@@ -1,5 +1,12 @@
- language: node_js
- node_js: node
- cache:
-   directories:
-     - node_modules
+language: node_js
+node_js: node
+cache:
+  directories:
+  - node_modules
+deploy:
+  provider: heroku
+  api_key:
+    secure: K1t5sK1YUfG0emJzHTJsOTWUhTKq1QNTeegVcIvEWXKFlZih/XM8oUuGmhgXb7eX8pA5I/0kFVeBYX0+C6QdDKS4oJ6oLj0+HjjsmoS/Oy81IKkrqxkqZ3NqjBOuxeyTcNYsLOrHAlLYOYy0QWUCm+qqABgwHXQ41W/PW0LA5e26l0cbka+kenXT66UT0SPQWIW+vYPFQTwhf6hEo/u3hqmcIUbT17N02i5GkaoPn3qNGshlbYHm98+yUm+/7I5BHqv5uncZKXi8m7AXeAVvDcsrphan7PJAwkYXqw0r5nh8rPaHkeHzZsR3N7Ir4NYt7neYAMzNgbt+x75xLqZimMQP1Lur6NalFuNIR0EYzX57EIBSYpdBK/j6q2wpPyzvy+hTOOVDd6nBVIHIdwqhzucqYw8sC47YNn6/BIZtYrQx8d3U1Nt2oHmKZ+VJm7jZtEK25KHR3QGPfIzNC2rFa5RfOELJHxklhclcj8Czmtv3kTXZMSXulraTYSvegVKvDOwklLuCvMHtSY6hQdDeoVKVSiziSHNW5WDpNDIpZ/YCxy17psocFFXo746rtBr4se2BH4QCLYAUpXgr9IgKvR1gU98V8uoRDqfN6U8aDcjvwFo26RKZgiSC6+f1ewMzSZyyGnT98vKDO9PUHBYTlzJWsJ4EozoS9MQxd9EDDTI=
+  app: stark-hamlet-54072
+  on:
+    repo: ASiede/ourtinerary
