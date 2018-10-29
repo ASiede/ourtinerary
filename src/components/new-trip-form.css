@@ -1,0 +1,20 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  text-align: center;
+}
+
+input, label {
+  margin: 10px;
+}
+
+input {
+  padding: 5px;
+}
+
+footer {
+  background-color: grey;
+  padding: 20px;
+}

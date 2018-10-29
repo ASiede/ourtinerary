@@ -1,0 +1,59 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  text-align: center;
+}
+
+nav {
+  background-color:grey;
+  padding: 5px;
+}
+
+nav ul {
+  display: flex;
+  justify-content: flex-end;
+}
+
+header {
+  padding: 25px;
+}
+
+section {
+  padding: 40px;
+  background-color: lightgrey;
+}
+
+section:nth-of-type(2n) {
+  background-color:white;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 5px;
+  text-align: left;
+}
+
+
+
+div {
+  background-color: lightgrey;
+}
+
+input, label {
+  margin: 10px;
+}
+
+input {
+  padding: 5px;
+}
+
+footer {
+  background-color: grey;
+  padding: 20px;
+}

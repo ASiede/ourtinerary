@@ -1,0 +1,21 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  text-align: center;
+}
+
+main ul {
+  border: 1px solid black;
+  list-style-type: none;
+  padding: 0;
+}
+main li {
+  padding: 15px;
+  background-color: white;
+}
+
+main li:nth-of-type(2n) {
+  background-color: lightgrey;
+} 
