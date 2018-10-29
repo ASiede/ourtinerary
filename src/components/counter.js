@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
 
-import {addToCount} from './actions'
+import {addToCount} from '../actions'
 
 export class Counter extends React.Component {
 
