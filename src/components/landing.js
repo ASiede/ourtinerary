@@ -8,7 +8,6 @@ import './landing.css'
 export default function Landing(props) {
 	return (
 		<div>
-			<Nav />
 			<body>
 				<header>
 					<h1>Welcome to OURtinerary</h1>
@@ -19,7 +18,7 @@ export default function Landing(props) {
 				    	<p>Want a central place for you and others to collaborate on an upcoming trip? Ourtinerary allows you to create a trip for one or more people, where trip goers can suggest itinerary items, vote on them, provide feedback, and confirm final trip plans. All in one place! </p>
 				    </section>
 				    <section>
-				        <h2>Screen Shots/explaination</h2>
+				        <h2>Screen Shots/explanation</h2>
 				        <p>[image placehoder]</p>
 				        <p>View of creating a new trip</p>
 				        <p>[image placehoder]</p>

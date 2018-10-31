@@ -1,20 +1,12 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import NewTripForm from './new-trip-form';
 import TripList from './trip-list';
 
-export default function User(props) {
-	const trips = [
-		{
-			name: 'NYC'
-		},
-		{
-			name: 'Paris'
-		},
-		{
-			name: 'Spring Break'
-		}
-	]
-
+export function User(props) {
+	
+	const trips = props.trips
+	
 	return (
 		<div>
 			<header>
@@ -23,7 +15,7 @@ export default function User(props) {
 			<main>
 	      		<section>
 	        		<h2>Your Trips</h2>
-				        <TripList trips={trips} />
+				        <TripList trips={trips}/>
 	      		</section>
 
 			    <section>
@@ -40,3 +32,16 @@ export default function User(props) {
     	</div>
 	);
 }
+
+const mapStateToProps = (state, props) => {
+	const username = props.match.params.username;
+	const user = state.ourtinerary.users.find(user => user.username === username)
+	const tripsById = user.tripsById
+	const trips = tripsById.map(tripId => state.ourtinerary.trips.find(trip => trip.id === tripId));
+
+    return {
+        trips
+    };
+};
+
+export default connect(mapStateToProps)(User);

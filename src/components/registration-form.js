@@ -14,6 +14,7 @@ export default function RegistrationForm(props) {
 		            <input type="text" /><br />
 		            <label>Password:</label><br />
 		            <input type="text" /><br />
+		            <button type="submit">Submit</button>
 	        	</form>
 		</div>
 	);

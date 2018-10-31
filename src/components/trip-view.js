@@ -1,72 +1,12 @@
 import React from 'react';
-import ItineraryList from './itinerary-list'
+import ItineraryList from './itinerary-list';
+import {connect} from 'react-redux';
 import './trip-view.css'
 
-export default function TripView(props) {
-	const list = [
-		{
-			type: 'Hotel',
-			name: 'Mariot',
-			confirmed: false,
-			price: 500,
-			pool: 'Yes',
-			website: 'mariot.com',
-			other: 'Close to the airport',
-			votes: {
-				collaborator1: 'Yes',
-				collaborator2: 'Yes',
-				collaborator3: null,
-				collaborator4: 'No'
-			}
-			
-		},
-
-		{
-			type: 'Hotel',
-			name: 'Motel 6',
-			confirmed: true,
-			price: 300,
-			pool: 'Yes',
-			website: 'motel6.com',
-			other: '',
-			votes: {
-				collaborator1: 'yes',
-				collaborator2: 'Yes',
-				collaborator3: 'Yes',
-				collaborator4: 'Yes'
-			}
-			
-		},
-		{
-			type: 'Restaurant',
-			name: 'Yum Yum',
-			catagory: 'chinese',
-			confirmed: true,
-			price: 'cheap',
-			website: 'yumyum.com',
-			other: 'super yelp reviews',
-			votes: {
-				collaborator1: 'Yes',
-				collaborator2: 'Yes',
-				collaborator3: 'Yes',
-				collaborator4: 'Yes'
-			}
-		},
-		{
-			type: 'Activity',
-			name: 'National Art Museum',
-			confirmed: false,
-			price: 'free',
-			location: 'googlemaps.link',
-			website: 'museum.com',
-			votes: {collaborator1: 'No',
-				collaborator2: 'Yes',
-				collaborator3: 'No',
-				collaborator4: 'Yes'
-			}
-		}
-	]
-
+export function TripView(props) {
+	
+	const itineraryItems = props.trip.itineraryItems;
+	console.log(itineraryItems)
 
 	return (
 		<div>
@@ -81,11 +21,10 @@ export default function TripView(props) {
 			        <h3>Start Date - End Date</h3>
 			        <h3>Collaborator 1, Collaborator 2, Collaborator 3, Collaborator 4</h3>
 			    </section>
-
-        		<h2>Suggested Itinerary Items</h2>
           
           		<section>
-          			<ItineraryList list={list} />
+          			<h2 className='itinerary-header'>Suggested Itinerary Items</h2>
+          			<ItineraryList itineraryItems={itineraryItems} />
           		</section>
 
 			    <section>
@@ -118,6 +57,27 @@ export default function TripView(props) {
 			    <footer>Footer</footer>
     		</main>
     	</div>	
-    
 	);
 }
+
+const mapStateToProps = (state, props) => {
+	const tripId = props.match.params.tripId;
+	const trip = state.ourtinerary.trips.find(trip => trip.id == tripId);
+
+    return {
+        tripId,
+        trip
+    };
+};
+
+export default connect(mapStateToProps)(TripView);
+
+
+
+
+
+
+
+
+
+

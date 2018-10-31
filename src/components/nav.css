@@ -6,3 +6,8 @@
 nav {
 	background-color: grey;
 }
+
+/*nav div {
+	display: flex;
+	justify-content: flex-end;
+}*/

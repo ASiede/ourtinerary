@@ -1,15 +1,18 @@
 import React from 'react';
-import './trip-list.css'
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+
+import './trip-list.css';
+
 
 export default function TripList(props) {
 	
-	const trips = props.trips.map((trip, index) => (
-		<li key={index}>{trip.name}</li>
+	const trips = props.trips.map((trip) => (
+		<li><Link to="/trip">{trip.name}</Link></li>
 	));
 
 	return (
 		<div>
-			<ul>
+			<ul className="trips">
 				{trips}
 			</ul>
 		</div>

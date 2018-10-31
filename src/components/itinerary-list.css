@@ -1,7 +1,18 @@
 * {
-  box-sizing: border-box;
+ 	box-sizing: border-box;
 }
 
 div {
-	background-color: lightgrey;
+	background-color: white;
+	border: black solid 1px;
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+li {
+	padding: 5px;
+	text-align: left;
 }
