@@ -5,6 +5,15 @@ import App from './components/app';
 import {Provider} from 'react-redux';
 import store from './store';
 import * as serviceWorker from './serviceWorker';
+import {login, registerUser} from './actions'
+
+console.log(store.getState());
+// store.dispatch(login('Rupaul', 'password'));
+console.log(store.getState());
+
+store.dispatch(registerUser('Andrea', 'Siede', 'Asiede', 'password'));
+
+console.log(store.getState());
 
 ReactDOM.render(
 	<Provider store={store}>

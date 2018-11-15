@@ -1,11 +1,18 @@
 import React from 'react';
 import Nav from './nav'
 import RegistrationForm from './registration-form'
+import {BrowserRouter as Redirect} from 'react-router-dom';
+import {connect} from 'react-redux';
 import LoginForm from './login-form'
 import './landing.css'
 
 
-export default function Landing(props) {
+export function Landing(props) {
+	if(props.loggedIn) {
+		console.log(props.currentUser);
+		props.history.push(`/user/${props.currentUser}`);
+	}
+
 	return (
 		<div>
 			<body>
@@ -36,3 +43,10 @@ export default function Landing(props) {
 		</div>
 	);
 }
+
+const mapStateToProps = state => ({
+	currentUser: state.ourtinerary.currentUser,
+	loggedIn: state.ourtinerary.currentUser !== null
+});
+
+export default connect(mapStateToProps)(Landing);

@@ -1,6 +1,7 @@
-import {addToCount} from '../actions'
+import * as actions from '../actions'
 
 const initialState = {
+	currentUser: null,
 	trips: [{
 			id: 1,
 			name: 'NYC',
@@ -111,12 +112,57 @@ const initialState = {
 	}]
 }
 
+
+
 export const ourtineraryReducer = (state=initialState, action) => {
-	if (addToCount.type === addToCount.ADD_TO_COUNT) {
+	
+	if (action.type === actions.ADD_TO_COUNT) {
 		const newCount = state.count + 1
 		return Object.assign({}, state, {
 			count: newCount
-		})
+		});
 	}
-	return state
+	
+
+	if (action.type === actions.LOGIN) {
+		const currentUser = state.users.find( user => user.username === action.username)
+		if (currentUser && currentUser.password === action.password) {
+			return Object.assign({}, state, {
+			currentUser: currentUser.username
+			});
+		}	
+	} 
+
+	if (action.type === actions.REGISTER_USER) {
+		const newUser = {
+			firstName: action.firstName,
+			lastName: action.lastName,
+			username: action.username,
+			password: action.password,
+			
+		}
+		return Object.assign({}, state, {
+			users: [...state.users, newUser],
+			currentUser: action.username
+		});
+			
+	} 
+
+	return state;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
