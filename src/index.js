@@ -11,9 +11,9 @@ console.log(store.getState());
 // store.dispatch(login('Rupaul', 'password'));
 console.log(store.getState());
 
-store.dispatch(registerUser('Andrea', 'Siede', 'Asiede', 'password'));
+// store.dispatch(registerUser('Andrea', 'Siede', 'Asiede', 'password'));
 
-console.log(store.getState());
+// console.log(store.getState());
 
 ReactDOM.render(
 	<Provider store={store}>
