@@ -1,7 +1,6 @@
 import React from 'react';
 
-export default function ItineraryItem(props) {
-    console.log(props.item) 
+export default function ItineraryItem(props) { 
 
     const confirmedText = props.item.confirmed ? 'Confirmed' : 'Unconfirmed';
     const confirmButtonText = props.item.confirmed ? 'Unconfirm' : 'Confirm';
