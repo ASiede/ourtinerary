@@ -5,7 +5,10 @@ import {login} from '../actions/index';
 import {required, nonEmpty} from '../validators';
 
 export class LoginForm extends React.Component {
-	
+	constructor(props) { 
+		super(props); 
+	}
+
 	onSubmit(values) {
 		console.log(values)
 		return this.props.dispatch(login(values.username, values.password));
@@ -52,6 +55,6 @@ export class LoginForm extends React.Component {
 
 export default reduxForm({
 	form: 'userLogin',
-	// onSubmitFail: (errors, dispatch) =>
- //        dispatch(focus('userLogin', Object.keys(errors)[0]))
+	onSubmitFail: (errors, dispatch) =>
+        dispatch(focus('userLogin', Object.keys(errors)[0]))
 })(LoginForm)

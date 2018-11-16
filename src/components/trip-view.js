@@ -1,5 +1,6 @@
 import React from 'react';
 import ItineraryList from './itinerary-list';
+import NewItineraryForm from './new-itinerary-item-form';
 import {connect} from 'react-redux';
 import './trip-view.css'
 
@@ -27,32 +28,12 @@ export function TripView(props) {
           			<ItineraryList itineraryItems={itineraryItems} />
           		</section>
 
-			    <section>
-			        <h3>Add an itinerary Item</h3>
-			        <form>
-			          <label>Type of Activity</label><br />
-			          <select>
-			            <option>Flight</option>
-			            <option default>Hotel</option>
-			            <option>Restaurants/Bars</option>
-			            <option>Activities</option>
-			            <option>Events</option>
-			            <option>Shopping</option>
-			            <option>Other</option>
-			          </select><br />
-			          <label>Name</label><br />
-			          <input type="text"></input><br /> 
-			          <label>Price</label><br />
-			          <input type="text"></input><br />
-			          <label>Pool</label><br />
-			          <input type="text"></input><br />
-			          <label>Website Link</label><br />
-			          <input type="text"></input><br />
-			          <label>Other</label><br />
-			          <input type="text"></input><br />
-			          <button type="submit">Submit</button>
-			        </form>
-			    </section>
+
+          		<section>
+          			<NewItineraryForm tripId={props.tripId}/>
+          		</section>
+
+			  
 
 			    <footer>Footer</footer>
     		</main>

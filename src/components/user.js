@@ -6,6 +6,8 @@ import TripList from './trip-list';
 export function User(props) {
 	
 	const trips = props.trips
+
+	const tripComponent = trips ? <TripList trips={trips}/> : <p>You have no trips yet. Create a trip below</p>;
 	
 	return (
 		<div>
@@ -15,7 +17,7 @@ export function User(props) {
 			<main>
 	      		<section>
 	        		<h2>Your Trips</h2>
-				        <TripList trips={trips}/>
+				        {tripComponent}
 	      		</section>
 
 			    <section>
@@ -35,9 +37,10 @@ export function User(props) {
 
 const mapStateToProps = (state, props) => {
 	const username = props.match.params.username;
-	const user = state.ourtinerary.users.find(user => user.username === username)
-	const tripsById = user.tripsById
-	const trips = tripsById.map(tripId => state.ourtinerary.trips.find(trip => trip.id === tripId));
+	const user = state.ourtinerary.users.find(user => user.username === username);
+	const trips = user.tripsById.length > 0 ?
+				user.tripsById.map(tripId => state.ourtinerary.trips.find(trip => trip.id === tripId)) :
+				''
 
     return {
         trips

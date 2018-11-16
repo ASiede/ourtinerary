@@ -5,14 +5,15 @@ import App from './components/app';
 import {Provider} from 'react-redux';
 import store from './store';
 import * as serviceWorker from './serviceWorker';
-import {login, registerUser} from './actions'
+import {login, registerUser, createNewTrip} from './actions'
 
-console.log(store.getState());
+// console.log(store.getState());
 // store.dispatch(login('Rupaul', 'password'));
 console.log(store.getState());
 
 // store.dispatch(registerUser('Andrea', 'Siede', 'Asiede', 'password'));
-
+store.dispatch(createNewTrip(4, 'Oregon', 'dates', 'Oregon', ['Trixie'], 'Alyssa', ));
+console.log(store.getState());
 // console.log(store.getState());
 
 ReactDOM.render(

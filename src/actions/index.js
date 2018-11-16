@@ -18,5 +18,31 @@ export const registerUser = (firstName, lastName, username, password) => ({
 	firstName,
 	lastName,
 	username, 
-	password,
+	password
+});
+
+export const CREATE_NEW_TRIP = "CREATE_NEW_TRIP"
+export const createNewTrip = (id, tripName, dates, location, collaborators, tripLeader) => ({
+	type: CREATE_NEW_TRIP,
+	id, 
+	tripName,
+	dates,
+	location, 
+	collaborators,
+	tripLeader
+});
+
+
+export const CREATE_NEW_ITINERARY_ITEM = "CREATE_NEW_ITINERARY_ITEM"
+export const createNewItineraryItem = (tripId, itineraryType, flightNumber, name, price, foodType, pool, website, other) => ({
+	type: CREATE_NEW_ITINERARY_ITEM,
+	tripId,
+	itineraryType,
+	flightNumber,
+	name,
+	price,
+	foodType,
+	pool,
+	website,
+	other
 });
