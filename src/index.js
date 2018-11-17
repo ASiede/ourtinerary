@@ -14,8 +14,8 @@ console.log(store.getState());
 // console.log(store.getState());
 
 
-store.dispatch(createNewTrip(4, 'Oregon', 'dates', 'Oregon', ['Trixie'], 'Alyssa', ));
-console.log(store.getState());
+// store.dispatch(createNewTrip(4, 'Oregon', 'dates', 'Oregon', ['Trixie'], 'Alyssa', ));
+// console.log(store.getState());
 
 
 // store.dispatch(createNewItineraryItem(1, "hotel", "", "Good Hotel", "cheap", "", "", "", ""))
