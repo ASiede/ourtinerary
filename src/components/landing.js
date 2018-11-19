@@ -8,13 +8,16 @@ import './landing.css'
 
 
 export function Landing(props) {
+	console.log('logged in is ' + props.loggedIn)
+	console.log("curent user is " + props.currentUser)
+	console.log(props.ourtinerary);
 	if(props.loggedIn) {
-		console.log(props.currentUser);
+
 		props.history.push(`/user/${props.currentUser}`);
 	}
 
 	return (
-		<div>
+		
 			<body>
 				<header>
 					<h1>Welcome to OURtinerary</h1>
@@ -40,13 +43,14 @@ export function Landing(props) {
 				</main>
 				<footer>Footer</footer>	
 			</body>	
-		</div>
+		
 	);
 }
 
 const mapStateToProps = state => ({
 	currentUser: state.ourtinerary.currentUser,
-	loggedIn: state.ourtinerary.currentUser !== null
+	loggedIn: state.ourtinerary.currentUser !== null,
+	ourtinerary: state.ourtinerary
 });
 
 export default connect(mapStateToProps)(Landing);

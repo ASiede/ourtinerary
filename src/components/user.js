@@ -4,14 +4,9 @@ import NewTripForm from './new-trip-form';
 import TripList from './trip-list';
 
 export function User(props) {
-	console.log(props.ourtinerary)
-	console.log(props.username)
 
 	const user = props.ourtinerary.users.find(user => user.username === props.username);	
-	console.log(user)
-	
-	
-	console.log(props.ourtinerary.trips)
+
 
 	const trips = user.tripsById.length > 0 ?
 				user.tripsById.map(tripId => props.ourtinerary.trips.find(trip => trip.id === tripId)) : "";

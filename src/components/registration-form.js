@@ -8,9 +8,7 @@ import {required, nonEmpty} from '../validators';
 export class RegistrationForm extends React.Component {
 	onSubmit(values) {
 		console.log(values)
-		const {firstName, lastName, username, password} = values;
-		const user = {firstName, lastName, username, password};
-		return this.props.dispatch(registerUser(user))
+		return this.props.dispatch(registerUser(values.firstName, values.lastName, values.username, values.password))
 					
 	}
 

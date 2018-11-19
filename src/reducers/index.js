@@ -142,9 +142,9 @@ export const ourtineraryReducer = (state=initialState, action) => {
 			lastName: action.lastName,
 			username: action.username,
 			password: action.password,
-			tripsById: []
-			
+			tripsById: []	
 		}
+
 		return Object.assign({}, state, {
 			users: [...state.users, newUser],
 			currentUser: action.username
@@ -164,7 +164,7 @@ export const ourtineraryReducer = (state=initialState, action) => {
 		}
 
 		
-		const user = state.users.find( user => action.tripLeader===user.username)
+		// const user = state.users.find( user => action.tripLeader===user.username)
 		
 
 		return Object.assign({}, state, {

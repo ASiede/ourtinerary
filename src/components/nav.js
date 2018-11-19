@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import './nav.css'
 
 export function Nav(props) {
-	console.log(props.loggedIn)
 	const navLinks = props.loggedIn ? 
 		<div>
 			<p>MyTrips</p>
