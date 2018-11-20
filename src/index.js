@@ -13,7 +13,7 @@ console.log(store.getState().ourtinerary);
 // store.dispatch(registerUser('Andrea', 'Siede', 'Asiede', 'password'));
 // console.log(store.getState());
 
-store.dispatch(login('Rupaul','password'));
+// store.dispatch(login('Rupaul','password'));
 // console.log(store.getState());
 
 // store.dispatch(createNewTrip(9, 'Oregon Fun', 'dates', 'Oregon', ['Trixie'], 'Alyssa', ));
