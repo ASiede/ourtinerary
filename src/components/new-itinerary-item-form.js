@@ -9,35 +9,41 @@ export class NewItineraryForm extends React.Component {
 	constructor(props) { 
 		super(props);
 		this.state = {
-            value: 'Hotel'
+            itineraryType: 'Hotel'
         } 
 	}
 
-	setValue(value) {
+	setValue(itineraryType) {
         this.setState({
-            value
+            itineraryType
         })
     }
 
 	onSubmit(values) {
-		console.log(values)
-		const {flightNumber, name, price, foodType, pool, website, other} = values;
-		const tripId = this.props.tripId
-		let itineraryType = this.state.value
-		const itineraryItem = {tripId, itineraryType, flightNumber, name, price, foodType, pool, website, other};
-		return this.props.dispatch(createNewItineraryItem(itineraryItem))
+		const flightNumber = values.flightNumber ? values.flightNumber : '';
+		const price = values.price ? values.price : '';
+		const foodType = values.foodType ? values.foodType : '';
+		const pool = values.pool ? values.pool : '';
+		const website = values.website ? values.website : '';
+		const other = values.other ? values.other : '';
+		const name = values.name ? values.name : '';
+		
+		const tripId = this.props.trip.id;
+		const collaborators = this.props.trip.collaborators;
+		let itineraryType = this.state.itineraryType
+
+		return this.props.dispatch(createNewItineraryItem(tripId, itineraryType, flightNumber, name, price, foodType, pool, website, other, collaborators))
 					
 	}
 
 
 	render () {
-		let itineraryType = this.state.value
-		console.log(this.state.value)
+		let itineraryType = this.state.itineraryType
 		return (
 			<div>
 				<h2>Create New Trip Itinerary Below</h2>
 		        	<label>Type of Activity</label><br />
-			          <select value={this.state.value} onChange={e => this.setValue(e.target.value)}>
+			          <select value={this.state.itineraryType} onChange={e => this.setValue(e.target.value)}>
 			            <option value="flight">Flight</option>
 			            <option value="hotel" default>Hotel</option>
 			            <option value="restaurant">Restaurants/Bars</option>
@@ -48,7 +54,7 @@ export class NewItineraryForm extends React.Component {
 			          </select><br />
 		        	
 
-		        	<form>
+		        	<form onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
 
 		        		{ itineraryType === "flight" &&
 			        		<Field

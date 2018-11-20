@@ -3,10 +3,9 @@ import ItineraryItem from './itinerary-item';
 import './itinerary-list.css'
 
 export default function ItineraryList(props) {
-	console.log(props.itineraryItems)
-	console.log(props.itineraryItems.map(item => item))
-	const list = props.itineraryItems.map(item => {
-			return <ItineraryItem item={item} />
+	
+	const list = props.trip.itineraryItems.map(item => {
+			return <ItineraryItem item={item} trip={props.trip} />
 		});
 
 	return (

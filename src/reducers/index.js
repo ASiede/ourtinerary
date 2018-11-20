@@ -77,6 +77,7 @@ const initialState = {
 			dates: '2/2/2020-2/20/2020',
 			location: 'New York City, NY',
 			tripleader: 'Rupaul',
+			collaborators: ['Rupaul', 'Alyssa'],
 			itineraryItems: []
 		}, 
 		{
@@ -99,7 +100,7 @@ const initialState = {
 		id: 20,
 		username: 'Alyssa',
 		password: 'password',
-		tripsById: []
+		tripsById: [1]
 	},
 	{
 		id: 30,
@@ -153,6 +154,7 @@ export const ourtineraryReducer = (state=initialState, action) => {
 	} 
 
 	if (action.type === actions.CREATE_NEW_TRIP) {
+		
 		const newTrip = {
 			id: action.id,
 			name: action.tripName,
@@ -162,20 +164,33 @@ export const ourtineraryReducer = (state=initialState, action) => {
 			collaborators: [...action.collaborators],
 			itineraryItems: []
 		}
-
 		
-		// const user = state.users.find( user => action.tripLeader===user.username)
-		
+		let users = state.users.map((user, username)=>{
+			if(user.username !== action.tripLeader &&
+				!action.collaborators.includes(user.username)) {
+					return user;
+			}
 
+			return Object.assign({}, user, {
+				tripsById: [...user.tripsById, action.id]
+			})
+		})
+		
 		return Object.assign({}, state, {
 			trips: [...state.trips, newTrip],
-
-			// users: [...state.users.filter(user => user.username !== action.tripLeader), updatedUser]
+			users
 		});
-			
 	} 
 
 	if (action.type === actions.CREATE_NEW_ITINERARY_ITEM) {
+	
+	console.log(action.collaborators)	
+	const votes = {}	
+	action.collaborators.forEach(collaborator => {
+		votes[`${collaborator}`] = null
+	})
+	
+	console.log(votes)
 		const newItineraryItem = {
 			type: action.itineraryType,
 			confirmed: false,
@@ -185,17 +200,18 @@ export const ourtineraryReducer = (state=initialState, action) => {
 			foodType: action.foodType,
 			pool: action.pool,
 			website: action.website,
-			other: action.other
-			
-		}
-
-		// const tripToUpdate = state.trips.filter(trip => (trip.id ===action.tripId))
-		// const updatedTrip = tripToUpdate.itineraryItems.concat([newItineraryItem]) 
+			other: action.other,
+			votes: votes
+		} 
 		
-		let trips = state.trips.map((itineraryItems, id) => {
-			if(id !== action.tripId) {
-				return trips;
+		let trips = state.trips.map((trip, tripId) => {
+			if(trip.id !== action.tripId) {
+				return trip;
 			}
+
+			return Object.assign({}, trip, {
+				itineraryItems: [...trip.itineraryItems, newItineraryItem]
+			});
 		}) 
 
 		return Object.assign({}, state, {

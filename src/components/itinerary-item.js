@@ -12,6 +12,14 @@ export default function ItineraryItem(props) {
     const otherHTML = props.item.other ? <li>Other: {props.item.other}</li> : '';
     const locationHTML = props.item.location ? <li>Location: {props.item.location}</li> : '';
 
+    const itineraryItem = props.item
+
+    const votesHTML = props.trip.collaborators.map(collaborator => 
+        <li>{collaborator}: {itineraryItem.votes[`${collaborator}`]}</li>
+      );
+
+    console.log(votesHTML)
+
     return (
         <div>
           <h3>{props.item.type}</h3>
@@ -29,10 +37,7 @@ export default function ItineraryItem(props) {
             {locationHTML}
           </ul>
           <ul>Votes
-            <li>Collaborator1: {props.item.votes.collaborator1}</li>
-            <li>Collaborator2: {props.item.votes.collaborator2}</li>
-            <li>Collaborator3: {props.item.votes.collaborator3}</li>
-            <li>Collaborator4: {props.item.votes.collaborator4}</li>
+            {votesHTML}
           </ul>
         </div>
     ) 

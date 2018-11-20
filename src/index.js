@@ -8,18 +8,20 @@ import * as serviceWorker from './serviceWorker';
 import {login, registerUser, createNewTrip, createNewItineraryItem} from './actions'
 
 
-console.log(store.getState());
+console.log(store.getState().ourtinerary);
 
 // store.dispatch(registerUser('Andrea', 'Siede', 'Asiede', 'password'));
 // console.log(store.getState());
 
-
-// store.dispatch(createNewTrip(4, 'Oregon', 'dates', 'Oregon', ['Trixie'], 'Alyssa', ));
+store.dispatch(login('Rupaul','password'));
 // console.log(store.getState());
 
+// store.dispatch(createNewTrip(9, 'Oregon Fun', 'dates', 'Oregon', ['Trixie'], 'Alyssa', ));
+// console.log(store.getState().ourtinerary);
 
-// store.dispatch(createNewItineraryItem(1, "hotel", "", "Good Hotel", "cheap", "", "", "", ""))
-// console.log(store.getState());
+
+// store.dispatch(createNewItineraryItem(2, "hotel", "", "Good Hotel", "cheap", "", "", "", "", ["Rupaul", "Alyssa" ]))
+// console.log(store.getState().ourtinerary.trips);
 
 ReactDOM.render(
 	<Provider store={store}>

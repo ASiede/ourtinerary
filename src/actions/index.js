@@ -34,7 +34,7 @@ export const createNewTrip = (id, tripName, dates, location, collaborators, trip
 
 
 export const CREATE_NEW_ITINERARY_ITEM = "CREATE_NEW_ITINERARY_ITEM"
-export const createNewItineraryItem = (tripId, itineraryType, flightNumber, name, price, foodType, pool, website, other) => ({
+export const createNewItineraryItem = (tripId, itineraryType, flightNumber, name, price, foodType, pool, website, other, collaborators) => ({
 	type: CREATE_NEW_ITINERARY_ITEM,
 	tripId,
 	itineraryType,
@@ -44,5 +44,6 @@ export const createNewItineraryItem = (tripId, itineraryType, flightNumber, name
 	foodType,
 	pool,
 	website,
-	other
+	other,
+	collaborators
 });

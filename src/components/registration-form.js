@@ -6,6 +6,10 @@ import {required, nonEmpty} from '../validators';
 
 
 export class RegistrationForm extends React.Component {
+	constructor(props) { 
+		super(props); 
+	}
+	
 	onSubmit(values) {
 		console.log(values)
 		return this.props.dispatch(registerUser(values.firstName, values.lastName, values.username, values.password))
@@ -24,8 +28,7 @@ export class RegistrationForm extends React.Component {
 				        label="First Name"
 				        validate={[required, nonEmpty]}
 				        />
-				        
-
+				       
 				        <Field 
 				        name="lastName" 
 				        type="text" 
@@ -33,8 +36,7 @@ export class RegistrationForm extends React.Component {
 				        label="Last Name"
 				        validate={[required, nonEmpty]}
 				        />
-				        
-
+				     
 				        <Field 
 				        name="username" 
 				        type="text" 
@@ -43,7 +45,6 @@ export class RegistrationForm extends React.Component {
 				        validate={[required, nonEmpty]}
 				        />
 				        
-
 				        <Field 
 				        name="password" 
 				        type="text" 
@@ -52,7 +53,6 @@ export class RegistrationForm extends React.Component {
 				        validate={[required, nonEmpty]}
 				        />
 				     
-				        
 				        <button 
 				        	type="submit"
 				        	disabled={

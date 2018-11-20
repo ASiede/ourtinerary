@@ -6,19 +6,32 @@ import {createNewTrip} from '../actions/index';
 import './new-trip-form.css'
 
 export class NewTripForm extends React.Component {
+	
+	constructor(props) { 
+		super(props); 
+	}
+
 	onSubmit(values) {
 		console.log(values)
-		const {tripName, dates, location, collaborators} = values;
 		const tripLeader = this.props.currentUser;
-		const trip = {tripName, dates, location, collaborators, tripLeader};
-		return this.props.dispatch(createNewTrip(trip))
-					
+		const tripId = (Math.floor(Math.random() * 100) + 5);
+		const collaboratorArr = values.collaborators.split(",");
+		const collaborators = collaboratorArr.map(name => name.trim());
+
+		return this.props.dispatch(createNewTrip(
+			tripId,
+			values.tripName, 
+			values.dates, 
+			values.location, 
+			collaborators, 
+			tripLeader))
 	}
 	render () {
+
 		return (
 			<div>
 				<h2>Create New Trip Below</h2>
-		        	<form>
+		        	<form onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
 		        		<Field
 		        		name="tripName"
 		        		type="text"
@@ -65,7 +78,7 @@ export class NewTripForm extends React.Component {
 }
 
 export default reduxForm({
-	form: 'NewTripForm',
+	form: 'newTripForm',
 	onSubmitFail: (errors, dispatch) =>
         dispatch(focus('newTripForm', Object.keys(errors)[0]))
 })(NewTripForm)

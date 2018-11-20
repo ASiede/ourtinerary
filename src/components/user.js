@@ -14,6 +14,7 @@ export function User(props) {
 	const tripComponent = trips ? <TripList trips={trips}/> : <p>You have no trips yet. Create a trip below</p>;
 
 	return (
+
 		<div>
 			<header>
 				<h1>OURtinerary</h1>
@@ -30,7 +31,7 @@ export function User(props) {
 			    </section>
 
 		        <section>
-		        	<NewTripForm />
+		        	<NewTripForm currentUser={props.username}/>
 		        </section>
 
 	      		<footer>Footer</footer>

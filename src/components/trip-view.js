@@ -6,8 +6,7 @@ import './trip-view.css'
 
 export function TripView(props) {
 	
-	const itineraryItems = props.trip.itineraryItems;
-	console.log(itineraryItems)
+	const trip = props.trip;
 
 	return (
 		<div>
@@ -25,12 +24,12 @@ export function TripView(props) {
           
           		<section>
           			<h2 className='itinerary-header'>Suggested Itinerary Items</h2>
-          			<ItineraryList itineraryItems={itineraryItems} />
+          			<ItineraryList trip={trip} />
           		</section>
 
 
           		<section>
-          			<NewItineraryForm tripId={props.tripId}/>
+          			<NewItineraryForm trip={props.trip}/>
           		</section>
 
 			  
