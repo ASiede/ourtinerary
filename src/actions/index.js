@@ -53,6 +53,15 @@ export const createNewItineraryItem = (tripId, itineraryType, flightNumber, name
 	collaborators
 });
 
+export const EDITVOTE = "EDITVOTE"
+export const editVote = (vote, itineraryItemId, tripId, currentUser) => ({
+	type: EDITVOTE,
+	vote,
+	itineraryItemId,
+	tripId,
+	currentUser
+});
+
 // export const TOGGLECONFIRM = "TOGGLECONFIRM"
 // export const toggleConfirm = (tripId, itineraryItemId) => ({
 // 	type: TOGGLECONFIRM,

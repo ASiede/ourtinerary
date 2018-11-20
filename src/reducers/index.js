@@ -37,7 +37,7 @@ const initialState = {
 					website: 'motel6.com',
 					other: '',
 					votes: {
-						"Rupaul": 'yes',
+						"Rupaul": null,
 						"Alyssa": 'Yes',
 						"Katya": 'Yes',
 						"Trixie": 'Yes'
@@ -221,6 +221,25 @@ export const ourtineraryReducer = (state=initialState, action) => {
 		});
 			
 	}
+
+	if (action.type === actions.EDITVOTE) {
+
+		const trip = state.trips.find( trip => trip.id === action.tripId)
+		console.log(action.currentUser)
+		const itineraryItem = trip.itineraryItems.find(item => item.id === action.itineraryItemId)
+		console.log(itineraryItem)
+
+		let votes = Object.assign({}, itineraryItem.votes, {
+				action.currentUser: action.vote
+			}
+		);
+		
+		console.log(votes)
+
+		return Object.assign({}, state, {
+			
+		});	
+	} 
 
 	// if (action.type === actions.LOGOUT) {
 	// 	let itineraryItems = state.trips[action.tripId].map((itineraryItem) => {

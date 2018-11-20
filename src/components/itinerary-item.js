@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {editVote} from '../actions/index';
 
 export class ItineraryItem extends React.Component { 
     constructor(props) {
@@ -10,10 +11,14 @@ export class ItineraryItem extends React.Component {
     //   return this.props.dispatch(toggleConfirm(this.props.trip.id, this.props.item))
     // }
 
-    render() {
+    handleVote(vote){
+      console.log(vote);
+      return this.props.dispatch(editVote(vote, this.props.item.id, this.props.trip.id, this.props.currentUser));
+    }
 
-    console.log(this.props)  
-    console.log(this.props.trip.id)
+
+
+    render() {
 
     const confirmedText = this.props.item.confirmed ? 'Confirmed' : 'Unconfirmed';
     const confirmButtonText = this.props.item.confirmed ? 'Unconfirm' : 'Confirm';
@@ -27,28 +32,25 @@ export class ItineraryItem extends React.Component {
 
     const itineraryItem = this.props.item
 
-    console.log('👍 👎')
-
     const votesHTML = this.props.trip.collaborators.map(collaborator => {
-        if(this.props.currentUser === collaborator) {
-          return <li>{collaborator}: {itineraryItem.votes[`${collaborator}`]}<span>👍 👎</span></li>
-          } else {
+
+        if(itineraryItem.votes[collaborator] && (itineraryItem.votes[collaborator] === 'Yes')) {
+            return <li>{collaborator}: 👍</li>
+
+            } else if (itineraryItem.votes[collaborator] && (itineraryItem.votes[collaborator] === 'No')){
+              return <li>{collaborator}: 👎</li>
+
+            } else if(this.props.currentUser === collaborator) {
+              return <li>{collaborator}: {itineraryItem.votes[`${collaborator}`]}<span onClick={() => this.handleVote('Yes')}>👍</span><span onClick={() => this.handleVote('No')}>👎</span></li>
+
+            } else {
             return <li>{collaborator}: {itineraryItem.votes[`${collaborator}`]}</li>
-          }
-        }
-      );
+            }
+        
+    });
 
     // const confirmButton = (this.props.currentUser === this.props.trip.tripleader) ? <button onClick={() => this.handleToggleConfirm()}>{confirmButtonText}</button> : '';
     
-    console.log(this.props.currentUser) 
-    console.log(this.props.trip.tripleader)  
-
-
-
-    if (this.props.currentUser === this.props.trip.tripleader) {
-     console.log('yes')
-    } else {console.log('no')}
-
       return (
         <div>
           <h3>{this.props.item.type}</h3>

@@ -5,7 +5,7 @@ import App from './components/app';
 import {Provider} from 'react-redux';
 import store from './store';
 import * as serviceWorker from './serviceWorker';
-import {login, registerUser, createNewTrip, createNewItineraryItem} from './actions'
+import {login, registerUser, createNewTrip, createNewItineraryItem, editVote} from './actions'
 
 
 console.log(store.getState().ourtinerary);
@@ -13,7 +13,7 @@ console.log(store.getState().ourtinerary);
 // store.dispatch(registerUser('Andrea', 'Siede', 'Asiede', 'password'));
 // console.log(store.getState());
 
-// store.dispatch(login('Rupaul','password'));
+store.dispatch(login('Rupaul','password'));
 // console.log(store.getState());
 
 // store.dispatch(createNewTrip(9, 'Oregon Fun', 'dates', 'Oregon', ['Trixie'], 'Alyssa', ));
@@ -22,6 +22,11 @@ console.log(store.getState().ourtinerary);
 
 // store.dispatch(createNewItineraryItem(2, "hotel", "", "Good Hotel", "cheap", "", "", "", "", ["Rupaul", "Alyssa" ]))
 // console.log(store.getState().ourtinerary.trips);
+
+store.dispatch(editVote('No', 60, 1, 'Rupaul'))
+console.log(store.getState().ourtinerary.trips[0]);
+
+
 
 ReactDOM.render(
 	<Provider store={store}>
