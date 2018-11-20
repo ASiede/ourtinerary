@@ -18,6 +18,8 @@ export class NewTripForm extends React.Component {
 		const collaboratorArr = values.collaborators.split(",");
 		const collaborators = collaboratorArr.map(name => name.trim());
 
+		this.props.reset();
+		
 		return this.props.dispatch(createNewTrip(
 			tripId,
 			values.tripName, 
@@ -26,8 +28,9 @@ export class NewTripForm extends React.Component {
 			collaborators, 
 			tripLeader))
 	}
+	
 	render () {
-
+		
 		return (
 			<div>
 				<h2>Create New Trip Below</h2>

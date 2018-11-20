@@ -10,7 +10,8 @@ const initialState = {
 			tripleader: 'Rupaul',
 			collaborators:["Rupaul", "Alyssa", "Katya", "Trixie"],
 			itineraryItems: [
-				{
+				{	
+					id: 50,
 					type: 'Hotel',
 					name: 'Mariot',
 					confirmed: false,
@@ -26,7 +27,8 @@ const initialState = {
 					}
 				},
 
-				{
+				{	
+					id: 60,
 					type: 'Hotel',
 					name: 'Motel 6',
 					confirmed: true,
@@ -42,6 +44,7 @@ const initialState = {
 					}	
 				},
 				{
+					id: 70,
 					type: 'Restaurant',
 					name: 'Yum Yum',
 					catagory: 'chinese',
@@ -57,6 +60,7 @@ const initialState = {
 					}
 				},
 				{
+					id: 80,	
 					type: 'Activity',
 					name: 'National Art Museum',
 					confirmed: false,
@@ -119,14 +123,6 @@ const initialState = {
 
 
 export const ourtineraryReducer = (state=initialState, action) => {
-	
-	if (action.type === actions.ADD_TO_COUNT) {
-		const newCount = state.count + 1
-		return Object.assign({}, state, {
-			count: newCount
-		});
-	}
-	
 
 	if (action.type === actions.LOGIN) {
 		const currentUser = state.users.find( user => user.username === action.username)
@@ -135,6 +131,12 @@ export const ourtineraryReducer = (state=initialState, action) => {
 			currentUser: currentUser.username
 			});
 		}	
+	} 
+
+	if (action.type === actions.LOGOUT) {
+		return Object.assign({}, state, {
+			currentUser: null
+		});	
 	} 
 
 	if (action.type === actions.REGISTER_USER) {
@@ -218,7 +220,19 @@ export const ourtineraryReducer = (state=initialState, action) => {
 			trips
 		});
 			
-	} 
+	}
+
+	// if (action.type === actions.LOGOUT) {
+	// 	let itineraryItems = state.trips[action.tripId].map((itineraryItem) => {
+	// 		if(itineraryItem.id !== action.itineraryItemId) {
+	// 			return trip
+	// 		}
+	// 	}
+
+	// 	return Object.assign({}, state, {
+	// 		trips
+	// 	});	
+	// }  
 
 	return state;
 }

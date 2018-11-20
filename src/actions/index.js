@@ -12,6 +12,11 @@ export const login = (username, password) => ({
 	password
 });
 
+export const LOGOUT = "LOGOUT"
+export const logout = () => ({
+	type: LOGOUT,
+});
+
 export const REGISTER_USER = "REGISTER_USER"
 export const registerUser = (firstName, lastName, username, password) => ({
 	type: REGISTER_USER,
@@ -47,3 +52,11 @@ export const createNewItineraryItem = (tripId, itineraryType, flightNumber, name
 	other,
 	collaborators
 });
+
+// export const TOGGLECONFIRM = "TOGGLECONFIRM"
+// export const toggleConfirm = (tripId, itineraryItemId) => ({
+// 	type: TOGGLECONFIRM,
+// });
+
+
+

@@ -7,6 +7,8 @@ import './trip-view.css'
 export function TripView(props) {
 	
 	const trip = props.trip;
+  const collaboratorsHTML = trip.collaborators.map(collaborator => <li>{collaborator}</li>);
+
 
 	return (
 		<div>
@@ -16,10 +18,12 @@ export function TripView(props) {
 
     		<main>
       			<section>
-			        <h2>Trip 1 Name</h2>
-			        <h3>Trip 1 Location</h3>
-			        <h3>Start Date - End Date</h3>
-			        <h3>Collaborator 1, Collaborator 2, Collaborator 3, Collaborator 4</h3>
+			        <h2>{trip.name}</h2>
+			        <h3>{trip.location}</h3>
+			        <h3>{trip.dates}</h3>
+			        <ul>Collaborators: 
+                {collaboratorsHTML} 
+              </ul>
 			    </section>
           
           		<section>

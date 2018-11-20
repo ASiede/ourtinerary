@@ -32,6 +32,8 @@ export class NewItineraryForm extends React.Component {
 		const collaborators = this.props.trip.collaborators;
 		let itineraryType = this.state.itineraryType
 
+		this.props.reset();
+
 		return this.props.dispatch(createNewItineraryItem(tripId, itineraryType, flightNumber, name, price, foodType, pool, website, other, collaborators))
 					
 	}

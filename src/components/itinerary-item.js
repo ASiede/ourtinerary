@@ -1,32 +1,58 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
-export default function ItineraryItem(props) { 
+export class ItineraryItem extends React.Component { 
+    constructor(props) {
+      super(props);
+    }
 
-    const confirmedText = props.item.confirmed ? 'Confirmed' : 'Unconfirmed';
-    const confirmButtonText = props.item.confirmed ? 'Unconfirm' : 'Confirm';
+    // handleToggleConfirm() {
+    //   return this.props.dispatch(toggleConfirm(this.props.trip.id, this.props.item))
+    // }
 
-    const priceHTML = props.item.price ? <li>Price: {props.item.price}</li> : '';
-    const categoryHTML = props.category ? <li>categoryetc</li> : '';
-    const poolHTML = props.item.pool ? <li>Pool: {props.item.pool}</li> : '';
-    const websiteHTML = props.item.website ? <li>Website: {props.item.website}</li> : '';
-    const otherHTML = props.item.other ? <li>Other: {props.item.other}</li> : '';
-    const locationHTML = props.item.location ? <li>Location: {props.item.location}</li> : '';
+    render() {
 
-    const itineraryItem = props.item
+    console.log(this.props)  
+    console.log(this.props.trip.id)
 
-    const votesHTML = props.trip.collaborators.map(collaborator => 
-        <li>{collaborator}: {itineraryItem.votes[`${collaborator}`]}</li>
+    const confirmedText = this.props.item.confirmed ? 'Confirmed' : 'Unconfirmed';
+    const confirmButtonText = this.props.item.confirmed ? 'Unconfirm' : 'Confirm';
+
+    const priceHTML = this.props.item.price ? <li>Price: {this.props.item.price}</li> : '';
+    const categoryHTML = this.props.category ? <li>categoryetc</li> : '';
+    const poolHTML = this.props.item.pool ? <li>Pool: {this.props.item.pool}</li> : '';
+    const websiteHTML = this.props.item.website ? <li>Website: {this.props.item.website}</li> : '';
+    const otherHTML = this.props.item.other ? <li>Other: {this.props.item.other}</li> : '';
+    const locationHTML = this.props.item.location ? <li>Location: {this.props.item.location}</li> : '';
+
+    const itineraryItem = this.props.item
+
+    console.log('👍 👎')
+
+    const votesHTML = this.props.trip.collaborators.map(collaborator => {
+        if(this.props.currentUser === collaborator) {
+          return <li>{collaborator}: {itineraryItem.votes[`${collaborator}`]}<span>👍 👎</span></li>
+          } else {
+            return <li>{collaborator}: {itineraryItem.votes[`${collaborator}`]}</li>
+          }
+        }
       );
 
-    console.log(votesHTML)
+    // const confirmButton = (this.props.currentUser === this.props.trip.tripleader) ? <button onClick={() => this.handleToggleConfirm()}>{confirmButtonText}</button> : '';
+    
+    console.log(this.props.currentUser) 
+    console.log(this.props.trip.tripleader)  
 
-    return (
+
+
+    if (this.props.currentUser === this.props.trip.tripleader) {
+     console.log('yes')
+    } else {console.log('no')}
+
+      return (
         <div>
-          <h3>{props.item.type}</h3>
-          <h4>{props.item.name}</h4>
-          <h5>({confirmedText})</h5>
-
-          <button>{confirmButtonText}</button>
+          <h3>{this.props.item.type}</h3>
+          <h4>{this.props.item.name}</h4>  
 
           <ul>
             {priceHTML}
@@ -40,5 +66,17 @@ export default function ItineraryItem(props) {
             {votesHTML}
           </ul>
         </div>
-    ) 
+    )} 
 }
+
+const mapStateToProps = state => ({
+  currentUser: state.ourtinerary.currentUser,
+  loggedIn: state.ourtinerary.currentUser !== null,
+  
+});
+
+export default connect(mapStateToProps)(ItineraryItem);
+
+
+
+

@@ -12,7 +12,6 @@ export function Landing(props) {
 	console.log("curent user is " + props.currentUser)
 	console.log(props.ourtinerary);
 	if(props.loggedIn) {
-
 		props.history.push(`/user/${props.currentUser}`);
 	}
 

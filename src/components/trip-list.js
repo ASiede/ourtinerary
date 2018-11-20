@@ -7,8 +7,6 @@ import './trip-list.css';
 export default function TripList(props) {
 	
 	const trips = props.trips.map((trip) => (
-		// <li><Link to="/trip/1">{trip.name}</Link></li>
-
 		<li><Link to={`/trip/${trip.id}`}>{trip.name}</Link></li>
 	));
 

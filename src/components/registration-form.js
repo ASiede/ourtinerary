@@ -9,9 +9,10 @@ export class RegistrationForm extends React.Component {
 	constructor(props) { 
 		super(props); 
 	}
-	
+
 	onSubmit(values) {
 		console.log(values)
+		this.props.reset();
 		return this.props.dispatch(registerUser(values.firstName, values.lastName, values.username, values.password))
 					
 	}
