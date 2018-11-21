@@ -12,7 +12,7 @@ export class ItineraryItem extends React.Component {
     // }
 
     handleVote(vote){
-      console.log(vote);
+      console.log(vote, this.props.item.id, this.props.trip.id, this.props.currentUser);
       return this.props.dispatch(editVote(vote, this.props.item.id, this.props.trip.id, this.props.currentUser));
     }
 
@@ -33,7 +33,7 @@ export class ItineraryItem extends React.Component {
     const itineraryItem = this.props.item
 
     const votesHTML = this.props.trip.collaborators.map(collaborator => {
-
+      
         if(itineraryItem.votes[collaborator] && (itineraryItem.votes[collaborator] === 'Yes')) {
             return <li>{collaborator}: 👍</li>
 

@@ -8,7 +8,7 @@ import * as serviceWorker from './serviceWorker';
 import {login, registerUser, createNewTrip, createNewItineraryItem, editVote} from './actions'
 
 
-console.log(store.getState().ourtinerary);
+// console.log(store.getState().ourtinerary);
 
 // store.dispatch(registerUser('Andrea', 'Siede', 'Asiede', 'password'));
 // console.log(store.getState());
@@ -22,9 +22,9 @@ store.dispatch(login('Rupaul','password'));
 
 // store.dispatch(createNewItineraryItem(2, "hotel", "", "Good Hotel", "cheap", "", "", "", "", ["Rupaul", "Alyssa" ]))
 // console.log(store.getState().ourtinerary.trips);
-
-store.dispatch(editVote('No', 60, 1, 'Rupaul'))
-console.log(store.getState().ourtinerary.trips[0]);
+// console.log(store.getState().ourtinerary.trips[0].itineraryItems);
+// store.dispatch(editVote('No', 60, 1, 'Rupaul'))
+// console.log(store.getState().ourtinerary.trips[0].itineraryItems);
 
 
 
