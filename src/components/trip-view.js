@@ -7,8 +7,7 @@ import './trip-view.css'
 export function TripView(props) {
 	
 	const trip = props.trip;
-  const collaboratorsHTML = trip.collaborators.map(collaborator => <li>{collaborator}</li>);
-
+  const collaboratorsHTML = trip.collaborators.map(collaborator => <li key={collaborator.toString()} >{collaborator}</li>);
 
 	return (
 		<div>

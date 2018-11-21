@@ -10,23 +10,6 @@ import {login, registerUser, createNewTrip, createNewItineraryItem, editVote} fr
 
 // console.log(store.getState().ourtinerary);
 
-// store.dispatch(registerUser('Andrea', 'Siede', 'Asiede', 'password'));
-// console.log(store.getState());
-
-store.dispatch(login('Rupaul','password'));
-// console.log(store.getState());
-
-// store.dispatch(createNewTrip(9, 'Oregon Fun', 'dates', 'Oregon', ['Trixie'], 'Alyssa', ));
-// console.log(store.getState().ourtinerary);
-
-
-// store.dispatch(createNewItineraryItem(2, "hotel", "", "Good Hotel", "cheap", "", "", "", "", ["Rupaul", "Alyssa" ]))
-// console.log(store.getState().ourtinerary.trips);
-// console.log(store.getState().ourtinerary.trips[0].itineraryItems);
-// store.dispatch(editVote('No', 60, 1, 'Rupaul'))
-// console.log(store.getState().ourtinerary.trips[0].itineraryItems);
-
-
 
 ReactDOM.render(
 	<Provider store={store}>

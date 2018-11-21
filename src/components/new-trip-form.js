@@ -6,13 +6,13 @@ import {createNewTrip} from '../actions/index';
 import './new-trip-form.css'
 
 export class NewTripForm extends React.Component {
-	
 	constructor(props) { 
 		super(props); 
 	}
 
 	onSubmit(values) {
-		console.log(values)
+		console.log(values);
+
 		const tripLeader = this.props.currentUser;
 		const tripId = (Math.floor(Math.random() * 100) + 5);
 		const collaboratorArr = values.collaborators.split(",");

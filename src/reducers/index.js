@@ -7,7 +7,7 @@ const initialState = {
 			name: 'NYC',
 			dates: '2/2/2020-2/20/2020',
 			location: 'New York City, NY',
-			tripleader: 'Rupaul',
+			tripLeader: 'Rupaul',
 			collaborators:["Rupaul", "Alyssa", "Katya", "Trixie"],
 			itineraryItems: [
 				{	
@@ -80,7 +80,7 @@ const initialState = {
 			name: 'Paris',
 			dates: '2/2/2020-2/20/2020',
 			location: 'New York City, NY',
-			tripleader: 'Rupaul',
+			tripLeader: 'Rupaul',
 			collaborators: ['Rupaul', 'Alyssa'],
 			itineraryItems: []
 		}, 
@@ -89,7 +89,7 @@ const initialState = {
 			name: 'Spring Break',
 			dates: '2/2/2020-2/20/2020',
 			location: 'New York City, NY',
-			tripleader: 'Rupaul',
+			tripLeader: 'Rupaul',
 			itineraryItems: []
 		}
 	],
@@ -127,18 +127,18 @@ export const ourtineraryReducer = (state=initialState, action) => {
 	let expression = action.type
 	switch (expression) {
 		case actions.LOGIN:
-			const currentUser = state.users.find( user => user.username === action.username)
+			const currentUser = state.users.find( user => user.username === action.username);
 			if (currentUser && currentUser.password === action.password) {
 				return Object.assign({}, state, {
 					currentUser: currentUser.username
-			});
-			break;	
-			}	
+				});
+			}
+			break;
 
 		case actions.LOGOUT: 
 			return Object.assign({}, state, {
 				currentUser: null
-			});	
+			});
 			break;	
 		
 
@@ -149,7 +149,7 @@ export const ourtineraryReducer = (state=initialState, action) => {
 				username: action.username,
 				password: action.password,
 				tripsById: []	
-			}
+			};
 
 			return Object.assign({}, state, {
 				users: [...state.users, newUser],
@@ -165,33 +165,33 @@ export const ourtineraryReducer = (state=initialState, action) => {
 				dates: action.dates,
 				location: action.location,
 				tripLeader: action.tripLeader,
-				collaborators: [...action.collaborators],
+				collaborators: [...action.collaborators, action.tripLeader],
 				itineraryItems: []
-			}
+			};
 		
 			let users = state.users.map((user, username)=>{
 				if(user.username !== action.tripLeader &&
 					!action.collaborators.includes(user.username)) {
 						return user;
-					}
+					};
 
 					return Object.assign({}, user, {
 						tripsById: [...user.tripsById, action.id]
 					});
 			})
-		
 			return Object.assign({}, state, {
 				trips: [...state.trips, newTrip],
 				users
 			});
+			
 			break;
 
 		case actions.CREATE_NEW_ITINERARY_ITEM:	
 			const votes = {}	
-				action.collaborators.forEach(collaborator => {
+			action.collaborators.forEach(collaborator => {
 					votes[`${collaborator}`] = null
-				})
-	
+				});
+			 
 			const newItineraryItem = {
 				type: action.itineraryType,
 				confirmed: false,
@@ -203,17 +203,17 @@ export const ourtineraryReducer = (state=initialState, action) => {
 				website: action.website,
 				other: action.other,
 				votes: votes
-			} 
+			};
 		
 			let trips = state.trips.map((trip, tripId) => {
 				if(trip.id !== action.tripId) {
 					return trip;
-				}
+				};
 
 				return Object.assign({}, trip, {
 					itineraryItems: [...trip.itineraryItems, newItineraryItem]
 				});
-			}) 
+			}) ;
 
 			return Object.assign({}, state, {
 				trips
@@ -230,7 +230,7 @@ export const ourtineraryReducer = (state=initialState, action) => {
 			let itineraryItems = trip.itineraryItems.map((item) => {
 				if( item.id !== action.itineraryItemId) {
 					return item;
-				}
+				};
 
 				return Object.assign({}, item, {
 					votes: updatedVotes
@@ -240,7 +240,7 @@ export const ourtineraryReducer = (state=initialState, action) => {
 			let updatedTrips = state.trips.map((trip) => {
 				if(trip.id !== action.tripId) {
 					return trip;
-				}
+				};
 
 				return Object.assign({}, trip, {
 					itineraryItems
@@ -249,161 +249,11 @@ export const ourtineraryReducer = (state=initialState, action) => {
 
 			return Object.assign({}, state, {
 				trips: updatedTrips
-			});	
-
+			});
+		default:
+		return state;
 	}
-
-	return state;
 }
-
-
-
-
-// if (action.type === actions.LOGIN) {
-// 		const currentUser = state.users.find( user => user.username === action.username)
-// 		if (currentUser && currentUser.password === action.password) {
-// 			return Object.assign({}, state, {
-// 			currentUser: currentUser.username
-// 			});
-// 		}	
-// 	} 
-
-// 	if (action.type === actions.LOGOUT) {
-// 		return Object.assign({}, state, {
-// 			currentUser: null
-// 		});	
-// 	} 
-
-// 	if (action.type === actions.REGISTER_USER) {
-// 		const newUser = {
-// 			firstName: action.firstName,
-// 			lastName: action.lastName,
-// 			username: action.username,
-// 			password: action.password,
-// 			tripsById: []	
-// 		}
-
-// 		return Object.assign({}, state, {
-// 			users: [...state.users, newUser],
-// 			currentUser: action.username
-// 		});
-			
-// 	} 
-
-// 	if (action.type === actions.CREATE_NEW_TRIP) {
-		
-// 		const newTrip = {
-// 			id: action.id,
-// 			name: action.tripName,
-// 			dates: action.dates,
-// 			location: action.location,
-// 			tripLeader: action.tripLeader,
-// 			collaborators: [...action.collaborators],
-// 			itineraryItems: []
-// 		}
-		
-// 		let users = state.users.map((user, username)=>{
-// 			if(user.username !== action.tripLeader &&
-// 				!action.collaborators.includes(user.username)) {
-// 					return user;
-// 			}
-
-// 			return Object.assign({}, user, {
-// 				tripsById: [...user.tripsById, action.id]
-// 			})
-// 		})
-		
-// 		return Object.assign({}, state, {
-// 			trips: [...state.trips, newTrip],
-// 			users
-// 		});
-// 	} 
-
-// 	if (action.type === actions.CREATE_NEW_ITINERARY_ITEM) {
-	
-// 	console.log(action.collaborators)	
-// 	const votes = {}	
-// 	action.collaborators.forEach(collaborator => {
-// 		votes[`${collaborator}`] = null
-// 	})
-	
-// 	console.log(votes)
-// 		const newItineraryItem = {
-// 			type: action.itineraryType,
-// 			confirmed: false,
-// 			flightNumber: action.flightNumber,
-// 			name: action.name,
-// 			price: action.price,
-// 			foodType: action.foodType,
-// 			pool: action.pool,
-// 			website: action.website,
-// 			other: action.other,
-// 			votes: votes
-// 		} 
-		
-// 		let trips = state.trips.map((trip, tripId) => {
-// 			if(trip.id !== action.tripId) {
-// 				return trip;
-// 			}
-
-// 			return Object.assign({}, trip, {
-// 				itineraryItems: [...trip.itineraryItems, newItineraryItem]
-// 			});
-// 		}) 
-
-// 		return Object.assign({}, state, {
-// 			trips
-// 		});
-			
-// 	}
-
-// 	if (action.type === actions.EDITVOTE) {
-
-// 		const trip = state.trips.find( trip => trip.id === action.tripId)
-		
-// 		const itineraryItem = trip.itineraryItems.find(item => item.id === action.itineraryItemId)
-
-// 		let votes = Object.assign({}, itineraryItem.votes, {
-// 				[action.currentUser]: action.vote
-// 			}
-// 		);
-
-// 		let itineraryItems = trip.itineraryItems.map((item) => {
-// 			if( item.id !== action.itineraryItemId) {
-// 				return item;
-// 			}
-
-// 			return Object.assign({}, item, {
-// 				votes: votes
-// 			});
-// 		});
-
-// 		let trips = state.trips.map((trip) => {
-// 			if(trip.id !== action.tripId) {
-// 				return trip;
-// 			}
-
-// 			return Object.assign({}, trip, {
-// 				itineraryItems
-// 			});
-// 		});
-
-// 		return Object.assign({}, state, {
-// 			trips
-// 		});	
-// 	} 
-
-	// if (action.type === actions.LOGOUT) {
-	// 	let itineraryItems = state.trips[action.tripId].map((itineraryItem) => {
-	// 		if(itineraryItem.id !== action.itineraryItemId) {
-	// 			return trip
-	// 		}
-	// 	}
-
-	// 	return Object.assign({}, state, {
-	// 		trips
-	// 	});	
-	// }  
 
 
 

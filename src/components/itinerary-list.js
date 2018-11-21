@@ -5,7 +5,7 @@ import './itinerary-list.css'
 export default function ItineraryList(props) {
 	
 	const list = props.trip.itineraryItems.map(item => {
-			return <ItineraryItem item={item} trip={props.trip} />
+			return <ItineraryItem key={item.id} item={item} trip={props.trip} />
 		});
 
 	return (

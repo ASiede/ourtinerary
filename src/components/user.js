@@ -6,11 +6,8 @@ import TripList from './trip-list';
 export function User(props) {
 
 	const user = props.ourtinerary.users.find(user => user.username === props.username);	
-
-
 	const trips = user.tripsById.length > 0 ?
 				user.tripsById.map(tripId => props.ourtinerary.trips.find(trip => trip.id === tripId)) : "";
-	
 	const tripComponent = trips ? <TripList trips={trips}/> : <p>You have no trips yet. Create a trip below</p>;
 
 	return (

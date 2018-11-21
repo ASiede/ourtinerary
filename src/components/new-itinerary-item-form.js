@@ -9,7 +9,7 @@ export class NewItineraryForm extends React.Component {
 	constructor(props) { 
 		super(props);
 		this.state = {
-            itineraryType: 'Hotel'
+            itineraryType: 'Flight'
         } 
 	}
 
@@ -30,12 +30,12 @@ export class NewItineraryForm extends React.Component {
 		
 		const tripId = this.props.trip.id;
 		const collaborators = this.props.trip.collaborators;
+
 		let itineraryType = this.state.itineraryType
 
 		this.props.reset();
 
-		return this.props.dispatch(createNewItineraryItem(tripId, itineraryType, flightNumber, name, price, foodType, pool, website, other, collaborators))
-					
+		return this.props.dispatch(createNewItineraryItem(tripId, itineraryType, flightNumber, name, price, foodType, pool, website, other, collaborators));		
 	}
 
 
@@ -46,19 +46,19 @@ export class NewItineraryForm extends React.Component {
 				<h2>Create New Trip Itinerary Below</h2>
 		        	<label>Type of Activity</label><br />
 			          <select value={this.state.itineraryType} onChange={e => this.setValue(e.target.value)}>
-			            <option value="flight">Flight</option>
-			            <option value="hotel" default>Hotel</option>
-			            <option value="restaurant">Restaurants/Bars</option>
-			            <option value="activity">Activities</option>
-			            <option value="event">Events</option>
-			            <option value="shopping">Shopping</option>
-			            <option value="other">Other</option>
+			            <option value="Flight">Flight</option>
+			            <option value="Hotel" default>Hotel</option>
+			            <option value="Restaurant/Bar">Restaurant/Bar</option>
+			            <option value="Activity">Activity</option>
+			            <option value="Event">Event</option>
+			            <option value="Shopping">Shopping</option>
+			            <option value="Other">Other</option>
 			          </select><br />
 		        	
 
 		        	<form onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
 
-		        		{ itineraryType === "flight" &&
+		        		{ itineraryType === "Flight" &&
 			        		<Field
 			        		name="flightNumber"
 			        		type="text"
@@ -76,7 +76,7 @@ export class NewItineraryForm extends React.Component {
 		        		validate={[required, nonEmpty]}
 		        		/>
 
-		        		{ itineraryType === "flight || restaurant || activity || event || other" &&
+		        		{ itineraryType === "Flight || Restaurant || Activity || Event || Other" &&
 		        		<Field
 		        		name="price"
 		        		type="text"
@@ -86,7 +86,7 @@ export class NewItineraryForm extends React.Component {
 		        		}
 
 
-		        		{ itineraryType === "restaurant" &&
+		        		{ itineraryType === "Restaurant" &&
 			        		<Field
 			        		name="foodType"
 			        		type="text"
@@ -95,7 +95,7 @@ export class NewItineraryForm extends React.Component {
 			        		/>
 			          	}
 
-			        	{ itineraryType === "hotel" &&
+			        	{ itineraryType === "Hotel" &&
 			        		<Field
 			        		name="pool"
 			        		type="text"

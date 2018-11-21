@@ -1,22 +1,16 @@
 import React from 'react';
-import Nav from './nav'
-import RegistrationForm from './registration-form'
-import {BrowserRouter as Redirect} from 'react-router-dom';
+import RegistrationForm from './registration-form';
 import {connect} from 'react-redux';
-import LoginForm from './login-form'
-import './landing.css'
+import LoginForm from './login-form';
+import './landing.css';
 
 
 export function Landing(props) {
-	console.log('logged in is ' + props.loggedIn)
-	console.log("curent user is " + props.currentUser)
-	console.log(props.ourtinerary);
 	if(props.loggedIn) {
 		props.history.push(`/user/${props.currentUser}`);
 	}
 
 	return (
-		
 			<body>
 				<header>
 					<h1>Welcome to OURtinerary</h1>

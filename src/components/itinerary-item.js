@@ -12,7 +12,6 @@ export class ItineraryItem extends React.Component {
     // }
 
     handleVote(vote){
-      console.log(vote, this.props.item.id, this.props.trip.id, this.props.currentUser);
       return this.props.dispatch(editVote(vote, this.props.item.id, this.props.trip.id, this.props.currentUser));
     }
 
@@ -33,18 +32,18 @@ export class ItineraryItem extends React.Component {
     const itineraryItem = this.props.item
 
     const votesHTML = this.props.trip.collaborators.map(collaborator => {
-      
+
         if(itineraryItem.votes[collaborator] && (itineraryItem.votes[collaborator] === 'Yes')) {
-            return <li>{collaborator}: 👍</li>
+            return <li key={collaborator.toString()} >{collaborator}: 👍</li>
 
             } else if (itineraryItem.votes[collaborator] && (itineraryItem.votes[collaborator] === 'No')){
-              return <li>{collaborator}: 👎</li>
+              return <li key={collaborator.toString()}>{collaborator}: 👎</li>
 
             } else if(this.props.currentUser === collaborator) {
-              return <li>{collaborator}: {itineraryItem.votes[`${collaborator}`]}<span onClick={() => this.handleVote('Yes')}>👍</span><span onClick={() => this.handleVote('No')}>👎</span></li>
+              return <li key={collaborator.toString()}>{collaborator}: {itineraryItem.votes[`${collaborator}`]}<span onClick={() => this.handleVote('Yes')}>👍</span><span onClick={() => this.handleVote('No')}>👎</span></li>
 
             } else {
-            return <li>{collaborator}: {itineraryItem.votes[`${collaborator}`]}</li>
+            return <li key={collaborator.toString()}>{collaborator}: {itineraryItem.votes[`${collaborator}`]}</li>
             }
         
     });
