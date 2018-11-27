@@ -1,46 +1,67 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {getTrips, getUser} from '../actions'
 import NewTripForm from './new-trip-form';
 import TripList from './trip-list';
 
-export function User(props) {
+export class User extends React.Component {
+	
+	componentDidMount() {
+		
+		//NEED TO GET TRIPS OF THE USER
+		//GET USER
+		this.props.dispatch(getUser(this.props.currentUser.id))
 
-	const user = props.ourtinerary.users.find(user => user.username === props.username);	
-	const trips = user.tripsById.length > 0 ?
-				user.tripsById.map(tripId => props.ourtinerary.trips.find(trip => trip.id === tripId)) : "";
-	const tripComponent = trips ? <TripList trips={trips}/> : <p>You have no trips yet. Create a trip below</p>;
+		//GET TRIPS
+		// this.props.dispatch(getTrips())
 
-	return (
+		
+			
+	}
+	
+	render() {
+		console.log(this.props.ourtinerary)
+		const user = this.props.ourtinerary.users.find(user => user.id === this.props.currentUser.id)
+		console.log(user)
+		// const trips = user.trips
+		// const trips = user.trips.length > 0 ?
+		// 			user.trips.map(tripId => this.props.ourtinerary.trips.find(trip => trip.id === tripId)) : "";
 
-		<div>
-			<header>
-				<h1>OURtinerary</h1>
-			</header>
-			<main>
-	      		<section>
-	        		<h2>Your Trips</h2>
-				        {tripComponent}
-	      		</section>
+		// const tripComponent = user.trips ? <TripList trips={user.trips}/> : <p>You have no trips yet. Create a trip below</p>;
+		
+		
 
-			    <section>
-			        <h2>Create new trip</h2>
-			        <button>Create!</button>
-			    </section>
+		return (
 
-		        <section>
-		        	<NewTripForm currentUser={props.username}/>
-		        </section>
+			<div>
+				<header>
+					<h1>OURtinerary</h1>
+				</header>
+				<main>
+		      		<section>
+		        		<h2>Your Trips</h2>
+					        {this.tripComponent}
+		      		</section>
 
-	      		<footer>Footer</footer>
-	    	</main>
-    	</div>
-	);
+				    <section>
+				        <h2>Create new trip</h2>
+				        <button>Create!</button>
+				    </section>
+
+			        <section>
+			        	<NewTripForm currentUser={this.props.username}/>
+			        </section>
+
+		      		<footer>Footer</footer>
+		    	</main>
+	    	</div>
+		);
+	}
 }
 
 const mapStateToProps = (state, props) => ({
 	ourtinerary: state.ourtinerary,
-	username: state.ourtinerary.currentUser,
-	
+	currentUser: state.ourtinerary.currentUser,
 });
 
 export default connect(mapStateToProps)(User);

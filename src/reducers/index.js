@@ -1,6 +1,7 @@
 import * as actions from '../actions'
 
-const initialState = {
+
+const dummyData = {
 	currentUser: null,
 	trips: [{
 			id: 1,
@@ -120,20 +121,30 @@ const initialState = {
 	}]
 }
 
-
+const initialState = {
+	trips: [],
+	users: [],
+	itineraryItems: [],
+	votes: [],
+	authToken: null,
+	currentUser: null,
+	loading: false,
+	error: null,
+	test: ''
+};
 
 export const ourtineraryReducer = (state=initialState, action) => {
 
 	let expression = action.type
 	switch (expression) {
-		case actions.LOGIN:
-			const currentUser = state.users.find( user => user.username === action.username);
-			if (currentUser && currentUser.password === action.password) {
-				return Object.assign({}, state, {
-					currentUser: currentUser.username
-				});
-			}
-			break;
+		// case actions.LOGIN:
+		// 	const currentUser = state.users.find( user => user.username === action.username);
+		// 	if (currentUser && currentUser.password === action.password) {
+		// 		return Object.assign({}, state, {
+		// 			currentUser: currentUser.username
+		// 		});
+		// 	}
+		// 	break;
 
 		case actions.LOGOUT: 
 			return Object.assign({}, state, {
@@ -142,21 +153,33 @@ export const ourtineraryReducer = (state=initialState, action) => {
 			break;	
 		
 
-		case actions.REGISTER_USER:
-			const newUser = {
-				firstName: action.firstName,
-				lastName: action.lastName,
-				username: action.username,
-				password: action.password,
-				tripsById: []	
-			};
+		// case actions.REGISTER_USER:
+		// 	const newUser = {
+		// 		firstName: action.firstName,
+		// 		lastName: action.lastName,
+		// 		username: action.username,
+		// 		password: action.password,
+		// 		tripsById: []	
+		// 	};
 
+			// return Object.assign({}, state, {
+			// 	users: [...state.users, newUser],
+			// 	currentUser: action.username
+			// });
+			// break;
+		case actions.FETCH_TRIPS_SUCCESS:
+			console.log(action.trips.trips)
 			return Object.assign({}, state, {
-				users: [...state.users, newUser],
-				currentUser: action.username
+				trips: action.trips.trips
 			});
 			break;
-		
+
+		case actions.FETCH_USER_SUCCESS:
+			console.log(action.user)
+			return Object.assign({}, state, {
+				users: [...state.users, action.user]
+			});
+			break;	
 
 		case actions.CREATE_NEW_TRIP:
 			const newTrip = {
@@ -250,6 +273,42 @@ export const ourtineraryReducer = (state=initialState, action) => {
 			return Object.assign({}, state, {
 				trips: updatedTrips
 			});
+			break;
+
+		// FOLLOWING CASES ARE IN REGARDS TO LOGGING IN	
+		case actions.SET_AUTH_TOKEN:
+			return Object.assign({}, state, {
+            	authToken: action.authToken
+        	});
+			break;
+
+		case actions.CLEAR_AUTH:
+			return Object.assign({}, state, {
+            	authToken: null,
+            	currentUser: null
+        	});
+        	break;
+
+		case actions.AUTH_REQUEST:
+			return Object.assign({}, state, {
+            	loading: true,
+            	error: null
+        	});
+        	break;
+
+		case actions.AUTH_SUCCESS:
+			return Object.assign({}, state, {
+            	loading: false,
+            	currentUser: action.currentUser
+        	});
+        	break;
+
+		case actions.AUTH_ERROR:
+			return Object.assign({}, state, {
+            loading: false,
+            error: action.error
+        });
+
 		default:
 		return state;
 	}

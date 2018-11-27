@@ -1,7 +1,7 @@
 import React from 'react';
 import {reduxForm, Field, focus} from 'redux-form';
 import Input from './input';
-import {login} from '../actions/index';
+import {login, getTrips} from '../actions';
 import {required, nonEmpty} from '../validators';
 
 export class LoginForm extends React.Component {
@@ -12,6 +12,7 @@ export class LoginForm extends React.Component {
 	onSubmit(values) {
 		console.log(values)
 		this.props.reset();
+		this.props.dispatch(getTrips())
 		return this.props.dispatch(login(values.username, values.password));
 		
 	}

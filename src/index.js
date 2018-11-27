@@ -5,11 +5,13 @@ import App from './components/app';
 import {Provider} from 'react-redux';
 import store from './store';
 import * as serviceWorker from './serviceWorker';
-import {login, registerUser, createNewTrip, createNewItineraryItem, editVote} from './actions'
+import * as actions from './actions'
 
 
 // console.log(store.getState().ourtinerary);
-
+// store.dispatch(actions.login("Delores", "passwordpassword"))
+// // store.dispatch(actions.getTrips());
+// console.log(store.getState().ourtinerary);
 
 ReactDOM.render(
 	<Provider store={store}>
