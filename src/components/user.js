@@ -11,19 +11,15 @@ export class User extends React.Component {
 		//NEED TO GET TRIPS OF THE USER
 		//GET USER
 		this.props.dispatch(getUser(this.props.currentUser.id))
-
-		//GET TRIPS
-		// this.props.dispatch(getTrips())
-
-		
-			
 	}
 	
 	render() {
 		console.log(this.props.ourtinerary)
 		const user = this.props.ourtinerary.users.find(user => user.id === this.props.currentUser.id)
 		console.log(user)
-		// const trips = user.trips
+		const trip = []
+		const trips = user ? user.trips : []
+		console.log(trips);
 		// const trips = user.trips.length > 0 ?
 		// 			user.trips.map(tripId => this.props.ourtinerary.trips.find(trip => trip.id === tripId)) : "";
 
