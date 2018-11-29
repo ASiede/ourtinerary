@@ -1,5 +1,7 @@
 import React from 'react';
 import Input from './input';
+import {connect} from 'react-redux';
+import {getUsers} from '../actions'
 import {reduxForm, Field, focus} from 'redux-form';
 import {required, nonEmpty} from '../validators';
 import {createNewTrip} from '../actions/index';
@@ -10,24 +12,26 @@ export class NewTripForm extends React.Component {
 		super(props); 
 	}
 
-	onSubmit(values) {
-		console.log(values);
+	componentDidMount() {
+		// this.props.dispatch(getUsers())
+	}
 
-		const tripLeader = this.props.currentUser;
-		const tripId = (Math.floor(Math.random() * 100) + 5);
+	onSubmit(values) {
+		
+		console.log(this.props.ourtinerary)
+		
 		const collaboratorArr = values.collaborators.split(",");
 		const collaborators = collaboratorArr.map(name => name.trim());
+		console.log(collaborators)
 
+		const tripLeader = this.props.currentUser;
+        const {tripName, dates, location} = values;
+		const trip = {tripName, dates, location, collaborators, tripLeader}
+		console.log(trip)
 		this.props.reset();
-		
-		return this.props.dispatch(createNewTrip(
-			tripId,
-			values.tripName, 
-			values.dates, 
-			values.location, 
-			collaborators, 
-			tripLeader))
-	}
+
+		return this.props.dispatch(createNewTrip(trip))
+	}		
 	
 	render () {
 		
@@ -80,8 +84,16 @@ export class NewTripForm extends React.Component {
 		)};
 }
 
+const mapStateToProps = (state) => ({
+	ourtinerary: state.ourtinerary,
+	currentUser: state.ourtinerary.currentUser,
+});
+
+NewTripForm = connect(mapStateToProps)(NewTripForm);
+
 export default reduxForm({
 	form: 'newTripForm',
 	onSubmitFail: (errors, dispatch) =>
         dispatch(focus('newTripForm', Object.keys(errors)[0]))
 })(NewTripForm)
+

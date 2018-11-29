@@ -19,9 +19,7 @@ export class ItineraryItem extends React.Component {
 
     render() {
 
-    const confirmedText = this.props.item.confirmed ? 'Confirmed' : 'Unconfirmed';
-    const confirmButtonText = this.props.item.confirmed ? 'Unconfirm' : 'Confirm';
-
+    console.log(this.props.item)
     const priceHTML = this.props.item.price ? <li>Price: {this.props.item.price}</li> : '';
     const categoryHTML = this.props.category ? <li>categoryetc</li> : '';
     const poolHTML = this.props.item.pool ? <li>Pool: {this.props.item.pool}</li> : '';
@@ -29,26 +27,28 @@ export class ItineraryItem extends React.Component {
     const otherHTML = this.props.item.other ? <li>Other: {this.props.item.other}</li> : '';
     const locationHTML = this.props.item.location ? <li>Location: {this.props.item.location}</li> : '';
 
-    const itineraryItem = this.props.item
+    console.log(this.props.item)
 
-    const votesHTML = this.props.trip.collaborators.map(collaborator => {
+    let itineraryItemVotes = []
+    itineraryItemVotes = this.props.item.votes ? this.props.item.votes : [];
 
-        if(itineraryItem.votes[collaborator] && (itineraryItem.votes[collaborator] === 'Yes')) {
-            return <li key={collaborator.toString()} >{collaborator}: 👍</li>
+    let votesHTML = '';
+    votesHTML = itineraryItemVotes.length>0 ? itineraryItemVotes.map(vote => {
 
-            } else if (itineraryItem.votes[collaborator] && (itineraryItem.votes[collaborator] === 'No')){
-              return <li key={collaborator.toString()}>{collaborator}: 👎</li>
+        if(vote.status === 'Yes') {
+            return <li key={vote.id} >{vote.user.username} 👍</li>
 
-            } else if(this.props.currentUser === collaborator) {
-              return <li key={collaborator.toString()}>{collaborator}: {itineraryItem.votes[`${collaborator}`]}<span onClick={() => this.handleVote('Yes')}>👍</span><span onClick={() => this.handleVote('No')}>👎</span></li>
+            } else if (vote.status === 'No'){
+              return <li key={vote.id}>{vote.user} 👎</li>
+
+            } else if(this.props.currentUser.username === vote.user.username) {
+              return <li key={vote.id}>{vote.user.usernam}:<span onClick={() => this.handleVote('Yes')}>👍</span><span onClick={() => this.handleVote('No')}>👎</span></li>
 
             } else {
-            return <li key={collaborator.toString()}>{collaborator}: {itineraryItem.votes[`${collaborator}`]}</li>
+            return <li key={vote.id}>{vote.user.username} no vote</li>
             }
         
-    });
-
-    // const confirmButton = (this.props.currentUser === this.props.trip.tripleader) ? <button onClick={() => this.handleToggleConfirm()}>{confirmButtonText}</button> : '';
+    }) : '';
     
       return (
         <div>

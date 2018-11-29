@@ -168,80 +168,80 @@ export const ourtineraryReducer = (state=initialState, action) => {
 			// });
 			// break;
 		case actions.FETCH_TRIPS_SUCCESS:
-			console.log(action.trips.trips)
+			
 			return Object.assign({}, state, {
 				trips: action.trips.trips
 			});
 			break;
 
 		case actions.FETCH_USER_SUCCESS:
-			console.log(action.user)
 			return Object.assign({}, state, {
 				users: [...state.users, action.user]
 			});
-			break;	
+			break;
 
-		case actions.CREATE_NEW_TRIP:
-			const newTrip = {
-				id: action.id,
-				name: action.tripName,
-				dates: action.dates,
-				location: action.location,
-				tripLeader: action.tripLeader,
-				collaborators: [...action.collaborators, action.tripLeader],
-				itineraryItems: []
-			};
-		
-			let users = state.users.map((user, username)=>{
-				if(user.username !== action.tripLeader &&
-					!action.collaborators.includes(user.username)) {
-						return user;
-					};
-
-					return Object.assign({}, user, {
-						tripsById: [...user.tripsById, action.id]
-					});
-			})
+		case actions.FETCH_USERS_SUCCESS:
+			
 			return Object.assign({}, state, {
-				trips: [...state.trips, newTrip],
-				users
+				users: action.users.users
+			});
+			break;	
+			
+		case actions.FETCH_TRIP_SUCCESS:
+			return Object.assign({}, state, {
+				trips: [...state.trips, action.trip]
+			});
+			break;			
+
+		case actions.FETCH_ITINERARY_ITEM_SUCCESS:
+			console.log(action.itineraryItem)
+			return Object.assign({}, state, {
+				itineraryItems: [...state.itineraryItems, action.itineraryItem]
+			});
+
+			break;		
+		// case actions.CREATE_NEW_ITINERARY_ITEM:	
+		// 	const votes = {}	
+		// 	action.collaborators.forEach(collaborator => {
+		// 			votes[`${collaborator}`] = null
+		// 		});
+			 
+		// 	const newItineraryItem = {
+		// 		type: action.itineraryType,
+		// 		confirmed: false,
+		// 		flightNumber: action.flightNumber,
+		// 		name: action.name,
+		// 		price: action.price,
+		// 		foodType: action.foodType,
+		// 		pool: action.pool,
+		// 		website: action.website,
+		// 		other: action.other,
+		// 		votes: votes
+		// 	};
+		
+		// 	let trips = state.trips.map((trip, tripId) => {
+		// 		if(trip.id !== action.tripId) {
+		// 			return trip;
+		// 		};
+
+		// 		return Object.assign({}, trip, {
+		// 			itineraryItems: [...trip.itineraryItems, newItineraryItem]
+		// 		});
+		// 	}) ;
+
+		// 	return Object.assign({}, state, {
+		// 		trips
+		// 	});
+		// 	break;
+		case actions.FETCH_NEW_TRIP_SUCCESS:
+			console.log(action.newTrip)
+			return Object.assign({}, state, {
+				trips: [...state.trips, action.newTrip],
 			});
 			
 			break;
 
-		case actions.CREATE_NEW_ITINERARY_ITEM:	
-			const votes = {}	
-			action.collaborators.forEach(collaborator => {
-					votes[`${collaborator}`] = null
-				});
-			 
-			const newItineraryItem = {
-				type: action.itineraryType,
-				confirmed: false,
-				flightNumber: action.flightNumber,
-				name: action.name,
-				price: action.price,
-				foodType: action.foodType,
-				pool: action.pool,
-				website: action.website,
-				other: action.other,
-				votes: votes
-			};
-		
-			let trips = state.trips.map((trip, tripId) => {
-				if(trip.id !== action.tripId) {
-					return trip;
-				};
 
-				return Object.assign({}, trip, {
-					itineraryItems: [...trip.itineraryItems, newItineraryItem]
-				});
-			}) ;
-
-			return Object.assign({}, state, {
-				trips
-			});
-			break;
 
 		case actions.EDITVOTE:
 			const trip = state.trips.find( trip => trip.id === action.tripId)

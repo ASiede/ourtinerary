@@ -10,7 +10,6 @@ export class LoginForm extends React.Component {
 	}
 
 	onSubmit(values) {
-		console.log(values)
 		this.props.reset();
 		this.props.dispatch(getTrips())
 		return this.props.dispatch(login(values.username, values.password));

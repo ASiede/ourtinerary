@@ -30,6 +30,7 @@ export const getTrips = () => dispatch => {
             }
         })
 		.then(trips => {
+            
 			dispatch(fetchTripsSuccess(trips));
 		});
 };
@@ -61,6 +62,96 @@ export const getUser = (userId) => dispatch => {
         })
         .then(user => {
             dispatch(fetchUserSuccess(user));
+        });
+};
+
+export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
+export const fetchUsersSuccess = users => ({
+    type: FETCH_USERS_SUCCESS,
+    users
+})
+export const getUsers = () => dispatch => {
+    fetch(`${API_BASE_URL}/users/`)
+        .then(res => {
+            if (!res.ok) {
+                return Promise.reject(res.statusText);
+            }
+            return res.json();
+        })
+        .catch(err => {
+            const {reason, message, location} = err;
+            if (reason === 'ValidationError') {
+                // Convert ValidationErrors into SubmissionErrors for Redux Form
+                return Promise.reject(
+                    new SubmissionError({
+                        [location]: message
+                    })
+                );
+            }
+        })
+        .then(users => {
+            dispatch(fetchUsersSuccess(users));
+        });
+};
+
+export const FETCH_TRIP_SUCCESS = 'FETCH_TRIP_SUCCESS';
+export const fetchTripSuccess = trip => ({
+    type: FETCH_TRIP_SUCCESS,
+    trip
+})
+export const getTrip = (tripId) => dispatch => {
+    fetch(`${API_BASE_URL}/trips/` + tripId)
+        .then(res => {
+            if (!res.ok) {
+                return Promise.reject(res.statusText);
+            }
+            return res.json();
+        })
+        .catch(err => {
+            const {reason, message, location} = err;
+            if (reason === 'ValidationError') {
+                // Convert ValidationErrors into SubmissionErrors for Redux Form
+                return Promise.reject(
+                    new SubmissionError({
+                        [location]: message
+                    })
+                );
+            }
+        })
+        .then(trip => {
+            dispatch(fetchTripSuccess(trip));
+        });
+};
+
+
+export const FETCH_ITINERARY_ITEM_SUCCESS = 'FETCH_ITINERARY_ITEM_SUCCESS';
+export const fetchItineraryItemSuccess = (itineraryItem, tripId) => ({
+    type: FETCH_ITINERARY_ITEM_SUCCESS,
+    itineraryItem,
+    tripId
+})
+export const getItineraryItem = (itemId, tripId) => dispatch => {
+    console.log(tripId)
+    fetch(`${API_BASE_URL}/itineraryItems/` + itemId)
+        .then(res => {
+            if (!res.ok) {
+                return Promise.reject(res.statusText);
+            }
+            return res.json();
+        })
+        .catch(err => {
+            const {reason, message, location} = err;
+            if (reason === 'ValidationError') {
+                // Convert ValidationErrors into SubmissionErrors for Redux Form
+                return Promise.reject(
+                    new SubmissionError({
+                        [location]: message
+                    })
+                );
+            }
+        })
+        .then((itineraryItem) => {
+            dispatch(fetchItineraryItemSuccess(itineraryItem, tripId));
         });
 };
 // export const LOGIN = "LOGIN"
@@ -108,16 +199,51 @@ export const registerUser = user => dispatch => {
         });
 };
 
-export const CREATE_NEW_TRIP = "CREATE_NEW_TRIP"
-export const createNewTrip = (id, tripName, dates, location, collaborators, tripLeader) => ({
-	type: CREATE_NEW_TRIP,
-	id, 
-	tripName,
-	dates,
-	location, 
-	collaborators,
-	tripLeader
-});
+export const FETCH_NEW_TRIP_SUCCESS = 'FETCH_NEW_TRIP_SUCCESS';
+export const fetchNewTripSuccess = trip => ({
+    type: FETCH_NEW_TRIP_SUCCESS,
+    trip
+})
+export const createNewTrip = (newTrip) => dispatch => {
+    fetch(`${API_BASE_URL}/trips`, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(newTrip)
+    })
+        .then(res => {
+            if (!res.ok) {
+                return Promise.reject(res.statusText);
+            }
+            return res.json();
+        })
+        .catch(err => {
+            const {reason, message, location} = err;
+            if (reason === 'ValidationError') {
+                // Convert ValidationErrors into SubmissionErrors for Redux Form
+                return Promise.reject(
+                    new SubmissionError({
+                        [location]: message
+                    })
+                );
+            }
+        })
+        .then(trip => {
+            dispatch(fetchNewTripSuccess(trip));
+        });
+};
+
+// export const CREATE_NEW_TRIP = "CREATE_NEW_TRIP"
+// export const createNewTrip = (id, tripName, dates, location, collaborators, tripLeader) => ({
+// 	type: CREATE_NEW_TRIP,
+// 	id, 
+// 	tripName,
+// 	dates,
+// 	location, 
+// 	collaborators,
+// 	tripLeader
+// });
 
 
 export const CREATE_NEW_ITINERARY_ITEM = "CREATE_NEW_ITINERARY_ITEM"
@@ -202,7 +328,6 @@ const normalizeResponseErrors = res => {
 const storeAuthInfo = (authToken, dispatch) => {
     const decodedToken = jwtDecode(authToken);
     dispatch(setAuthToken(authToken));
-    console.log(decodedToken.user)
     dispatch(authSuccess(decodedToken.user));
     saveAuthToken(authToken);
 };

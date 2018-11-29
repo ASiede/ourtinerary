@@ -1,20 +1,35 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 import './trip-list.css';
 
 
-export default function TripList(props) {
+export class TripList extends React.Component {
+	componentDidMount() {
+		
+	}
 	
-	const trips = props.trips.map((trip) => (
+	render() {
+		const trips = this.props.ourtinerary.trips.map((trip) => (
 		<li key={trip.id}><Link to={`/trip/${trip.id}`}>{trip.name}</Link></li>
 	));
-
-	return (
+		console.log(this.props.ourtinerary.trips)
+		return (
 		<div>
 			<ul className="trips">
 				{trips}
 			</ul>
 		</div>
-	)
+		)
+	}
+	
 }
+
+
+const mapStateToProps = (state) => ({
+	ourtinerary: state.ourtinerary,
+	currentUser: state.ourtinerary.currentUser,
+});
+
+export default connect(mapStateToProps)(TripList);
