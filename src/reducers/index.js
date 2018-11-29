@@ -1,124 +1,36 @@
 import * as actions from '../actions'
 
+const initialStateNormalized = {
+	trips : {
+		byId: {
 
-const dummyData = {
+		},
+		allIds: []
+	},
+	users : {
+		byId: {
+
+		},
+		allIds: []
+	},
+	itineraryItems : {
+		byId: {
+
+		},
+		allIds: []
+	},
+	votes : {
+		byId: {
+
+		},
+		allIds: []
+	},
+	authToken: null,
 	currentUser: null,
-	trips: [{
-			id: 1,
-			name: 'NYC',
-			dates: '2/2/2020-2/20/2020',
-			location: 'New York City, NY',
-			tripLeader: 'Rupaul',
-			collaborators:["Rupaul", "Alyssa", "Katya", "Trixie"],
-			itineraryItems: [
-				{	
-					id: 50,
-					type: 'Hotel',
-					name: 'Mariot',
-					confirmed: false,
-					price: 500,
-					pool: 'Yes',
-					website: 'mariot.com',
-					other: 'Close to the airport',
-					votes: {
-						"Rupaul": 'Yes',
-						"Alyssa": 'Yes',
-						"Katya": null,
-						"Trixie": 'No'
-					}
-				},
+	loading: false,
+	error: null,
+	itineraryType: 'Flight'
 
-				{	
-					id: 60,
-					type: 'Hotel',
-					name: 'Motel 6',
-					confirmed: true,
-					price: 300,
-					pool: 'Yes',
-					website: 'motel6.com',
-					other: '',
-					votes: {
-						"Rupaul": null,
-						"Alyssa": 'Yes',
-						"Katya": 'Yes',
-						"Trixie": 'Yes'
-					}	
-				},
-				{
-					id: 70,
-					type: 'Restaurant',
-					name: 'Yum Yum',
-					catagory: 'chinese',
-					confirmed: true,
-					price: 'cheap',
-					website: 'yumyum.com',
-					other: 'super yelp reviews',
-					votes: {
-						"Rupaul": 'Yes',
-						"Alyssa": 'Yes',
-						"Katya": 'Yes',
-						"Trixie": 'Yes'
-					}
-				},
-				{
-					id: 80,	
-					type: 'Activity',
-					name: 'National Art Museum',
-					confirmed: false,
-					price: 'free',
-					location: 'googlemaps.link',
-					website: 'museum.com',
-					votes: {"Rupaul": 'No',
-						"Alyssa": 'Yes',
-						"Katya": 'No',
-						"Trixie": 'Yes'
-					}
-				}
-			]
-		}, 
-		{
-			id: 2,
-			name: 'Paris',
-			dates: '2/2/2020-2/20/2020',
-			location: 'New York City, NY',
-			tripLeader: 'Rupaul',
-			collaborators: ['Rupaul', 'Alyssa'],
-			itineraryItems: []
-		}, 
-		{
-			id: 3,
-			name: 'Spring Break',
-			dates: '2/2/2020-2/20/2020',
-			location: 'New York City, NY',
-			tripLeader: 'Rupaul',
-			itineraryItems: []
-		}
-	],
-
-	users: [{
-		id: 10,
-		username: 'Rupaul',
-		password: 'password',
-		tripsById: [1, 2, 3]
-	},
-	{
-		id: 20,
-		username: 'Alyssa',
-		password: 'password',
-		tripsById: [1]
-	},
-	{
-		id: 30,
-		username: 'Katya',
-		password: 'password',
-		tripsById: []
-	},
-	{
-		id: 40,
-		username: 'Trixie',
-		password: 'password',
-		tripsById: []
-	}]
 }
 
 const initialState = {
@@ -130,49 +42,52 @@ const initialState = {
 	currentUser: null,
 	loading: false,
 	error: null,
-	test: ''
+	itineraryType: 'Flight'
 };
 
 export const ourtineraryReducer = (state=initialState, action) => {
 
 	let expression = action.type
 	switch (expression) {
-		// case actions.LOGIN:
-		// 	const currentUser = state.users.find( user => user.username === action.username);
-		// 	if (currentUser && currentUser.password === action.password) {
-		// 		return Object.assign({}, state, {
-		// 			currentUser: currentUser.username
-		// 		});
-		// 	}
-		// 	break;
 
 		case actions.LOGOUT: 
 			return Object.assign({}, state, {
 				currentUser: null
 			});
 			break;	
+
+		case actions.CHANGE_ITINERARY_TYPE:
+			return Object.assign({}, state, {
+				itineraryType: action.itineraryType
+			});
+			break;		
 		
-
-		// case actions.REGISTER_USER:
-		// 	const newUser = {
-		// 		firstName: action.firstName,
-		// 		lastName: action.lastName,
-		// 		username: action.username,
-		// 		password: action.password,
-		// 		tripsById: []	
-		// 	};
-
-			// return Object.assign({}, state, {
-			// 	users: [...state.users, newUser],
-			// 	currentUser: action.username
-			// });
-			// break;
 		case actions.FETCH_TRIPS_SUCCESS:
 			
 			return Object.assign({}, state, {
 				trips: action.trips.trips
 			});
 			break;
+
+		case actions.FETCH_TRIP_SUCCESS:
+			return Object.assign({}, state, {
+				trips: [...state.trips, action.trip],
+				// itineraryItems: [...state.itineraryItems, ...action.trip.itineraryItems]
+			});
+			break;
+
+		case actions.DELETE_TRIP_SUCCESS:
+			console.log(action.tripId)
+			let trips = state.trips.map((trip) => {
+				if(trip.id !== action.tripId) {
+					return trip;
+				};
+			}) ;
+
+			return Object.assign({}, state, {
+				trips
+			});
+			break;				
 
 		case actions.FETCH_USER_SUCCESS:
 			return Object.assign({}, state, {
@@ -187,91 +102,52 @@ export const ourtineraryReducer = (state=initialState, action) => {
 			});
 			break;	
 			
-		case actions.FETCH_TRIP_SUCCESS:
-			return Object.assign({}, state, {
-				trips: [...state.trips, action.trip]
-			});
-			break;			
+				
 
 		case actions.FETCH_ITINERARY_ITEM_SUCCESS:
 			console.log(action.itineraryItem)
 			return Object.assign({}, state, {
-				itineraryItems: [...state.itineraryItems, action.itineraryItem]
+				itineraryItems: [...state.itineraryItems, action.itineraryItem],
+				// votes: [...state.votes, ...action.itineraryItem.votes]
 			});
 
 			break;		
-		// case actions.CREATE_NEW_ITINERARY_ITEM:	
-		// 	const votes = {}	
-		// 	action.collaborators.forEach(collaborator => {
-		// 			votes[`${collaborator}`] = null
-		// 		});
-			 
-		// 	const newItineraryItem = {
-		// 		type: action.itineraryType,
-		// 		confirmed: false,
-		// 		flightNumber: action.flightNumber,
-		// 		name: action.name,
-		// 		price: action.price,
-		// 		foodType: action.foodType,
-		// 		pool: action.pool,
-		// 		website: action.website,
-		// 		other: action.other,
-		// 		votes: votes
-		// 	};
-		
-		// 	let trips = state.trips.map((trip, tripId) => {
-		// 		if(trip.id !== action.tripId) {
-		// 			return trip;
-		// 		};
 
-		// 		return Object.assign({}, trip, {
-		// 			itineraryItems: [...trip.itineraryItems, newItineraryItem]
-		// 		});
-		// 	}) ;
-
-		// 	return Object.assign({}, state, {
-		// 		trips
-		// 	});
-		// 	break;
 		case actions.FETCH_NEW_TRIP_SUCCESS:
-			console.log(action.newTrip)
 			return Object.assign({}, state, {
-				trips: [...state.trips, action.newTrip],
+				trips: [...state.trips, action.trip],
 			});
-			
 			break;
 
-
-
-		case actions.EDITVOTE:
-			const trip = state.trips.find( trip => trip.id === action.tripId)
-			const itineraryItem = trip.itineraryItems.find(item => item.id === action.itineraryItemId)
-			let updatedVotes = Object.assign({}, itineraryItem.updatedVotes, {
-				[action.currentUser]: action.vote
+		case actions.FETCH_NEW_ITINERARY_ITEM_SUCCESS:
+			return Object.assign({}, state, {
+				itineraryItems: [...state.itineraryItems]
 			});
+			break;	
 
-			let itineraryItems = trip.itineraryItems.map((item) => {
-				if( item.id !== action.itineraryItemId) {
-					return item;
+		case actions.EDIT_VOTE_SUCCESS:
+			console.log(action.vote)
+			let votes = state.votes.map((vote) => {
+				if(vote.id !== action.vote.id) {
+					return vote;
 				};
 
-				return Object.assign({}, item, {
-					votes: updatedVotes
+				return Object.assign({}, vote, {
+					status: action.vote.status
 				});
-			});
+			}) ;
 
-			let updatedTrips = state.trips.map((trip) => {
-				if(trip.id !== action.tripId) {
-					return trip;
+			let itineraryItems = state.itineraryItems.map((itineraryItem) => {
+				if(itineraryItem.id !== action.vote.itineraryItem) {
+					return itineraryItem;
 				};
-
-				return Object.assign({}, trip, {
-					itineraryItems
+				return Object.assign({}, itineraryItem, {
+					itineraryItem: votes
 				});
-			});
+			})
 
 			return Object.assign({}, state, {
-				trips: updatedTrips
+				itineraryItems
 			});
 			break;
 

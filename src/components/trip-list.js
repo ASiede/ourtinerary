@@ -14,7 +14,7 @@ export class TripList extends React.Component {
 		const trips = this.props.ourtinerary.trips.map((trip) => (
 		<li key={trip.id}><Link to={`/trip/${trip.id}`}>{trip.name}</Link></li>
 	));
-		console.log(this.props.ourtinerary.trips)
+	
 		return (
 		<div>
 			<ul className="trips">

@@ -11,7 +11,8 @@ export function Landing(props) {
 	}
 
 	return (
-			<body>
+		<div>
+			
 				<header>
 					<h1>Welcome to OURtinerary</h1>
 				</header>
@@ -35,8 +36,8 @@ export function Landing(props) {
 				    </section>
 				</main>
 				<footer>Footer</footer>	
-			</body>	
-		
+			
+		</div>
 	);
 }
 

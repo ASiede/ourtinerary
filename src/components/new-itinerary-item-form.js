@@ -1,5 +1,7 @@
 import React from 'react';
 import Input from './input';
+import {connect} from 'react-redux';
+import {changeItineraryType} from '../actions'
 import {reduxForm, Field, focus} from 'redux-form';
 import {required, nonEmpty} from '../validators';
 import {createNewItineraryItem} from '../actions/index';
@@ -8,15 +10,10 @@ import {createNewItineraryItem} from '../actions/index';
 export class NewItineraryForm extends React.Component {
 	constructor(props) { 
 		super(props);
-		this.state = {
-            itineraryType: 'Flight'
-        } 
 	}
 
 	setValue(itineraryType) {
-        this.setState({
-            itineraryType
-        })
+        return this.props.dispatch(changeItineraryType(itineraryType))
     }
 
 	onSubmit(values) {
@@ -29,23 +26,23 @@ export class NewItineraryForm extends React.Component {
 		const name = values.name ? values.name : '';
 		
 		const tripId = this.props.trip.id;
-		const collaborators = this.props.trip.collaborators;
-
-		let itineraryType = this.state.itineraryType
+		let type = this.props.ourtinerary.itineraryType
 
 		this.props.reset();
 
-		return this.props.dispatch(createNewItineraryItem(tripId, itineraryType, flightNumber, name, price, foodType, pool, website, other, collaborators));		
+		const itineraryItem = {tripId, type, flightNumber, name, price, foodType, pool, website, other}
+
+		//WORKS EXCEPT VOTES DONT POPULATE BECAUSE OF SERVER ENPOINT
+		return this.props.dispatch(createNewItineraryItem(itineraryItem));		
 	}
-
-
+	
 	render () {
-		let itineraryType = this.state.itineraryType
+		let itineraryType = this.props.ourtinerary.itineraryType
 		return (
 			<div>
 				<h2>Create New Trip Itinerary Below</h2>
 		        	<label>Type of Activity</label><br />
-			          <select value={this.state.itineraryType} onChange={e => this.setValue(e.target.value)}>
+			          <select value={itineraryType} onChange={e => this.setValue(e.target.value)}>
 			            <option value="Flight">Flight</option>
 			            <option value="Hotel" default>Hotel</option>
 			            <option value="Restaurant/Bar">Restaurant/Bar</option>
@@ -131,6 +128,13 @@ export class NewItineraryForm extends React.Component {
 		)
 	}	
 }
+
+const mapStateToProps = (state) => ({
+	ourtinerary: state.ourtinerary,
+	currentUser: state.ourtinerary.currentUser,
+});
+
+NewItineraryForm = connect(mapStateToProps)(NewItineraryForm);
 
 export default reduxForm({
 	form: 'NewTripForm',

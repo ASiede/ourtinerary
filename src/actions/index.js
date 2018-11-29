@@ -166,6 +166,11 @@ export const logout = () => ({
 	type: LOGOUT,
 });
 
+export const CHANGE_ITINERARY_TYPE = "CHANGE_ITINERARY_TYPE"
+export const changeItineraryType = (itineraryType) => ({
+    type: CHANGE_ITINERARY_TYPE,
+    itineraryType
+});
 // export const REGISTER_USER = "REGISTER_USER"
 // export const registerUser = (firstName, lastName, username, password) => ({
 // 	type: REGISTER_USER,
@@ -234,6 +239,42 @@ export const createNewTrip = (newTrip) => dispatch => {
         });
 };
 
+export const DELETE_TRIP_SUCCESS = 'DELETE_TRIP_SUCCESS';
+export const deleteTripSuccess = tripId => ({
+    type: EDIT_VOTE_SUCCESS,
+    tripId
+})
+export const deleteTrip = (trip) => dispatch => {
+    fetch(`${API_BASE_URL}/trips/`+ trip.id, {
+        method: 'DELETE',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(trip)
+    })
+        .then(res => {
+            if (!res.ok) {
+                return Promise.reject(res.statusText);
+            }
+            return res.json();
+        })
+        .catch(err => {
+            const {reason, message, location} = err;
+            if (reason === 'ValidationError') {
+                // Convert ValidationErrors into SubmissionErrors for Redux Form
+                return Promise.reject(
+                    new SubmissionError({
+                        [location]: message
+                    })
+                );
+            }
+        })
+        .then(tripId => {
+            console.log(tripId)
+            dispatch(deleteTripSuccess(tripId));
+        });
+};
+
 // export const CREATE_NEW_TRIP = "CREATE_NEW_TRIP"
 // export const createNewTrip = (id, tripName, dates, location, collaborators, tripLeader) => ({
 // 	type: CREATE_NEW_TRIP,
@@ -246,29 +287,102 @@ export const createNewTrip = (newTrip) => dispatch => {
 // });
 
 
-export const CREATE_NEW_ITINERARY_ITEM = "CREATE_NEW_ITINERARY_ITEM"
-export const createNewItineraryItem = (tripId, itineraryType, flightNumber, name, price, foodType, pool, website, other, collaborators) => ({
-	type: CREATE_NEW_ITINERARY_ITEM,
-	tripId,
-	itineraryType,
-	flightNumber,
-	name,
-	price,
-	foodType,
-	pool,
-	website,
-	other,
-	collaborators
-});
+// export const CREATE_NEW_ITINERARY_ITEM = "CREATE_NEW_ITINERARY_ITEM"
+// export const createNewItineraryItem = (tripId, itineraryType, flightNumber, name, price, foodType, pool, website, other, collaborators) => ({
+// 	type: CREATE_NEW_ITINERARY_ITEM,
+// 	tripId,
+// 	itineraryType,
+// 	flightNumber,
+// 	name,
+// 	price,
+// 	foodType,
+// 	pool,
+// 	website,
+// 	other,
+// 	collaborators
+// });
 
-export const EDITVOTE = "EDITVOTE"
-export const editVote = (vote, itineraryItemId, tripId, currentUser) => ({
-	type: EDITVOTE,
-	vote,
-	itineraryItemId,
-	tripId,
-	currentUser
-});
+export const FETCH_NEW_ITINERARY_ITEM_SUCCESS = 'FETCH_NEW_ITINERARY_ITEM_SUCCESS';
+export const fetchNewItineraryItemSuccess = itineraryItem => ({
+    type: FETCH_NEW_ITINERARY_ITEM_SUCCESS,
+    itineraryItem
+})
+export const createNewItineraryItem = (itineraryItem) => dispatch => {
+    fetch(`${API_BASE_URL}/itineraryItems`, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(itineraryItem)
+    })
+        .then(res => {
+            if (!res.ok) {
+                return Promise.reject(res.statusText);
+            }
+            return res.json();
+        })
+        .catch(err => {
+            const {reason, message, location} = err;
+            if (reason === 'ValidationError') {
+                // Convert ValidationErrors into SubmissionErrors for Redux Form
+                return Promise.reject(
+                    new SubmissionError({
+                        [location]: message
+                    })
+                );
+            }
+        })
+        .then(itineraryItem => {
+            console.log(itineraryItem)
+            dispatch(fetchNewItineraryItemSuccess(itineraryItem));
+        });
+};
+
+
+// export const EDITVOTE = "EDITVOTE"
+// export const editVote = (vote, itineraryItemId, tripId, currentUser) => ({
+// 	type: EDITVOTE,
+// 	vote,
+// 	itineraryItemId,
+// 	tripId,
+// 	currentUser
+// });
+
+export const EDIT_VOTE_SUCCESS = 'EDIT_VOTE_SUCCESS';
+export const editVoteSuccess = vote => ({
+    type: EDIT_VOTE_SUCCESS,
+    vote
+})
+export const editVote = (vote) => dispatch => {
+    fetch(`${API_BASE_URL}/votes/`+ vote.id, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(vote)
+    })
+        .then(res => {
+            if (!res.ok) {
+                return Promise.reject(res.statusText);
+            }
+            return res.json();
+        })
+        .catch(err => {
+            const {reason, message, location} = err;
+            if (reason === 'ValidationError') {
+                // Convert ValidationErrors into SubmissionErrors for Redux Form
+                return Promise.reject(
+                    new SubmissionError({
+                        [location]: message
+                    })
+                );
+            }
+        })
+        .then(vote => {
+            console.log(vote)
+            dispatch(editVoteSuccess(vote));
+        });
+};
 
 // export const TOGGLECONFIRM = "TOGGLECONFIRM"
 // export const toggleConfirm = (tripId, itineraryItemId) => ({

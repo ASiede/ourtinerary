@@ -13,34 +13,34 @@ export class NewTripForm extends React.Component {
 	}
 
 	componentDidMount() {
-		// this.props.dispatch(getUsers())
+		this.props.dispatch(getUsers())
+
 	}
 
 	onSubmit(values) {
-		
-		console.log(this.props.ourtinerary)
-		
+		// NEED TO PUT TRIP LEADER IN COLLABORATORS
+		//ACTUALLY NEVERMIND ON THAT I THINK
 		const collaboratorArr = values.collaborators.split(",");
-		const collaborators = collaboratorArr.map(name => name.trim());
-		console.log(collaborators)
-
-		const tripLeader = this.props.currentUser;
-        const {tripName, dates, location} = values;
-		const trip = {tripName, dates, location, collaborators, tripLeader}
-		console.log(trip)
+		const collaboratorsArrTrimmed = collaboratorArr.map(name => name.trim());
+		const collaborators = collaboratorsArrTrimmed.map(collaborator => {
+			const user = this.props.ourtinerary.users.find( user => user.username === collaborator)
+			return user.id
+		})
+		const tripLeader = this.props.ourtinerary.currentUser.id;
+        const {name, dates, location} = values;
+		const trip = {name, dates, location, collaborators, tripLeader}
 		this.props.reset();
 
 		return this.props.dispatch(createNewTrip(trip))
 	}		
 	
 	render () {
-		
 		return (
 			<div>
 				<h2>Create New Trip Below</h2>
 		        	<form onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
 		        		<Field
-		        		name="tripName"
+		        		name="name"
 		        		type="text"
 		        		component={Input}
 		        		label="Trip Name"

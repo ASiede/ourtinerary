@@ -7,72 +7,69 @@ export class ItineraryItem extends React.Component {
       super(props);
     }
 
-    // handleToggleConfirm() {
-    //   return this.props.dispatch(toggleConfirm(this.props.trip.id, this.props.item))
-    // }
 
-    handleVote(vote){
-      return this.props.dispatch(editVote(vote, this.props.item.id, this.props.trip.id, this.props.currentUser));
+    handleVote(voteId, status){
+      const vote = {
+              id: voteId,
+              status: status
+            }
+      return this.props.dispatch(editVote(vote));
     }
 
-
-
     render() {
+        console.log(this.props.ourtinerary)
 
-    console.log(this.props.item)
-    const priceHTML = this.props.item.price ? <li>Price: {this.props.item.price}</li> : '';
-    const categoryHTML = this.props.category ? <li>categoryetc</li> : '';
-    const poolHTML = this.props.item.pool ? <li>Pool: {this.props.item.pool}</li> : '';
-    const websiteHTML = this.props.item.website ? <li>Website: {this.props.item.website}</li> : '';
-    const otherHTML = this.props.item.other ? <li>Other: {this.props.item.other}</li> : '';
-    const locationHTML = this.props.item.location ? <li>Location: {this.props.item.location}</li> : '';
+        const itineraryItem = this.props.ourtinerary.itineraryItems.find(item => {return item.id === this.props.itemId})
 
-    console.log(this.props.item)
+        console.log(itineraryItem)
 
-    let itineraryItemVotes = []
-    itineraryItemVotes = this.props.item.votes ? this.props.item.votes : [];
+        const priceHTML = itineraryItem.price ? <li>Price: {itineraryItem.price}</li> : '';
+        const poolHTML = itineraryItem.pool ? <li>Pool: {itineraryItem.pool}</li> : '';
+        const websiteHTML = itineraryItem.website ? <li>Website: {itineraryItem.website}</li> : '';
+        const otherHTML = itineraryItem.other ? <li>Other: {itineraryItem.other}</li> : '';
+        const locationHTML = itineraryItem.location ? <li>Location: {itineraryItem.location}</li> : '';
 
-    let votesHTML = '';
-    votesHTML = itineraryItemVotes.length>0 ? itineraryItemVotes.map(vote => {
+        const itineraryItemVotes = itineraryItem.votes
 
-        if(vote.status === 'Yes') {
-            return <li key={vote.id} >{vote.user.username} 👍</li>
+        let votesHTML = '';
+        votesHTML = itineraryItemVotes.length>0 ? itineraryItemVotes.map(vote => {
 
-            } else if (vote.status === 'No'){
-              return <li key={vote.id}>{vote.user} 👎</li>
+            if(vote.status === 'Yes') {
+                return <li key={vote._id}>{vote.user.username} 👍</li>
 
-            } else if(this.props.currentUser.username === vote.user.username) {
-              return <li key={vote.id}>{vote.user.usernam}:<span onClick={() => this.handleVote('Yes')}>👍</span><span onClick={() => this.handleVote('No')}>👎</span></li>
+                } else if (vote.status === 'No'){
+                  return <li key={vote._id}>{vote.user.username} 👎</li>
 
-            } else {
-            return <li key={vote.id}>{vote.user.username} no vote</li>
-            }
-        
-    }) : '';
+                } else if(this.props.ourtinerary.currentUser.username === vote.user.username) {
+                  return <li key={vote._id}>{vote.user.usernam}Choose your vote:<span onClick={() => this.handleVote(vote._id,'Yes')}>👍</span><span onClick={() => this.handleVote(vote._id, 'No')}>👎</span></li>
+
+                } else {
+                return <li key={vote._id}>{vote.user.username} hasn't voted yet </li>
+                }    
+        }) : '';
     
-      return (
-        <div>
-          <h3>{this.props.item.type}</h3>
-          <h4>{this.props.item.name}</h4>  
+        return (
+            <div>
+                <h3>{itineraryItem.type}</h3>
+                <h4>{itineraryItem.name}</h4>  
 
-          <ul>
-            {priceHTML}
-            {poolHTML}
-            {categoryHTML}
-            {websiteHTML}
-            {otherHTML}
-            {locationHTML}
-          </ul>
-          <ul>Votes
-            {votesHTML}
-          </ul>
-        </div>
-    )} 
+                <ul>
+                    {priceHTML}
+                    {poolHTML}
+                    {websiteHTML}
+                    {otherHTML}
+                    {locationHTML}
+                </ul>
+                <ul>Votes
+                    {votesHTML}
+                </ul>
+            </div>
+        )} 
 }
 
 const mapStateToProps = state => ({
   currentUser: state.ourtinerary.currentUser,
-  loggedIn: state.ourtinerary.currentUser !== null,
+  ourtinerary: state.ourtinerary
   
 });
 

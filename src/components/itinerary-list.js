@@ -8,8 +8,6 @@ export class ItineraryList extends React.Component {
 	
 
 	componentDidMount() {
-		console.log(this.props.trip.id)
-		console.log(this.props.trip.itineraryItems)
 		this.props.trip.itineraryItems.map(item => {
 			this.props.dispatch(getItineraryItem(item._id, this.props.trip.id))
 		})
@@ -18,10 +16,9 @@ export class ItineraryList extends React.Component {
 	}
 
 	render() {
-		console.log(this.props.ourtinerary.itineraryItems)
-		
+		console.log(this.props.ourtinerary)
 		const list = this.props.ourtinerary.itineraryItems.map(item => {
-				return <ItineraryItem key={item.id} item={item} trip={this.props.trip} />
+				return <ItineraryItem key={item.id} itemId={item.id} />
 			});
 
 		return (
