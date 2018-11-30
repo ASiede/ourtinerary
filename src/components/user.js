@@ -11,11 +11,13 @@ export class User extends React.Component {
 	}
 	
 	render() {
-		console.log(this.props.ourtinerary)
 		const user = this.props.ourtinerary.users.find(user => user.id === this.props.currentUser.id)
-		const trip = []
-		const trips = user ? user.trips : []
-		const tripComponent = trips ? <TripList trips={trips}/> : <p>You have no trips yet. Create a trip below</p>;
+		let userTrips = []
+		userTrips = user ? user.trips : []
+
+		console.log(userTrips)
+
+		const tripComponent = userTrips ? <TripList userTrips={userTrips}/> : <p>You have no trips yet. Create a trip below</p>;
 		return (
 
 			<div>
