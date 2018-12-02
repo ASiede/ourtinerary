@@ -77,13 +77,17 @@ export const ourtineraryReducer = (state=initialState, action) => {
 			break;
 
 		case actions.DELETE_TRIP_SUCCESS:
-			console.log(action.tripId)
-			let trips = state.trips.map((trip) => {
-				if(trip.id !== action.tripId) {
+			console.log('test')
+			console.log(action.trip.id)
+			console.log(state.trips[1].id)
+
+			let trips = state.trips.filter((trip) => {
+				if(trip.id !== action.trip.id) {
 					return trip;
 				};
-			}) ;
-
+				// return Object.assign({}, trip, {})
+			});
+			console.log(trips)
 			return Object.assign({}, state, {
 				trips
 			});
@@ -106,12 +110,31 @@ export const ourtineraryReducer = (state=initialState, action) => {
 
 		case actions.FETCH_ITINERARY_ITEM_SUCCESS:
 			console.log(action.itineraryItem)
+			console.log(action.tripId)
+
+			let tripsToUpdateWithItems = state.trips.map((trip => {
+				if(!trip.id === action.tripId) {
+					return trip;
+				}
+
+				return Object.assign({}, trip, {
+					itineraryItems: [...trip.itineraryItems, action.itineraryItem]
+				})
+			}))
+
+
 			return Object.assign({}, state, {
 				itineraryItems: [...state.itineraryItems, action.itineraryItem],
-				// votes: [...state.votes, ...action.itineraryItem.votes]
+				// trips: tripsToUpdateWithItems
 			});
+			break;	
 
-			break;		
+			// return Object.assign({}, state, {
+			// 	itineraryItems: [...state.itineraryItems, action.itineraryItem],
+			// 	// votes: [...state.votes, ...action.itineraryItem.votes]
+			// });
+
+			// break;		
 
 		case actions.FETCH_NEW_TRIP_SUCCESS:
 			return Object.assign({}, state, {
@@ -120,35 +143,40 @@ export const ourtineraryReducer = (state=initialState, action) => {
 			break;
 
 		case actions.FETCH_NEW_ITINERARY_ITEM_SUCCESS:
+			let tripsWithNewItineraryItem = state.trips.map( trip => {
+				if(trip.id !== action.tripId) {
+					return trip;
+				}
+				console.log(...trip.itineraryItems)
+				return Object.assign({}, trip, {
+					itineraryItems: [...trip.itineraryItems, action.translatedItineraryItem]
+				})
+			})
 			return Object.assign({}, state, {
-				itineraryItems: [...state.itineraryItems]
+				trips: tripsWithNewItineraryItem,
+				votes: [...state.votes, ...action.votes]
+			})
+			break;
+
+		case actions.FETCH_VOTE_SUCCESS:
+			return Object.assign({}, state, {
+				votes: [...state.votes, action.vote]
 			});
-			break;	
+			break;		
 
 		case actions.EDIT_VOTE_SUCCESS:
-			console.log(action.vote)
 			let votes = state.votes.map((vote) => {
 				if(vote.id !== action.vote.id) {
 					return vote;
-				};
-
+				}
 				return Object.assign({}, vote, {
 					status: action.vote.status
-				});
-			}) ;
-
-			let itineraryItems = state.itineraryItems.map((itineraryItem) => {
-				if(itineraryItem.id !== action.vote.itineraryItem) {
-					return itineraryItem;
-				};
-				return Object.assign({}, itineraryItem, {
-					itineraryItem: votes
-				});
+				})
 			})
 
 			return Object.assign({}, state, {
-				itineraryItems
-			});
+				votes
+			})
 			break;
 
 		// FOLLOWING CASES ARE IN REGARDS TO LOGGING IN	

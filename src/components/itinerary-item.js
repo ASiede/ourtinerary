@@ -1,57 +1,40 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {editVote} from '../actions/index';
+import {editVote, getItineraryItem} from '../actions/index';
+import Vote from './vote'
 
 export class ItineraryItem extends React.Component { 
     constructor(props) {
       super(props);
     }
 
-
-    handleVote(voteId, status){
-      const vote = {
-              id: voteId,
-              status: status
-            }
-      return this.props.dispatch(editVote(vote));
+    componentDidMount() {
     }
 
     render() {
-        console.log(this.props.ourtinerary)
+        //NOT ALL CATAGORIES ARE HERE
 
-        const itineraryItem = this.props.ourtinerary.itineraryItems.find(item => {return item.id === this.props.itemId})
+        const priceHTML = this.props.item.price ? <li>Price: {this.props.item.price}</li> : '';
+        const poolHTML = this.props.item.pool ? <li>Pool: {this.props.item.pool}</li> : '';
+        const websiteHTML = this.props.item.website ? <li>Website: {this.props.item.website}</li> : '';
+        const otherHTML = this.props.item.other ? <li>Other: {this.props.item.other}</li> : '';
+        const locationHTML = this.props.item.location ? <li>Location: {this.props.item.location}</li> : '';
 
-        console.log(itineraryItem)
+        const itineraryItemVotes = this.props.item.votes ? this.props.item.votes : [];
+        
+        const typeHTML = this.props.item ? <h3>{this.props.item.type}</h3> : '';
+        const nameHTML = this.props.item ? <h4>{this.props.item.name}</h4> : '';
 
-        const priceHTML = itineraryItem.price ? <li>Price: {itineraryItem.price}</li> : '';
-        const poolHTML = itineraryItem.pool ? <li>Pool: {itineraryItem.pool}</li> : '';
-        const websiteHTML = itineraryItem.website ? <li>Website: {itineraryItem.website}</li> : '';
-        const otherHTML = itineraryItem.other ? <li>Other: {itineraryItem.other}</li> : '';
-        const locationHTML = itineraryItem.location ? <li>Location: {itineraryItem.location}</li> : '';
-
-        const itineraryItemVotes = itineraryItem.votes
-
-        let votesHTML = '';
-        votesHTML = itineraryItemVotes.length>0 ? itineraryItemVotes.map(vote => {
-
-            if(vote.status === 'Yes') {
-                return <li key={vote._id}>{vote.user.username} 👍</li>
-
-                } else if (vote.status === 'No'){
-                  return <li key={vote._id}>{vote.user.username} 👎</li>
-
-                } else if(this.props.ourtinerary.currentUser.username === vote.user.username) {
-                  return <li key={vote._id}>{vote.user.usernam}Choose your vote:<span onClick={() => this.handleVote(vote._id,'Yes')}>👍</span><span onClick={() => this.handleVote(vote._id, 'No')}>👎</span></li>
-
-                } else {
-                return <li key={vote._id}>{vote.user.username} hasn't voted yet </li>
-                }    
-        }) : '';
+        const voteHTML = this.props.item.votes.map(vote => { 
+          return (
+          <Vote key={vote.id} voteId={vote} />
+          )
+        })
     
         return (
             <div>
-                <h3>{itineraryItem.type}</h3>
-                <h4>{itineraryItem.name}</h4>  
+                <h3>{typeHTML}</h3>
+                <h4>{nameHTML}</h4>  
 
                 <ul>
                     {priceHTML}
@@ -61,7 +44,7 @@ export class ItineraryItem extends React.Component {
                     {locationHTML}
                 </ul>
                 <ul>Votes
-                    {votesHTML}
+                    {voteHTML}
                 </ul>
             </div>
         )} 

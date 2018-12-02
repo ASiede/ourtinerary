@@ -2,24 +2,26 @@ import React from 'react';
 import ItineraryList from './itinerary-list';
 import NewItineraryForm from './new-itinerary-item-form';
 import {connect} from 'react-redux';
-import {deleteTrip} from '../actions'
+import {getTrip, deleteTrip} from '../actions'
 import './trip-view.css'
 
 export class TripView extends React.Component {
 	
     componentDidMount() {
-    // this.props.dispatch(getTrip(this.props.tripId))
     }
 
     handleDeleteTrip(trip) {
+      // ADD AN ARE YOU SURE
       this.props.dispatch(deleteTrip(trip))
-      return this.props.history.push('/')
+      return this.props.history.push(`/user/${this.props.ourtinerary.currentUser.id}`);
+      
     }
-
     render() {
-        console.log(this.props.ourtinerary)
-        const collaboratorsHTML = this.props.trip ? this.props.trip.collaborators.map(collaborator => <li key={collaborator.toString()} >{collaborator}</li>) :''
-      	
+        const collaboratorsHTML = this.props.trip ? this.props.trip.collaborators.map(collaborator => <li key={collaborator.toString()} >{collaborator}</li>) :'';
+      	const tripNameHTML = this.props.trip ? <h2>{this.props.trip.name}</h2> : '';
+        const tripLocationHTML = this.props.trip ? <h3>{this.props.trip.location}</h3>: '';
+        const tripDatesHTML = this.props.trip ? <h3>{this.props.trip.dates}</h3> : '';
+
 
         return (
       		<div>
@@ -28,9 +30,9 @@ export class TripView extends React.Component {
           	</header>
                 <main>
                   <section>
-                    <h2>{this.props.trip.name}</h2>
-                    <h3>{this.props.trip.location}</h3>
-                    <h3>{this.props.trip.dates}</h3>
+                    {tripNameHTML}
+                    {tripLocationHTML}
+                    {tripDatesHTML}
                     <ul>Collaborators: 
                       {collaboratorsHTML} 
                     </ul>

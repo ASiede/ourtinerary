@@ -33,9 +33,9 @@ export class NewItineraryForm extends React.Component {
 		const itineraryItem = {tripId, type, flightNumber, name, price, foodType, pool, website, other}
 
 		//WORKS EXCEPT VOTES DONT POPULATE BECAUSE OF SERVER ENPOINT
-		return this.props.dispatch(createNewItineraryItem(itineraryItem));		
+		return this.props.dispatch(createNewItineraryItem(itineraryItem, tripId));		
 	}
-	
+
 	render () {
 		let itineraryType = this.props.ourtinerary.itineraryType
 		return (

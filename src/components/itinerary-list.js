@@ -1,25 +1,26 @@
 import React from 'react';
 import ItineraryItem from './itinerary-item';
 import {connect} from 'react-redux';
-import {getItineraryItem} from '../actions'
+import {getItineraryItem, getTrip} from '../actions'
 import './itinerary-list.css'
 
 export class ItineraryList extends React.Component {
-	
+	// has props trips
+	//has trip id
 
 	componentDidMount() {
-		this.props.trip.itineraryItems.map(item => {
-			this.props.dispatch(getItineraryItem(item._id, this.props.trip.id))
-		})
-
-
+		
 	}
 
 	render() {
-		console.log(this.props.ourtinerary)
-		const list = this.props.ourtinerary.itineraryItems.map(item => {
-				return <ItineraryItem key={item.id} itemId={item.id} />
-			});
+		
+		const trip = this.props.ourtinerary.trips ? this.props.ourtinerary.trips.find(trip => trip.id === this.props.trip.id) : {};
+
+		const itineraryItems = trip.itineraryItems
+
+		const list = trip ? trip.itineraryItems.map(item => 
+			 <ItineraryItem key={item.id} item={item} trip={trip} />
+		): '';
 
 		return (
 			<div>{list}</div>
@@ -30,7 +31,7 @@ export class ItineraryList extends React.Component {
 
 const mapStateToProps = (state) => ({
 	ourtinerary: state.ourtinerary,
-	currentUser: state.ourtinerary.currentUser,
+	itineraryItems: state.ourtinerary.itineraryItems,
 });
 
 export default connect(mapStateToProps)(ItineraryList);

@@ -240,9 +240,9 @@ export const createNewTrip = (newTrip) => dispatch => {
 };
 
 export const DELETE_TRIP_SUCCESS = 'DELETE_TRIP_SUCCESS';
-export const deleteTripSuccess = tripId => ({
-    type: EDIT_VOTE_SUCCESS,
-    tripId
+export const deleteTripSuccess = trip => ({
+    type: DELETE_TRIP_SUCCESS,
+    trip
 })
 export const deleteTrip = (trip) => dispatch => {
     fetch(`${API_BASE_URL}/trips/`+ trip.id, {
@@ -269,45 +269,31 @@ export const deleteTrip = (trip) => dispatch => {
                 );
             }
         })
-        .then(tripId => {
-            console.log(tripId)
-            dispatch(deleteTripSuccess(tripId));
+        .then(deletedTrip => {
+            dispatch(deleteTripSuccess(trip));
         });
 };
 
-// export const CREATE_NEW_TRIP = "CREATE_NEW_TRIP"
-// export const createNewTrip = (id, tripName, dates, location, collaborators, tripLeader) => ({
-// 	type: CREATE_NEW_TRIP,
-// 	id, 
-// 	tripName,
-// 	dates,
-// 	location, 
-// 	collaborators,
-// 	tripLeader
-// });
-
-
-// export const CREATE_NEW_ITINERARY_ITEM = "CREATE_NEW_ITINERARY_ITEM"
-// export const createNewItineraryItem = (tripId, itineraryType, flightNumber, name, price, foodType, pool, website, other, collaborators) => ({
-// 	type: CREATE_NEW_ITINERARY_ITEM,
-// 	tripId,
-// 	itineraryType,
-// 	flightNumber,
-// 	name,
-// 	price,
-// 	foodType,
-// 	pool,
-// 	website,
-// 	other,
-// 	collaborators
-// });
-
 export const FETCH_NEW_ITINERARY_ITEM_SUCCESS = 'FETCH_NEW_ITINERARY_ITEM_SUCCESS';
-export const fetchNewItineraryItemSuccess = itineraryItem => ({
+export const fetchNewItineraryItemSuccess = (itineraryItem, tripId) => ({
     type: FETCH_NEW_ITINERARY_ITEM_SUCCESS,
-    itineraryItem
+    translatedItineraryItem : {
+        _id: itineraryItem.id,
+        type: itineraryItem.type,
+        name: itineraryItem.name,
+        flightNumber: itineraryItem.flightNumber,
+        confirmed: itineraryItem.confirmed,
+        price: itineraryItem.price,
+        foodType: itineraryItem.foodType,
+        pool: itineraryItem.pool,
+        website: itineraryItem.website,
+        other: itineraryItem.other,
+        votes: itineraryItem.votes.map(vote => vote._id),
+    },
+    votes: itineraryItem.votes,
+    tripId
 })
-export const createNewItineraryItem = (itineraryItem) => dispatch => {
+export const createNewItineraryItem = (itineraryItem, tripId) => dispatch => {
     fetch(`${API_BASE_URL}/itineraryItems`, {
         method: 'POST',
         headers: {
@@ -334,7 +320,7 @@ export const createNewItineraryItem = (itineraryItem) => dispatch => {
         })
         .then(itineraryItem => {
             console.log(itineraryItem)
-            dispatch(fetchNewItineraryItemSuccess(itineraryItem));
+            dispatch(fetchNewItineraryItemSuccess(itineraryItem, tripId));
         });
 };
 
@@ -388,6 +374,35 @@ export const editVote = (vote) => dispatch => {
 // export const toggleConfirm = (tripId, itineraryItemId) => ({
 // 	type: TOGGLECONFIRM,
 // });
+
+export const FETCH_VOTE_SUCCESS = 'FETCH_VOTE_SUCCESS';
+export const fetchVoteSuccess = vote => ({
+    type: FETCH_VOTE_SUCCESS,
+    vote
+})
+export const getVote = (voteId) => dispatch => {
+    fetch(`${API_BASE_URL}/votes/` + voteId)
+        .then(res => {
+            if (!res.ok) {
+                return Promise.reject(res.statusText);
+            }
+            return res.json();
+        })
+        .catch(err => {
+            const {reason, message, location} = err;
+            if (reason === 'ValidationError') {
+                // Convert ValidationErrors into SubmissionErrors for Redux Form
+                return Promise.reject(
+                    new SubmissionError({
+                        [location]: message
+                    })
+                );
+            }
+        })
+        .then(vote => {
+            dispatch(fetchVoteSuccess(vote));
+        });
+};
 
 
 //LOGGIN IN
@@ -506,5 +521,7 @@ export const refreshAuthToken = () => (dispatch, getState) => {
             clearAuthToken(authToken);
         });
 };
+
+
 
 
