@@ -166,20 +166,6 @@ export const logout = () => ({
 	type: LOGOUT,
 });
 
-export const CHANGE_ITINERARY_TYPE = "CHANGE_ITINERARY_TYPE"
-export const changeItineraryType = (itineraryType) => ({
-    type: CHANGE_ITINERARY_TYPE,
-    itineraryType
-});
-// export const REGISTER_USER = "REGISTER_USER"
-// export const registerUser = (firstName, lastName, username, password) => ({
-// 	type: REGISTER_USER,
-// 	firstName,
-// 	lastName,
-// 	username, 
-// 	password
-// });
-
 export const registerUser = user => dispatch => {
     return fetch(`${API_BASE_URL}/users`, {
         method: 'POST',
@@ -271,6 +257,45 @@ export const deleteTrip = (trip) => dispatch => {
         })
         .then(deletedTrip => {
             dispatch(deleteTripSuccess(trip));
+        });
+};
+
+export const DELETE_ITINERARY_ITEM_SUCCESS = 'DELETE_ITINERARY_ITEM_SUCCESS';
+export const deleteItineraryItemSuccess = (itineraryItemId, tripId) => ({
+    type: DELETE_ITINERARY_ITEM_SUCCESS,
+    itineraryItemId,
+    tripId
+})
+export const deleteItineraryItem = (itineraryItemId, tripId) => dispatch => {
+    fetch(`${API_BASE_URL}/itineraryItems/`+ itineraryItemId, {
+        method: 'DELETE',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+            itineraryItemId: itineraryItemId,
+            tripId: tripId
+        })
+    })
+        .then(res => {
+            if (!res.ok) {
+                return Promise.reject(res.statusText);
+            }
+            return res.json();
+        })
+        .catch(err => {
+            const {reason, message, location} = err;
+            if (reason === 'ValidationError') {
+                // Convert ValidationErrors into SubmissionErrors for Redux Form
+                return Promise.reject(
+                    new SubmissionError({
+                        [location]: message
+                    })
+                );
+            }
+        })
+        .then(deletedItineraryItem => {
+            dispatch(deleteItineraryItemSuccess(itineraryItemId, tripId));
         });
 };
 

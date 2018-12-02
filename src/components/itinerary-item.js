@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {editVote, getItineraryItem} from '../actions/index';
+import {editVote, getItineraryItem, deleteItineraryItem} from '../actions/index';
 import Vote from './vote'
 
 export class ItineraryItem extends React.Component { 
@@ -11,14 +11,22 @@ export class ItineraryItem extends React.Component {
     componentDidMount() {
     }
 
-    render() {
-        //NOT ALL CATAGORIES ARE HERE
+     handleDeleteItineraryItem(itineraryItem) {
+      // ADD AN ARE YOU SURE
+      this.props.dispatch(deleteItineraryItem(itineraryItem, this.props.trip.id))
+      
+      
+    }
 
+    render() {
+        //ADD CONFIRMATION BUTTON
+        const flightNumberHTML = this.props.item.flightNumber ? <li>Price: {this.props.item.flightNumber}</li> : '';
+        const confirmedHTML = this.props.item.confirmed ? <li>Price: {this.props.item.confirmed}</li> : '';
         const priceHTML = this.props.item.price ? <li>Price: {this.props.item.price}</li> : '';
+        const foodTypeHTML = this.props.item.foodType ? <li>Price: {this.props.item.foodType}</li> : '';
         const poolHTML = this.props.item.pool ? <li>Pool: {this.props.item.pool}</li> : '';
         const websiteHTML = this.props.item.website ? <li>Website: {this.props.item.website}</li> : '';
         const otherHTML = this.props.item.other ? <li>Other: {this.props.item.other}</li> : '';
-        const locationHTML = this.props.item.location ? <li>Location: {this.props.item.location}</li> : '';
 
         const itineraryItemVotes = this.props.item.votes ? this.props.item.votes : [];
         
@@ -33,15 +41,17 @@ export class ItineraryItem extends React.Component {
     
         return (
             <div>
+                <button type="click" onClick={() => this.handleDeleteItineraryItem(this.props.item._id)}>Delete ItineraryItem</button>
                 <h3>{typeHTML}</h3>
                 <h4>{nameHTML}</h4>  
 
                 <ul>
+                    {flightNumberHTML}
                     {priceHTML}
+                    {foodTypeHTML}
                     {poolHTML}
                     {websiteHTML}
                     {otherHTML}
-                    {locationHTML}
                 </ul>
                 <ul>Votes
                     {voteHTML}

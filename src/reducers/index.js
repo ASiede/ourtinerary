@@ -1,38 +1,5 @@
 import * as actions from '../actions'
 
-const initialStateNormalized = {
-	trips : {
-		byId: {
-
-		},
-		allIds: []
-	},
-	users : {
-		byId: {
-
-		},
-		allIds: []
-	},
-	itineraryItems : {
-		byId: {
-
-		},
-		allIds: []
-	},
-	votes : {
-		byId: {
-
-		},
-		allIds: []
-	},
-	authToken: null,
-	currentUser: null,
-	loading: false,
-	error: null,
-	itineraryType: 'Flight'
-
-}
-
 const initialState = {
 	trips: [],
 	users: [],
@@ -41,8 +8,7 @@ const initialState = {
 	authToken: null,
 	currentUser: null,
 	loading: false,
-	error: null,
-	itineraryType: 'Flight'
+	error: null
 };
 
 export const ourtineraryReducer = (state=initialState, action) => {
@@ -53,12 +19,6 @@ export const ourtineraryReducer = (state=initialState, action) => {
 		case actions.LOGOUT: 
 			return Object.assign({}, state, {
 				currentUser: null
-			});
-			break;	
-
-		case actions.CHANGE_ITINERARY_TYPE:
-			return Object.assign({}, state, {
-				itineraryType: action.itineraryType
 			});
 			break;		
 		
@@ -72,26 +32,38 @@ export const ourtineraryReducer = (state=initialState, action) => {
 		case actions.FETCH_TRIP_SUCCESS:
 			return Object.assign({}, state, {
 				trips: [...state.trips, action.trip],
-				// itineraryItems: [...state.itineraryItems, ...action.trip.itineraryItems]
 			});
 			break;
 
 		case actions.DELETE_TRIP_SUCCESS:
-			console.log('test')
-			console.log(action.trip.id)
-			console.log(state.trips[1].id)
-
 			let trips = state.trips.filter((trip) => {
 				if(trip.id !== action.trip.id) {
 					return trip;
 				};
-				// return Object.assign({}, trip, {})
 			});
-			console.log(trips)
 			return Object.assign({}, state, {
 				trips
 			});
-			break;				
+			break;
+
+		case actions.DELETE_ITINERARY_ITEM_SUCCESS:
+			let tripsWithDeletedItem = state.trips.map((trip) => {
+				if(trip.id !== action.tripId) {
+					return trip;
+				};
+				let filteredItineraryItems = trip.itineraryItems.filter((itineraryItem => {
+					if (itineraryItem._id !== action.itineraryItemId) {
+						return itineraryItem;
+					};
+				}));
+				return Object.assign({}, trip, {
+					itineraryItems: [...filteredItineraryItems]
+				})
+			});
+			return Object.assign({}, state, {
+				trips: tripsWithDeletedItem
+			});
+			break;						
 
 		case actions.FETCH_USER_SUCCESS:
 			return Object.assign({}, state, {

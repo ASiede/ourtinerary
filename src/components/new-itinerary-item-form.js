@@ -10,11 +10,16 @@ import {createNewItineraryItem} from '../actions/index';
 export class NewItineraryForm extends React.Component {
 	constructor(props) { 
 		super(props);
+		this.state = {
+			itineraryType: 'Flight'
+		}
 	}
 
-	setValue(itineraryType) {
-        return this.props.dispatch(changeItineraryType(itineraryType))
-    }
+	handleFormChange(itineraryType) {
+	    this.setState({
+	      itineraryType
+	    })
+  	}
 
 	onSubmit(values) {
 		const flightNumber = values.flightNumber ? values.flightNumber : '';
@@ -24,25 +29,19 @@ export class NewItineraryForm extends React.Component {
 		const website = values.website ? values.website : '';
 		const other = values.other ? values.other : '';
 		const name = values.name ? values.name : '';
-		
 		const tripId = this.props.trip.id;
-		let type = this.props.ourtinerary.itineraryType
-
 		this.props.reset();
-
+		let type = this.state.itineraryType
 		const itineraryItem = {tripId, type, flightNumber, name, price, foodType, pool, website, other}
-
-		//WORKS EXCEPT VOTES DONT POPULATE BECAUSE OF SERVER ENPOINT
 		return this.props.dispatch(createNewItineraryItem(itineraryItem, tripId));		
 	}
 
 	render () {
-		let itineraryType = this.props.ourtinerary.itineraryType
 		return (
 			<div>
 				<h2>Create New Trip Itinerary Below</h2>
 		        	<label>Type of Activity</label><br />
-			          <select value={itineraryType} onChange={e => this.setValue(e.target.value)}>
+			          <select value={this.state.itineraryType} onChange={e => this.handleFormChange(e.target.value)}>
 			            <option value="Flight">Flight</option>
 			            <option value="Hotel" default>Hotel</option>
 			            <option value="Restaurant/Bar">Restaurant/Bar</option>
@@ -55,7 +54,7 @@ export class NewItineraryForm extends React.Component {
 
 		        	<form onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
 
-		        		{ itineraryType === "Flight" &&
+		        		{ this.state.itineraryType === "Flight" &&
 			        		<Field
 			        		name="flightNumber"
 			        		type="text"
@@ -73,7 +72,7 @@ export class NewItineraryForm extends React.Component {
 		        		validate={[required, nonEmpty]}
 		        		/>
 
-		        		{ itineraryType === "Flight || Restaurant || Activity || Event || Other" &&
+		        		{ this.state.itineraryType === "Flight || Restaurant || Activity || Event || Other" &&
 		        		<Field
 		        		name="price"
 		        		type="text"
@@ -83,7 +82,7 @@ export class NewItineraryForm extends React.Component {
 		        		}
 
 
-		        		{ itineraryType === "Restaurant" &&
+		        		{ this.state.itineraryType === "Restaurant" &&
 			        		<Field
 			        		name="foodType"
 			        		type="text"
@@ -92,7 +91,7 @@ export class NewItineraryForm extends React.Component {
 			        		/>
 			          	}
 
-			        	{ itineraryType === "Hotel" &&
+			        	{ this.state.itineraryType === "Hotel" &&
 			        		<Field
 			        		name="pool"
 			        		type="text"
