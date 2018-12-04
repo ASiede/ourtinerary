@@ -8,10 +8,11 @@ export class User extends React.Component {
 	
 	componentDidMount() {
 		this.props.dispatch(getUser(this.props.currentUser.id))
-		
+
 	}
 	
 	render() {
+
 		const user = this.props.ourtinerary.users.find(user => user.id === this.props.currentUser.id)
 
 		let userTrips = []
@@ -30,11 +31,6 @@ export class User extends React.Component {
 		        		<h2>Your Trips</h2>
 					        {tripComponent}
 		      		</section>
-
-				    <section>
-				        <h2>Create new trip</h2>
-				        <button>Create!</button>
-				    </section>
 
 			        <section>
 			        	<NewTripForm currentUser={this.props.currentUser.username}/>

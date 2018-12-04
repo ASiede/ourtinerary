@@ -34,7 +34,7 @@ export class TripView extends React.Component {
         const tripLocationHTML = this.props.trip ? <h3>{this.props.trip.location}</h3>: '';
         const tripDatesHTML = this.props.trip ? <h3>{this.props.trip.dates}</h3> : '';
 
-        const editTripFormHTML = this.state.editTripForm ? <EditTripForm tripId={this.props.trip.id}/> : '';
+        const editTripFormHTML = this.state.editTripForm ? <EditTripForm tripId={this.props.trip.id} history={this.props.history}/> : '';
 
         let toggleEditTripHTML = '';
 

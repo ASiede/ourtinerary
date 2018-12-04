@@ -36,8 +36,10 @@ export class ItineraryItem extends React.Component {
         const itineraryItemVotes = this.props.item.votes ? this.props.item.votes : [];
         const typeHTML = this.props.item ? <h3>{this.props.item.type}</h3> : '';
         const nameHTML = this.props.item ? <h4>{this.props.item.name}</h4> : '';
+        
+        const voteIds = this.props.item.votes.sort();
 
-        const voteHTML = this.props.item.votes.map(vote => { 
+        const voteHTML = voteIds.map(vote => { 
           return (
           <Vote key={vote.id} voteId={vote} />
           )

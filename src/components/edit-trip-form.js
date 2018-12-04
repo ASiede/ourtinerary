@@ -24,11 +24,13 @@ export class EditTripForm extends React.Component {
 
       	console.log(this.props.tripId)
 
-        this.props.dispatch(deleteTrip(this.props.tripId))
+        return this.props
+			.dispatch(deleteTrip(this.props.tripId))
+			// .then(() => this.props.history.goBack() )
 
 
         //DON'T KNOW HOW TO REDIRECT
-        // return this.props.history.push(`/user/${this.props.ourtinerary.currentUser.id}`);
+        // .then(() => this.props.history.goBack() )
       
     }
 

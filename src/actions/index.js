@@ -286,7 +286,7 @@ export const deleteTrip = (tripId) => dispatch => {
         })
         .then(deletedTrip => {
             dispatch(deleteTripSuccess(tripId));
-        });
+        })
 };
 
 export const DELETE_ITINERARY_ITEM_SUCCESS = 'DELETE_ITINERARY_ITEM_SUCCESS';

@@ -9,7 +9,7 @@ import * as actions from './actions'
 
 
 // console.log(store.getState().ourtinerary);
-// store.dispatch(actions.login("Delores", "passwordpassword"))
+store.dispatch(actions.login("Delores", "passwordpassword"))
 // // // store.dispatch(actions.getTrips());
 // console.log(store.getState().ourtinerary);
 

@@ -11,34 +11,46 @@ export class NewTripForm extends React.Component {
 	constructor(props) { 
 		super(props);
 		this.state = {
-			redirect: false
+			numberOfCollaborators: 1
 		} 
+	}
+
+	handleAddCollaborator(e) {
+		e.preventDefault();
+		this.setState({
+	        numberOfCollaborators: this.state.numberOfCollaborators + 1
+	      })
 	}
 
 	componentDidMount() {
 		this.props.dispatch(getUsers())
 
-		if (this.state.redirect === true) {
-			return this.props.history.push(`/trips/${this.props.ourtinerary.newlyCreatedTrip.id}`)
-		}
+			
+
 		
 
 	}
 
 	onSubmit(values) {
-		// NEED TO PUT TRIP LEADER IN COLLABORATORS
-		//ACTUALLY NEVERMIND ON THAT I THINK
-
+		console.log(values)
 		let nonUsers = [];
 		let collaboratorEmails = [];
 
-		//all lowercase
+		let keys = Object.keys(values)
+		
+		const allEmails = []
 
-		const collaboratorArr = values.collaborators.split(",");
-		const collaboratorsArrTrimmed = collaboratorArr.map(name => name.trim().toLowerCase());
+		keys.forEach(key => {
+			if (key.includes('collabo')) {
+				allEmails.push(values[key])
+			}
+		})
+		console.log(collaboratorEmails)
+		
+
+		const collaboratorsArrTrimmed = allEmails.map(name => name.trim().toLowerCase());
 
 		const userEmail = this.props.ourtinerary.users.map(user => user.email)
-
 
 		collaboratorsArrTrimmed.forEach(email => {
 			if (userEmail.includes(email)) {
@@ -47,7 +59,6 @@ export class NewTripForm extends React.Component {
 				nonUsers.push(email)
 			}
 		})
-
 
 		const collaborators = collaboratorEmails.map(collaboratorEmail => {
 			const user = this.props.ourtinerary.users.find( user => user.email === collaboratorEmail)
@@ -59,26 +70,54 @@ export class NewTripForm extends React.Component {
 		const trip = {name, dates, location, collaborators, tripLeader}
 		this.props.reset();
 
-		console.log(this.props.ourtinerary.newlyCreatedTrip)
-
 		const inviterName = this.props.ourtinerary.currentUser.username
-		console.log(inviterName)
 
 		if(nonUsers.length>0 && inviterName) {
 			nonUsers.map(nonUser => this.props.dispatch(invite(nonUser, inviterName, values.name)))
 		}
 
-		this.props.dispatch(createNewTrip(trip))
+		return this.props.dispatch(createNewTrip(trip))
 
-		// .then(() => this.setState({redirect: true}))
-		
+		// .then((res) => this.props.history.push(`/trips/${this.props.ourtinerary.newlyCreatedTrip.id}`))
 
-			
 
 
 	}		
 	
 	render () {
+		// 		if(this.props.ourtinerary.newlyCreatedTrip) {
+		// 	console.log('new created')
+		// 	return this.props.history.push(`/trips/${this.props.ourtinerary.newlyCreatedTrip.id}`)
+		// }
+		
+		const html = <Field
+		        		name='collaborator'
+		        		type="text"
+		        		component={Input}
+		        		label="Collaborator"
+		        		validate={[email]}
+		        		/>
+		const anotherArray = []
+		let i
+		for(i=1; i < this.state.numberOfCollaborators + 1; i++) {
+			let names = `collaborator${i}`
+			anotherArray.push(
+					<Field
+		        		name={names}
+		        		type="text"
+		        		component={Input}
+		        		label="Collaborator"
+		        		validate={[email]}
+		        		/>
+				)
+		}
+
+
+		console.log(anotherArray)
+		const collaboratorsHTML = anotherArray.map(html => html)
+		
+		
+
 		return (
 			<div>
 				<h2>Create New Trip Below</h2>
@@ -107,13 +146,11 @@ export class NewTripForm extends React.Component {
 		        		validate={[required, nonEmpty]}
 		        		/>
 
-		        		<Field
-		        		name="collaborators"
-		        		type="text"
-		        		component={Input}
-		        		label="Collaborators*"
-		        		validate={[email]}
-		        		/>
+		        		<p>Add your collaborators here*</p>
+		        		<button type="click" onClick={(e) => this.handleAddCollaborator(e)}>Add Collaborator</button>
+
+		        		{collaboratorsHTML}
+
 		        		<p>*Enter the emails of those you want to collaborate with for your trip. Registered users of OURtinerary will be added to your trip and non users will receive an email invite</p>
 
 		         		<button 
