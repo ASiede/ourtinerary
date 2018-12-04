@@ -8,6 +8,7 @@ export class User extends React.Component {
 	
 	componentDidMount() {
 		this.props.dispatch(getUser(this.props.currentUser.id))
+		
 	}
 	
 	render() {
@@ -16,7 +17,8 @@ export class User extends React.Component {
 		let userTrips = []
 		userTrips = user ? user.trips : []
 
-		const tripComponent = userTrips ? <TripList user={user}/> : <p>You have no trips yet. Create a trip below</p>;
+		const tripComponent = userTrips && userTrips.length>0 ? <TripList user={user}/> : <p>You have no trips yet. Create a trip below</p>;
+
 		return (
 
 			<div>

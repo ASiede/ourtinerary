@@ -10,19 +10,17 @@ export class TripList extends React.Component {
 	componentDidMount() {
 		// COULD IMPROVE BY PASSING SEARCH QUERIES FOR ONLY USERS TRIPS
 		this.props.dispatch(getTrips())
+
 	}
 
 	render() {
-		console.log(this.props.ourtinerary.trips)
-		
-		const userId = this.props.user ? this.props.user.id : '';
-		const currentTrips = (this.props.ourtinerary.trips && this.props.user) ? this.props.ourtinerary.trips.filter(trip=> {
-			return (trip.collaborators.filter( collaborator => {
-				return collaborator.id === this.props.user.id}))
-		}): [];
 
-		const trips = currentTrips.map((trip) => (
-			<li key={trip.id}><Link to={`/trip/${trip.id}`}>{trip.name}</Link></li>
+		const userId = this.props.user ? this.props.user.id : '';
+
+		const userTrips = this.props.user && this.props.user.trips ? this.props.user.trips : [];
+
+		const trips = userTrips.map((trip) => (
+			<li key={trip._id}><Link to={`/trip/${trip._id}`}>{trip.name}</Link></li>
 		));
 
 		return (

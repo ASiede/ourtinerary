@@ -8,6 +8,7 @@ export class Vote extends React.Component {
     }
 
     componentDidMount() {
+
      this.props.dispatch(getVote(this.props.voteId))
     }
 
@@ -16,14 +17,12 @@ export class Vote extends React.Component {
 		  id: voteId,
 		  status: status
 		}
-
 	return this.props.dispatch(editVote(vote));
-
 	}
 
     render() {
 
-    	const vote = this.props.ourtinerary.votes.length>0 ? this.props.ourtinerary.votes.find(vote => vote.id === this.props.voteId): [];
+    	const vote = this.props.ourtinerary.votes && this.props.ourtinerary.votes.length>0 ? this.props.ourtinerary.votes.find(vote => vote.id === this.props.voteId): [];
 
     	let voteHTML = '';
 

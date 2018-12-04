@@ -20,16 +20,20 @@ export class ItineraryItem extends React.Component {
 
     render() {
         //ADD CONFIRMATION BUTTON
-        const flightNumberHTML = this.props.item.flightNumber ? <li>Price: {this.props.item.flightNumber}</li> : '';
-        const confirmedHTML = this.props.item.confirmed ? <li>Price: {this.props.item.confirmed}</li> : '';
-        const priceHTML = this.props.item.price ? <li>Price: {this.props.item.price}</li> : '';
-        const foodTypeHTML = this.props.item.foodType ? <li>Price: {this.props.item.foodType}</li> : '';
-        const poolHTML = this.props.item.pool ? <li>Pool: {this.props.item.pool}</li> : '';
-        const websiteHTML = this.props.item.website ? <li>Website: {this.props.item.website}</li> : '';
-        const otherHTML = this.props.item.other ? <li>Other: {this.props.item.other}</li> : '';
+        const linkString = this.props.item.website;
 
+        const confirmedHTML = this.props.item.confirmed ? <li>confirmed: {this.props.item.confirmed}</li> : '';
+        const flightNumberHTML = this.props.item.flightNumber ? <li>Flight Number: {this.props.item.flightNumber}</li> : '';
+        const layoversHTML = this.props.item.layovers ? <li>Layovers: {this.props.item.layovers}</li> : '';
+        const lengthHTML = this.props.item.length ? <li>Length: {this.props.item.length}</li> : '';
+        const departureTimeArrivalTimeHTML = this.props.item.departureTimeArrivalTime ? <li>Departure Time/ArrivalTime: {this.props.item.departureTimeArrivalTime}</li> : '';
+        const priceHTML = this.props.item.price ? <li>Price: {this.props.item.price}</li> : '';
+        const locationHTML = this.props.item.location ? <li>Location: {this.props.item.location}</li> : '';
+        const poolHTML = this.props.item.pool ? <li>Pool: {this.props.item.pool}</li> : '';
+        const foodTypeHTML = this.props.item.foodType ? <li>Foot Type: {this.props.item.foodType}</li> : '';
+        const websiteHTML = this.props.item.website ? <li>Website: <a href={"http://"+linkString} target="_blank">{this.props.item.website}</a></li> : '';
+        const otherHTML = this.props.item.other ? <li>Other: {this.props.item.other}</li> : '';
         const itineraryItemVotes = this.props.item.votes ? this.props.item.votes : [];
-        
         const typeHTML = this.props.item ? <h3>{this.props.item.type}</h3> : '';
         const nameHTML = this.props.item ? <h4>{this.props.item.name}</h4> : '';
 
@@ -47,9 +51,13 @@ export class ItineraryItem extends React.Component {
 
                 <ul>
                     {flightNumberHTML}
+                    {layoversHTML}
+                    {lengthHTML}
+                    {departureTimeArrivalTimeHTML}
                     {priceHTML}
-                    {foodTypeHTML}
+                    {locationHTML}
                     {poolHTML}
+                    {foodTypeHTML}
                     {websiteHTML}
                     {otherHTML}
                 </ul>

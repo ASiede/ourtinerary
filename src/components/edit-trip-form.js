@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {getUsers} from '../actions'
 import {reduxForm, Field, focus} from 'redux-form';
 import {required, nonEmpty} from '../validators';
-import {editTrip} from '../actions/index';
+import {editTrip, deleteTrip} from '../actions/index';
 // import './edit-trip-form.css'
 
 export class EditTripForm extends React.Component {
@@ -18,6 +18,19 @@ export class EditTripForm extends React.Component {
 	componentDidMount() {
 		this.props.dispatch(getUsers())
 	}
+
+	handleDeleteTrip(trip) {
+      // ADD AN ARE YOU SURE
+
+      	console.log(this.props.tripId)
+
+        this.props.dispatch(deleteTrip(this.props.tripId))
+
+
+        //DON'T KNOW HOW TO REDIRECT
+        // return this.props.history.push(`/user/${this.props.ourtinerary.currentUser.id}`);
+      
+    }
 
 	toggleVisable() {
 		console.log("toggled")
@@ -105,6 +118,8 @@ export class EditTripForm extends React.Component {
 				        	Submit
 				        </button>
 		        	</form>
+
+		        	<button type="click" onClick={() => this.handleDeleteTrip(this.props.trip)}>Delete Trip</button>
 		    </div> 
 		)
 	}
@@ -120,6 +135,6 @@ EditTripForm = connect(mapStateToProps)(EditTripForm);
 
 export default reduxForm({
 	form: 'editTripForm',
-	// onSubmitFail: (errors, dispatch) =>
- //        dispatch(focus('editTripForm', Object.keys(errors)[0]))
+	onSubmitFail: (errors, dispatch) =>
+        dispatch(focus('editTripForm', Object.keys(errors)[0]))
 })(EditTripForm)

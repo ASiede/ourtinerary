@@ -3,7 +3,7 @@ import ItineraryList from './itinerary-list';
 import NewItineraryForm from './new-itinerary-item-form';
 import EditTripForm from './edit-trip-form'
 import {connect} from 'react-redux';
-import {getTrip, deleteTrip} from '../actions'
+import {getTrip} from '../actions'
 import './trip-view.css'
 
 export class TripView extends React.Component {
@@ -14,19 +14,19 @@ export class TripView extends React.Component {
         }
     }
 
-    handleDeleteTrip(trip) {
-      // ADD AN ARE YOU SURE
-        this.props.dispatch(deleteTrip(trip))
-        return this.props.history.push(`/user/${this.props.ourtinerary.currentUser.id}`);
-      
-    }
+    componentDidMount() {
+      if(!this.props.trip) {
+        
+      }
+    } 
+
+
 
     toggleEditTripForm(e) {
         this.setState({
             editTripForm: !this.state.editTripForm
         })
     }
-
 
     render() {
         const collaboratorsHTML = this.props.trip ? this.props.trip.collaborators.map(collaborator => <li key={collaborator.toString()} >{collaborator}</li>) :'';
@@ -37,7 +37,8 @@ export class TripView extends React.Component {
         const editTripFormHTML = this.state.editTripForm ? <EditTripForm tripId={this.props.trip.id}/> : '';
 
         let toggleEditTripHTML = '';
-        if (this.props.trip.tripLeader === this.props.ourtinerary.currentUser.username) {
+
+        if (this.props.trip.tripLeader && (this.props.trip.tripLeader === this.props.ourtinerary.currentUser.username)) {
             toggleEditTripHTML = <button type="click" onClick={(e) => this.toggleEditTripForm(e)}>Toggle Edit Options</button>
         }
 
@@ -54,7 +55,7 @@ export class TripView extends React.Component {
                             <ul>Collaborators: 
                                 {collaboratorsHTML} 
                             </ul>
-                            <button type="click" onClick={() => this.handleDeleteTrip(this.props.trip)}>Delete Trip</button>
+                            
                             {toggleEditTripHTML}
                             {editTripFormHTML}
                         </section>

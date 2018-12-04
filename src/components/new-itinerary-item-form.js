@@ -21,19 +21,34 @@ export class NewItineraryForm extends React.Component {
 	    })
   	}
 
+  	componentDidMount() {
+  		
+  	}
+
 	onSubmit(values) {
+
 		const flightNumber = values.flightNumber ? values.flightNumber : '';
+		const layovers = values.layovers ? values.layovers : '';
+		const length = values.length ? values.length : '';
+		const departureTimeArrivalTime = values.departureTimeArrivalTime ? values.departureTimeArrivalTime : '';
+		const name = values.name ? values.name : '';
 		const price = values.price ? values.price : '';
-		const foodType = values.foodType ? values.foodType : '';
+		const location = values.location ? values.location : '';
 		const pool = values.pool ? values.pool : '';
+		const foodType = values.foodType ? values.foodType : '';
 		const website = values.website ? values.website : '';
 		const other = values.other ? values.other : '';
-		const name = values.name ? values.name : '';
+		
 		const tripId = this.props.trip.id;
+		
 		this.props.reset();
+
 		let type = this.state.itineraryType
-		const itineraryItem = {tripId, type, flightNumber, name, price, foodType, pool, website, other}
-		return this.props.dispatch(createNewItineraryItem(itineraryItem, tripId));		
+		const itineraryItem = {tripId, type, flightNumber, layovers,length,departureTimeArrivalTime, name, price, location, pool, foodType, website, other}
+
+		if (tripId) {
+		return this.props.dispatch(createNewItineraryItem(itineraryItem, tripId));	
+		}	
 	}
 
 	render () {
@@ -60,27 +75,71 @@ export class NewItineraryForm extends React.Component {
 			        		type="text"
 			        		component={Input}
 			        		label="FlightNumber"
-			        		validate={[required, nonEmpty]}
 			        		/>
 			          	}
 
+			          	{ this.state.itineraryType === "Flight" &&
+			        		<Field
+			        		name="layovers"
+			        		type="text"
+			        		component={Input}
+			        		label="Layovers"
+			        		/>
+			          	}
+
+			          	{ this.state.itineraryType === "Flight" &&
+			        		<Field
+			        		name="length"
+			        		type="text"
+			        		component={Input}
+			        		label="Length"
+			        		/>
+			          	}
+
+			          	{ this.state.itineraryType === "Flight" &&
+			        		<Field
+			        		name="departureTimeArrivalTime"
+			        		type="text"
+			        		component={Input}
+			        		label="Departure Time/Arrival Time"
+			        		/>
+			          	}
+
+		        		{ this.state.itineraryType !== "Flight" &&
 		        		<Field
 		        		name="name"
 		        		type="text"
 		        		component={Input}
 		        		label="Name"
-		        		validate={[required, nonEmpty]}
 		        		/>
+		        		}
 
-		        		{ this.state.itineraryType === "Flight || Restaurant || Activity || Event || Other" &&
+		        		
 		        		<Field
 		        		name="price"
 		        		type="text"
 		        		component={Input}
 		        		label="Price"
 		        		/>
-		        		}
+		   
 
+		        		{ this.state.itineraryType !== "Flight" &&
+			        		<Field
+			        		name="location"
+			        		type="text"
+			        		component={Input}
+			        		label="Location"
+			        		/>
+			          	}
+
+			          	{ this.state.itineraryType === "Hotel" &&
+			        		<Field
+			        		name="pool"
+			        		type="text"
+			        		component={Input}
+			        		label="Pool"
+			        		/>
+			          	}
 
 		        		{ this.state.itineraryType === "Restaurant" &&
 			        		<Field
@@ -90,16 +149,7 @@ export class NewItineraryForm extends React.Component {
 			        		label="Food Type"
 			        		/>
 			          	}
-
-			        	{ this.state.itineraryType === "Hotel" &&
-			        		<Field
-			        		name="pool"
-			        		type="text"
-			        		component={Input}
-			        		label="Pool"
-			        		/>
-			          	}	
-		          		
+			        	
 		          		<Field
 		        		name="website"
 		        		type="text"
@@ -111,7 +161,7 @@ export class NewItineraryForm extends React.Component {
 		        		name="other"
 		        		type="text"
 		        		component={Input}
-		        		label="Other"
+		        		label="Other/Notes"
 		        		/>
 
 		         		<button 

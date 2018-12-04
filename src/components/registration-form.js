@@ -1,8 +1,9 @@
 import React from 'react';
 import {reduxForm, Field, focus} from 'redux-form';
+import {connect} from 'react-redux';
 import Input from './input';
 import {login, registerUser, getTrips} from '../actions/index';
-import {required, nonEmpty} from '../validators';
+import {required, nonEmpty, email} from '../validators';
 
 
 export class RegistrationForm extends React.Component {
@@ -11,13 +12,12 @@ export class RegistrationForm extends React.Component {
 	}
 
 	onSubmit(values) {
-		console.log(values)
 		this.props.reset();
-		const {username, password, firstName, lastName} = values;
-        const user = {username, password, firstName, lastName};
-        // this.props.dispatch(getTrips())
-		return this.props.dispatch(registerUser(user))
-					
+		const {username, password, email, firstName, lastName} = values;
+        const user = {username, password, email, firstName, lastName};
+		return this.props
+            .dispatch(registerUser(user))
+            .then(() => this.props.dispatch(login(username, password)));			
 	}
 
 	render () {
@@ -39,6 +39,14 @@ export class RegistrationForm extends React.Component {
 				        component={Input}
 				        label="Last Name"
 				        validate={[required, nonEmpty]}
+				        />
+
+				        <Field 
+				        name="email" 
+				        type="text" 
+				        component={Input}
+				        label="Email"
+				        validate={[required, nonEmpty, email]}
 				        />
 				     
 				        <Field 
@@ -69,6 +77,14 @@ export class RegistrationForm extends React.Component {
 		    </div>	
 		)};
 }
+
+const mapStateToProps = (state) => ({
+	ourtinerary: state.ourtinerary,
+	loggedIn: state.ourtinerary.currentUser !== null,
+	currentUser: state.ourtinerary.currentUser,
+});
+
+RegistrationForm = connect(mapStateToProps)(RegistrationForm);
 
 export default reduxForm({
 	form: 'registration',

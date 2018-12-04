@@ -27,7 +27,7 @@ export class LoginForm extends React.Component {
 				        name="username" 
 				        type="text" 
 				        component={Input}
-				        label="Name"
+				        label="Username"
 				        validate={[required, nonEmpty]}
 				        />
 				        
