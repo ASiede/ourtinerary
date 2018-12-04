@@ -12,7 +12,6 @@ export function Landing(props) {
 
 	return (
 		<div>
-			
 				<header>
 					<h1>Welcome to OURtinerary</h1>
 				</header>

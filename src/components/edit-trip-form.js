@@ -21,17 +21,14 @@ export class EditTripForm extends React.Component {
 
 	handleDeleteTrip(trip) {
       // ADD AN ARE YOU SURE
-
       	console.log(this.props.tripId)
 
         return this.props
 			.dispatch(deleteTrip(this.props.tripId))
 			// .then(() => this.props.history.goBack() )
 
-
         //DON'T KNOW HOW TO REDIRECT
         // .then(() => this.props.history.goBack() )
-      
     }
 
 	toggleVisable() {
@@ -67,11 +64,8 @@ export class EditTripForm extends React.Component {
 		this.toggleVisable()
 
 
-
 		return this.props.dispatch(editTrip(updatedFields))
 	}
-
-
 
 	
 	render () {
