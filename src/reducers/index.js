@@ -8,7 +8,8 @@ const initialState = {
 	authToken: null,
 	currentUser: null,
 	loading: false,
-	error: null
+	error: null,
+	newlyCreatedTrip: null
 };
 
 export const ourtineraryReducer = (state=initialState, action) => {
@@ -35,9 +36,20 @@ export const ourtineraryReducer = (state=initialState, action) => {
 			});
 			break;
 
+		case actions.EDIT_TRIP_SUCCESS:
+			let tripsWithEditedTrip = state.trips.filter(trip => {
+				if(trip.id !== action.trip.id) {
+					return trip;
+				}
+			})
+			return Object.assign({}, state, {
+				trips: [...tripsWithEditedTrip, action.trip]
+			});
+			break;	
+
 		case actions.DELETE_TRIP_SUCCESS:
 			let trips = state.trips.filter((trip) => {
-				if(trip.id !== action.trip.id) {
+				if(trip.id !== action.tripId) {
 					return trip;
 				};
 			});
@@ -78,12 +90,8 @@ export const ourtineraryReducer = (state=initialState, action) => {
 			});
 			break;	
 			
-				
 
 		case actions.FETCH_ITINERARY_ITEM_SUCCESS:
-			console.log(action.itineraryItem)
-			console.log(action.tripId)
-
 			let tripsToUpdateWithItems = state.trips.map((trip => {
 				if(!trip.id === action.tripId) {
 					return trip;
@@ -94,39 +102,46 @@ export const ourtineraryReducer = (state=initialState, action) => {
 				})
 			}))
 
-
 			return Object.assign({}, state, {
 				itineraryItems: [...state.itineraryItems, action.itineraryItem],
 				// trips: tripsToUpdateWithItems
 			});
-			break;	
-
-			// return Object.assign({}, state, {
-			// 	itineraryItems: [...state.itineraryItems, action.itineraryItem],
-			// 	// votes: [...state.votes, ...action.itineraryItem.votes]
-			// });
-
-			// break;		
+			break;		
 
 		case actions.FETCH_NEW_TRIP_SUCCESS:
+			const trip = action.trip
+			trip._id = action.trip.id
+			let users = state.users.map( user => {
+				if(user.id ==! action.trip.tripLeader.id) {
+					return user;
+				}
+				return Object.assign({}, user, {
+					trips: [...user.trips, trip]
+				})
+			})
+
 			return Object.assign({}, state, {
 				trips: [...state.trips, action.trip],
+				newlyCreatedTrip: action.trip,
+				users
 			});
 			break;
 
 		case actions.FETCH_NEW_ITINERARY_ITEM_SUCCESS:
+			console.log(action.translatedItineraryItem)
+			
 			let tripsWithNewItineraryItem = state.trips.map( trip => {
 				if(trip.id !== action.tripId) {
 					return trip;
 				}
-				console.log(...trip.itineraryItems)
+				
 				return Object.assign({}, trip, {
 					itineraryItems: [...trip.itineraryItems, action.translatedItineraryItem]
 				})
 			})
 			return Object.assign({}, state, {
 				trips: tripsWithNewItineraryItem,
-				votes: [...state.votes, ...action.votes]
+				votes: [...state.votes, ...action.translatedItineraryItem.votes]
 			})
 			break;
 

@@ -154,12 +154,7 @@ export const getItineraryItem = (itemId, tripId) => dispatch => {
             dispatch(fetchItineraryItemSuccess(itineraryItem, tripId));
         });
 };
-// export const LOGIN = "LOGIN"
-// export const login = (username, password) => ({
-// 	type: LOGIN,
-// 	username, 
-// 	password
-// });
+
 
 export const LOGOUT = "LOGOUT"
 export const logout = () => ({
@@ -175,7 +170,6 @@ export const registerUser = user => dispatch => {
         body: JSON.stringify(user)
     })
     	.then(res => normalizeResponseErrors(res))
-        // .then(res => (res))
         .then(res => res.json())
         .catch(err => {
             const {reason, message, location} = err;
@@ -221,7 +215,42 @@ export const createNewTrip = (newTrip) => dispatch => {
             }
         })
         .then(trip => {
-            dispatch(fetchNewTripSuccess(trip));
+            dispatch(fetchNewTripSuccess(trip))
+        });
+};
+
+export const EDIT_TRIP_SUCCESS = 'EDIT_TRIP_SUCCESS';
+export const editTripSuccess = trip => ({
+    type: EDIT_TRIP_SUCCESS,
+    trip
+})
+export const editTrip = (updatedFields) => dispatch => {
+    fetch(`${API_BASE_URL}/trips/`+updatedFields.id, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(updatedFields)
+    })
+        .then(res => {
+            if (!res.ok) {
+                return Promise.reject(res.statusText);
+            }
+            return res.json();
+        })
+        .catch(err => {
+            const {reason, message, location} = err;
+            if (reason === 'ValidationError') {
+                // Convert ValidationErrors into SubmissionErrors for Redux Form
+                return Promise.reject(
+                    new SubmissionError({
+                        [location]: message
+                    })
+                );
+            }
+        })
+        .then(trip => {
+            dispatch(editTripSuccess(trip));
         });
 };
 
@@ -230,13 +259,13 @@ export const deleteTripSuccess = trip => ({
     type: DELETE_TRIP_SUCCESS,
     trip
 })
-export const deleteTrip = (trip) => dispatch => {
-    fetch(`${API_BASE_URL}/trips/`+ trip.id, {
+export const deleteTrip = (tripId) => dispatch => {
+    fetch(`${API_BASE_URL}/trips/`+ tripId, {
         method: 'DELETE',
         headers: {
             'content-type': 'application/json'
         },
-        body: JSON.stringify(trip)
+        body: JSON.stringify({id: tripId})
     })
         .then(res => {
             if (!res.ok) {
@@ -256,7 +285,7 @@ export const deleteTrip = (trip) => dispatch => {
             }
         })
         .then(deletedTrip => {
-            dispatch(deleteTripSuccess(trip));
+            dispatch(deleteTripSuccess(tripId));
         });
 };
 
@@ -302,20 +331,25 @@ export const deleteItineraryItem = (itineraryItemId, tripId) => dispatch => {
 export const FETCH_NEW_ITINERARY_ITEM_SUCCESS = 'FETCH_NEW_ITINERARY_ITEM_SUCCESS';
 export const fetchNewItineraryItemSuccess = (itineraryItem, tripId) => ({
     type: FETCH_NEW_ITINERARY_ITEM_SUCCESS,
+    // itineraryItem,
     translatedItineraryItem : {
         _id: itineraryItem.id,
         type: itineraryItem.type,
-        name: itineraryItem.name,
-        flightNumber: itineraryItem.flightNumber,
         confirmed: itineraryItem.confirmed,
+        flightNumber: itineraryItem.flightNumber,
+        layovers: itineraryItem.layovers,
+        length: itineraryItem.length,
+        departureTimeArrivalTime: itineraryItem.departureTimeArrivalTime,
+        name: itineraryItem.name,
         price: itineraryItem.price,
-        foodType: itineraryItem.foodType,
+        location: itineraryItem.location,
         pool: itineraryItem.pool,
+        foodType: itineraryItem.foodType,
         website: itineraryItem.website,
         other: itineraryItem.other,
-        votes: itineraryItem.votes.map(vote => vote._id),
+        votes: itineraryItem.votes
     },
-    votes: itineraryItem.votes,
+    // votes: itineraryItem.votes,
     tripId
 })
 export const createNewItineraryItem = (itineraryItem, tripId) => dispatch => {
@@ -429,6 +463,48 @@ export const getVote = (voteId) => dispatch => {
         });
 };
 
+export const INVITE_SUCCESS = 'INVITE_SUCCESS';
+export const inviteSuccess = trip => ({
+    type: INVITE_SUCCESS,
+    trip
+})
+export const invite = (email, inviterName, tripName) => dispatch => {
+    const emailBody = {
+        to: email,
+        inviter: inviterName,
+        trip: tripName
+    }
+
+    console.log(emailBody)
+
+    fetch(`${API_BASE_URL}/send-email`, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(emailBody)
+    })
+        .then(res => {
+            if (!res.ok) {
+                return Promise.reject(res.statusText);
+            }
+            return res.json();
+        })
+        .catch(err => {
+            const {reason, message, location} = err;
+            if (reason === 'ValidationError') {
+                // Convert ValidationErrors into SubmissionErrors for Redux Form
+                return Promise.reject(
+                    new SubmissionError({
+                        [location]: message
+                    })
+                );
+            }
+        })
+        .then(() => {
+            // dispatch(inviteSuccess(trip))
+        });
+};
 
 //LOGGIN IN
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';
