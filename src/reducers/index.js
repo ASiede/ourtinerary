@@ -1,5 +1,4 @@
 import * as actions from '../actions'
-import {history} from '../components/app.js'
 
 const initialState = {
 	trips: [],

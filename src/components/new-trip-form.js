@@ -86,6 +86,7 @@ export class NewTripForm extends React.Component {
 			let names = `collaborator${i}`
 			anotherArray.push(
 					<Field
+						key={i}
 		        		name={names}
 		        		type="text"
 		        		component={Input}

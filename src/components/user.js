@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {getTrips, getUser} from '../actions'
+import {getUser} from '../actions'
 import NewTripForm from './new-trip-form';
 import TripList from './trip-list';
 import { withRouter } from 'react-router'

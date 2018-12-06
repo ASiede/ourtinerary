@@ -10,9 +10,9 @@ import {editTrip, deleteTrip, invite} from '../actions/index';
 export class EditTripForm extends React.Component {
 	constructor(props) { 
 		super(props)
-		this.state = {
-			visable: true
-		} 
+		// this.state = {
+		// 	visable: true
+		// } 
 	}
 
 	componentDidMount() {
@@ -21,22 +21,16 @@ export class EditTripForm extends React.Component {
 	}
 
 	handleDeleteTrip(trip) {
-      // ADD AN ARE YOU SURE
-
-      	console.log(this.props.tripId)
-
-      	const userId = this.props.ourtinerary.currentUser.id
-        return this.props
-			.dispatch(deleteTrip(this.props.tripId, userId))
-      
+		const userId = this.props.ourtinerary.currentUser.id
+        return this.props.dispatch(deleteTrip(this.props.trip.id, userId))
     }
 
-	toggleVisable() {
-		console.log("toggled")
-		this.setState({
-	        visable: !this.state.visable
-	      })
-	}
+	// toggleVisable() {
+	// 	console.log("toggled")
+	// 	this.setState({
+	//         visable: !this.state.visable
+	//       })
+	// }
 
 	onSubmit(values) {
 		//Separating users and non users
@@ -52,18 +46,14 @@ export class EditTripForm extends React.Component {
 					submittedEmails.push(values[key])
 				}
 		})
-		console.log(submittedEmails)	
 
 		//gets current collaborator emails
 		let currentCollaboratorsUsernames = this.props.trip.collaborators ? this.props.trip.collaborators: '';
 		let currentUsers = this.props.ourtinerary.users.filter(user => currentCollaboratorsUsernames.includes(user.username))
 		let currentCollaboratorsEmails = currentUsers.map(user => user.email)
-		console.log(currentCollaboratorsEmails)
 
 		//trims input email
 		const allEmailsTrimmed = submittedEmails.map(name => name.trim().toLowerCase());
-		
-		console.log(allEmailsTrimmed)
 
 		//Get all user emails
 		let userEmails = this.props.ourtinerary.users.map(user => user.email)
@@ -76,9 +66,6 @@ export class EditTripForm extends React.Component {
 				nonUsers.push(email)
 			}
 		})
-		console.log(userEmails)
-		console.log(nonUsers)
-		console.log(users)
 
 		//check to make sure no repeats
 		users.forEach(user => {
@@ -86,8 +73,7 @@ export class EditTripForm extends React.Component {
 				currentCollaboratorsEmails.push(user)
 			}
 		})
-		
-		console.log(currentCollaboratorsEmails)
+
 		//needs to be ids
 		let collaboratorUserObjs = this.props.ourtinerary.users.filter(user => currentCollaboratorsEmails.includes(user.email));
 		let currentCollaboratorsIds = collaboratorUserObjs.map(user => user.id)
@@ -110,7 +96,6 @@ export class EditTripForm extends React.Component {
 		})
 
 		this.props.reset();
-		// this.toggleVisable()
 
 		nonUsers.forEach( nonUser => {
 			return this.props.dispatch(invite(nonUser, this.props.ourtinerary.currentUser.username, this.props.trip.name))
@@ -119,13 +104,7 @@ export class EditTripForm extends React.Component {
 		return this.props.dispatch(editTrip(updatedFields))
 	}
 
-
-
-	
 	render () {
-		
-
-
 		return (
 			<div>
 				<h2>Make Changes Below</h2>
@@ -156,7 +135,7 @@ export class EditTripForm extends React.Component {
 
 		        		<Field
 		        		name="collaborators"
-		        		type="text"
+		        		type="email"
 		        		value="test"
 		        		component={Input}
 		        		label="Collaborators*"

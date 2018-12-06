@@ -1,12 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {editVote, getItineraryItem, deleteItineraryItem} from '../actions/index';
+import {deleteItineraryItem} from '../actions/index';
 import Vote from './vote'
 
 export class ItineraryItem extends React.Component { 
-    constructor(props) {
-      super(props);
-    }
 
     handleDeleteItineraryItem(itineraryItem) {
       this.props.dispatch(deleteItineraryItem(itineraryItem, this.props.trip.id))
@@ -15,7 +12,7 @@ export class ItineraryItem extends React.Component {
     render() {
         //ADD CONFIRMATION BUTTON
         const linkString = this.props.item.website;
-        const confirmedHTML = this.props.item.confirmed ? <li>confirmed: {this.props.item.confirmed}</li> : '';
+        // const confirmedHTML = this.props.item.confirmed ? <li>confirmed: {this.props.item.confirmed}</li> : '';
         const flightNumberHTML = this.props.item.flightNumber ? <li>Flight Number: {this.props.item.flightNumber}</li> : '';
         const layoversHTML = this.props.item.layovers ? <li>Layovers: {this.props.item.layovers}</li> : '';
         const lengthHTML = this.props.item.length ? <li>Length: {this.props.item.length}</li> : '';
