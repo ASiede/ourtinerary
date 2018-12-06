@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {getTrips, getUser} from '../actions'
 import NewTripForm from './new-trip-form';
 import TripList from './trip-list';
+import { withRouter } from 'react-router'
+
 
 export class User extends React.Component {
 	
@@ -12,12 +14,9 @@ export class User extends React.Component {
 	}
 	
 	render() {
-
 		const user = this.props.ourtinerary.users.find(user => user.id === this.props.currentUser.id)
-
 		let userTrips = []
 		userTrips = user ? user.trips : []
-
 		const tripComponent = userTrips && userTrips.length>0 ? <TripList user={user}/> : <p>You have no trips yet. Create a trip below</p>;
 
 		return (
@@ -48,4 +47,7 @@ const mapStateToProps = (state, props) => ({
 	currentUser: state.ourtinerary.currentUser,
 });
 
-export default connect(mapStateToProps)(User);
+export default withRouter(connect(mapStateToProps)(User));
+
+
+

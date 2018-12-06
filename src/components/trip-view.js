@@ -4,6 +4,7 @@ import NewItineraryForm from './new-itinerary-item-form';
 import EditTripForm from './edit-trip-form'
 import {connect} from 'react-redux';
 import {getTrip} from '../actions'
+import { withRouter } from 'react-router'
 import './trip-view.css'
 
 export class TripView extends React.Component {
@@ -13,14 +14,6 @@ export class TripView extends React.Component {
             editTripForm: false
         }
     }
-
-    componentDidMount() {
-      if(!this.props.trip) {
-        
-      }
-    } 
-
-
 
     toggleEditTripForm(e) {
         this.setState({
@@ -34,18 +27,18 @@ export class TripView extends React.Component {
         const tripLocationHTML = this.props.trip ? <h3>{this.props.trip.location}</h3>: '';
         const tripDatesHTML = this.props.trip ? <h3>{this.props.trip.dates}</h3> : '';
 
-        const editTripFormHTML = this.state.editTripForm ? <EditTripForm tripId={this.props.trip.id} history={this.props.history}/> : '';
+        const editTripFormHTML = this.state.editTripForm ? <EditTripForm trip={this.props.trip}/> : '';
 
         let toggleEditTripHTML = '';
 
-        if (this.props.trip.tripLeader && (this.props.trip.tripLeader === this.props.ourtinerary.currentUser.username)) {
+        if (this.props.trip && (this.props.trip.tripLeader === this.props.ourtinerary.currentUser.username)) {
             toggleEditTripHTML = <button type="click" onClick={(e) => this.toggleEditTripForm(e)}>Toggle Edit Options</button>
         }
 
         return (
             <div>
                 <header>
-            			 <h1>OURtinerary</h1>
+            		<h1>OURtinerary</h1>
                 </header>
                     <main>
                         <section>
@@ -90,7 +83,7 @@ const mapStateToProps = (state, props) => {
     };
 };
 
-export default connect(mapStateToProps)(TripView);
+export default withRouter(connect(mapStateToProps)(TripView));
 
 
 

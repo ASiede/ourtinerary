@@ -23,35 +23,24 @@ export class NewTripForm extends React.Component {
 	}
 
 	componentDidMount() {
+		//can improve if i get by email individually
 		this.props.dispatch(getUsers())
-
-			
-
-		
-
 	}
 
 	onSubmit(values) {
-		console.log(values)
+		//Separating users and non users
+		let allEmails = []
 		let nonUsers = [];
 		let collaboratorEmails = [];
-
 		let keys = Object.keys(values)
-		
-		const allEmails = []
 
 		keys.forEach(key => {
 			if (key.includes('collabo')) {
 				allEmails.push(values[key])
 			}
 		})
-		console.log(collaboratorEmails)
-		
-
 		const collaboratorsArrTrimmed = allEmails.map(name => name.trim().toLowerCase());
-
 		const userEmail = this.props.ourtinerary.users.map(user => user.email)
-
 		collaboratorsArrTrimmed.forEach(email => {
 			if (userEmail.includes(email)) {
 				collaboratorEmails.push(email);
@@ -59,7 +48,6 @@ export class NewTripForm extends React.Component {
 				nonUsers.push(email)
 			}
 		})
-
 		const collaborators = collaboratorEmails.map(collaboratorEmail => {
 			const user = this.props.ourtinerary.users.find( user => user.email === collaboratorEmail)
 			return user.id
@@ -78,25 +66,20 @@ export class NewTripForm extends React.Component {
 
 		return this.props.dispatch(createNewTrip(trip))
 
-		// .then((res) => this.props.history.push(`/trips/${this.props.ourtinerary.newlyCreatedTrip.id}`))
-
-
-
 	}		
 	
 	render () {
-		// 		if(this.props.ourtinerary.newlyCreatedTrip) {
-		// 	console.log('new created')
-		// 	return this.props.history.push(`/trips/${this.props.ourtinerary.newlyCreatedTrip.id}`)
-		// }
-		
-		const html = <Field
-		        		name='collaborator'
-		        		type="text"
-		        		component={Input}
-		        		label="Collaborator"
-		        		validate={[email]}
-		        		/>
+		const html = 
+			<Field
+    		name='collaborator'
+    		type="text"
+    		component={Input}
+    		label="Collaborator"
+    		validate={[email]}
+    		/>
+
+    		//NEED TO IMPROVE
+
 		const anotherArray = []
 		let i
 		for(i=1; i < this.state.numberOfCollaborators + 1; i++) {
@@ -112,12 +95,8 @@ export class NewTripForm extends React.Component {
 				)
 		}
 
-
-		console.log(anotherArray)
 		const collaboratorsHTML = anotherArray.map(html => html)
 		
-		
-
 		return (
 			<div>
 				<h2>Create New Trip Below</h2>
@@ -175,7 +154,8 @@ NewTripForm = connect(mapStateToProps)(NewTripForm);
 
 export default reduxForm({
 	form: 'newTripForm',
-	onSubmitFail: (errors, dispatch) =>
+	onSubmitFail: (errors, dispatch) =>{
         dispatch(focus('newTripForm', Object.keys(errors)[0]))
+    }
 })(NewTripForm)
 

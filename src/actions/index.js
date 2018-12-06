@@ -2,6 +2,9 @@ import {API_BASE_URL} from '../config.js';
 import {SubmissionError} from 'redux-form';
 import jwtDecode from 'jwt-decode';
 import {saveAuthToken, clearAuthToken} from '../local-storage';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import { browserHistory } from 'react-router';
+import {history} from '../components/app.js'
 
 
 export const FETCH_TRIPS_SUCCESS = 'FETCH_TRIPS_SUCCESS';
@@ -30,11 +33,9 @@ export const getTrips = () => dispatch => {
             }
         })
 		.then(trips => {
-            
 			dispatch(fetchTripsSuccess(trips));
 		});
 };
-
 
 export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
 export const fetchUserSuccess = user => ({
@@ -123,7 +124,6 @@ export const getTrip = (tripId) => dispatch => {
         });
 };
 
-
 export const FETCH_ITINERARY_ITEM_SUCCESS = 'FETCH_ITINERARY_ITEM_SUCCESS';
 export const fetchItineraryItemSuccess = (itineraryItem, tripId) => ({
     type: FETCH_ITINERARY_ITEM_SUCCESS,
@@ -131,7 +131,6 @@ export const fetchItineraryItemSuccess = (itineraryItem, tripId) => ({
     tripId
 })
 export const getItineraryItem = (itemId, tripId) => dispatch => {
-    console.log(tripId)
     fetch(`${API_BASE_URL}/itineraryItems/` + itemId)
         .then(res => {
             if (!res.ok) {
@@ -154,7 +153,6 @@ export const getItineraryItem = (itemId, tripId) => dispatch => {
             dispatch(fetchItineraryItemSuccess(itineraryItem, tripId));
         });
 };
-
 
 export const LOGOUT = "LOGOUT"
 export const logout = () => ({
@@ -191,12 +189,12 @@ export const fetchNewTripSuccess = trip => ({
 })
 export const createNewTrip = (newTrip) => dispatch => {
     fetch(`${API_BASE_URL}/trips`, {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json'
-        },
-        body: JSON.stringify(newTrip)
-    })
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newTrip)
+        })
         .then(res => {
             if (!res.ok) {
                 return Promise.reject(res.statusText);
@@ -216,7 +214,8 @@ export const createNewTrip = (newTrip) => dispatch => {
         })
         .then(trip => {
             dispatch(fetchNewTripSuccess(trip))
-        });
+            history.push(`trip/${trip.id}`)
+        })
 };
 
 export const EDIT_TRIP_SUCCESS = 'EDIT_TRIP_SUCCESS';
@@ -259,7 +258,7 @@ export const deleteTripSuccess = trip => ({
     type: DELETE_TRIP_SUCCESS,
     trip
 })
-export const deleteTrip = (tripId) => dispatch => {
+export const deleteTrip = (tripId, userId) => dispatch => {
     fetch(`${API_BASE_URL}/trips/`+ tripId, {
         method: 'DELETE',
         headers: {
@@ -271,6 +270,7 @@ export const deleteTrip = (tripId) => dispatch => {
             if (!res.ok) {
                 return Promise.reject(res.statusText);
             }
+            history.goBack();
             return res.json();
         })
         .catch(err => {
@@ -331,7 +331,6 @@ export const deleteItineraryItem = (itineraryItemId, tripId) => dispatch => {
 export const FETCH_NEW_ITINERARY_ITEM_SUCCESS = 'FETCH_NEW_ITINERARY_ITEM_SUCCESS';
 export const fetchNewItineraryItemSuccess = (itineraryItem, tripId) => ({
     type: FETCH_NEW_ITINERARY_ITEM_SUCCESS,
-    // itineraryItem,
     translatedItineraryItem : {
         _id: itineraryItem.id,
         type: itineraryItem.type,
@@ -348,8 +347,7 @@ export const fetchNewItineraryItemSuccess = (itineraryItem, tripId) => ({
         website: itineraryItem.website,
         other: itineraryItem.other,
         votes: itineraryItem.votes
-    },
-    // votes: itineraryItem.votes,
+        },
     tripId
 })
 export const createNewItineraryItem = (itineraryItem, tripId) => dispatch => {
@@ -378,20 +376,9 @@ export const createNewItineraryItem = (itineraryItem, tripId) => dispatch => {
             }
         })
         .then(itineraryItem => {
-            console.log(itineraryItem)
             dispatch(fetchNewItineraryItemSuccess(itineraryItem, tripId));
         });
 };
-
-
-// export const EDITVOTE = "EDITVOTE"
-// export const editVote = (vote, itineraryItemId, tripId, currentUser) => ({
-// 	type: EDITVOTE,
-// 	vote,
-// 	itineraryItemId,
-// 	tripId,
-// 	currentUser
-// });
 
 export const EDIT_VOTE_SUCCESS = 'EDIT_VOTE_SUCCESS';
 export const editVoteSuccess = vote => ({
@@ -424,15 +411,9 @@ export const editVote = (vote) => dispatch => {
             }
         })
         .then(vote => {
-            console.log(vote)
             dispatch(editVoteSuccess(vote));
         });
 };
-
-// export const TOGGLECONFIRM = "TOGGLECONFIRM"
-// export const toggleConfirm = (tripId, itineraryItemId) => ({
-// 	type: TOGGLECONFIRM,
-// });
 
 export const FETCH_VOTE_SUCCESS = 'FETCH_VOTE_SUCCESS';
 export const fetchVoteSuccess = vote => ({
@@ -474,9 +455,6 @@ export const invite = (email, inviterName, tripName) => dispatch => {
         inviter: inviterName,
         trip: tripName
     }
-
-    console.log(emailBody)
-
     fetch(`${API_BASE_URL}/send-email`, {
         method: 'POST',
         headers: {

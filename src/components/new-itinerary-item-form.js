@@ -21,12 +21,7 @@ export class NewItineraryForm extends React.Component {
 	    })
   	}
 
-  	componentDidMount() {
-  		
-  	}
-
 	onSubmit(values) {
-
 		const flightNumber = values.flightNumber ? values.flightNumber : '';
 		const layovers = values.layovers ? values.layovers : '';
 		const length = values.length ? values.length : '';
@@ -40,14 +35,13 @@ export class NewItineraryForm extends React.Component {
 		const other = values.other ? values.other : '';
 		
 		const tripId = this.props.trip.id;
-		
 		this.props.reset();
 
 		let type = this.state.itineraryType
 		const itineraryItem = {tripId, type, flightNumber, layovers,length,departureTimeArrivalTime, name, price, location, pool, foodType, website, other}
 
 		if (tripId) {
-		return this.props.dispatch(createNewItineraryItem(itineraryItem, tripId));	
+			return this.props.dispatch(createNewItineraryItem(itineraryItem, tripId));	
 		}	
 	}
 
@@ -56,16 +50,15 @@ export class NewItineraryForm extends React.Component {
 			<div>
 				<h2>Create New Trip Itinerary Below</h2>
 		        	<label>Type of Activity</label><br />
-			          <select value={this.state.itineraryType} onChange={e => this.handleFormChange(e.target.value)}>
-			            <option value="Flight">Flight</option>
-			            <option value="Hotel" default>Hotel</option>
-			            <option value="Restaurant/Bar">Restaurant/Bar</option>
-			            <option value="Activity">Activity</option>
-			            <option value="Event">Event</option>
-			            <option value="Shopping">Shopping</option>
-			            <option value="Other">Other</option>
-			          </select><br />
-		        	
+						<select value={this.state.itineraryType} onChange={e => this.handleFormChange(e.target.value)}>
+							<option value="Flight">Flight</option>
+							<option value="Hotel" default>Hotel</option>
+							<option value="Restaurant/Bar">Restaurant/Bar</option>
+							<option value="Activity">Activity</option>
+							<option value="Event">Event</option>
+							<option value="Shopping">Shopping</option>
+							<option value="Other">Other</option>
+						</select><br />
 
 		        	<form onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
 

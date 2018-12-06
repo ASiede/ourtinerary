@@ -16,14 +16,12 @@ export class Nav extends React.Component {
 	render() {
 		const username = this.props.currentUser ? this.props.currentUser.username: '';
 		const navLinks = this.props.loggedIn ? 
-		<div>
-			<p>Currrently logged in as {username}</p>
-			<p> <Link to={`/user/${this.props.currentUser}`}>MyTrips</Link></p>
-			<p onClick={() => this.logout()}><Link to={`/`}>Log Out</Link></p>
-		</div>
-		: '';
-
-		
+			<div>
+				<p>Currrently logged in as {username}</p>
+				<p> <Link to={`/user/${this.props.currentUser}`}>MyTrips</Link></p>
+				<p onClick={() => this.logout()}><Link to={`/`}>Log Out</Link></p>
+			</div>
+			: '';
 
 		return (
 		<nav>
@@ -33,9 +31,6 @@ export class Nav extends React.Component {
 		)
 	}	
 }
-
-
-
 
 const mapStateToProps = state => ({
 	currentUser: state.ourtinerary.currentUser,

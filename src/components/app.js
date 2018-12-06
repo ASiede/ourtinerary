@@ -6,12 +6,16 @@ import Landing from './landing';
 import User from './user';
 import Nav from './nav';
 import TripView from './trip-view'
+import createBrowserHistory from 'history/createBrowserHistory'
+
 
 const user = {loggedIn: true}
 
+export const history = createBrowserHistory()
+
 export default function App(props) {
 	return (
-		<Router>
+		<Router history={history}>
 			<Provider store={store}>
 				<div>
 					<Nav user={user} />

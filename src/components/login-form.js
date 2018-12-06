@@ -5,19 +5,14 @@ import {login, getTrips} from '../actions';
 import {required, nonEmpty} from '../validators';
 
 export class LoginForm extends React.Component {
-	constructor(props) { 
-		super(props); 
-	}
 
 	onSubmit(values) {
 		this.props.reset();
 		this.props.dispatch(getTrips())
-		return this.props.dispatch(login(values.username, values.password));
-		
+		return this.props.dispatch(login(values.username, values.password));	
 	}
 
 	render () {
-		
 		return (
 			<div>
 				<h3>Login</h3>

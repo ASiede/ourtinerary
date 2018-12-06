@@ -1,4 +1,5 @@
 import * as actions from '../actions'
+import {history} from '../components/app.js'
 
 const initialState = {
 	trips: [],
@@ -20,23 +21,21 @@ export const ourtineraryReducer = (state=initialState, action) => {
 		case actions.LOGOUT: 
 			return Object.assign({}, state, {
 				currentUser: null
-			});
-			break;		
+			});		
 		
 		case actions.FETCH_TRIPS_SUCCESS:
 			
 			return Object.assign({}, state, {
 				trips: action.trips.trips
 			});
-			break;
 
 		case actions.FETCH_TRIP_SUCCESS:
 			return Object.assign({}, state, {
 				trips: [...state.trips, action.trip],
 			});
-			break;
 
 		case actions.EDIT_TRIP_SUCCESS:
+			console.log(action.trip)
 			let tripsWithEditedTrip = state.trips.filter(trip => {
 				if(trip.id !== action.trip.id) {
 					return trip;
@@ -45,7 +44,6 @@ export const ourtineraryReducer = (state=initialState, action) => {
 			return Object.assign({}, state, {
 				trips: [...tripsWithEditedTrip, action.trip]
 			});
-			break;	
 
 		case actions.DELETE_TRIP_SUCCESS:
 			let trips = state.trips.filter((trip) => {
@@ -56,7 +54,6 @@ export const ourtineraryReducer = (state=initialState, action) => {
 			return Object.assign({}, state, {
 				trips
 			});
-			break;
 
 		case actions.DELETE_ITINERARY_ITEM_SUCCESS:
 			let tripsWithDeletedItem = state.trips.map((trip) => {
@@ -74,21 +71,18 @@ export const ourtineraryReducer = (state=initialState, action) => {
 			});
 			return Object.assign({}, state, {
 				trips: tripsWithDeletedItem
-			});
-			break;						
+			});					
 
 		case actions.FETCH_USER_SUCCESS:
 			return Object.assign({}, state, {
 				users: [...state.users, action.user]
 			});
-			break;
 
 		case actions.FETCH_USERS_SUCCESS:
 			
 			return Object.assign({}, state, {
 				users: action.users.users
 			});
-			break;	
 			
 
 		case actions.FETCH_ITINERARY_ITEM_SUCCESS:
@@ -96,7 +90,6 @@ export const ourtineraryReducer = (state=initialState, action) => {
 				if(!trip.id === action.tripId) {
 					return trip;
 				}
-
 				return Object.assign({}, trip, {
 					itineraryItems: [...trip.itineraryItems, action.itineraryItem]
 				})
@@ -104,32 +97,25 @@ export const ourtineraryReducer = (state=initialState, action) => {
 
 			return Object.assign({}, state, {
 				itineraryItems: [...state.itineraryItems, action.itineraryItem],
-				// trips: tripsToUpdateWithItems
-			});
-			break;		
+			});	
 
 		case actions.FETCH_NEW_TRIP_SUCCESS:
-			const trip = action.trip
-			trip._id = action.trip.id
+			let newTrip = action.trip
+			newTrip._id = action.trip.id
 			let users = state.users.map( user => {
-				if(user.id ==! action.trip.tripLeader.id) {
+				if(user.username !== action.trip.tripLeader) {
 					return user;
 				}
 				return Object.assign({}, user, {
-					trips: [...user.trips, trip]
+					trips: [...user.trips, newTrip]
 				})
 			})
-
 			return Object.assign({}, state, {
-				trips: [...state.trips, action.trip],
-				newlyCreatedTrip: action.trip,
+				trips: [...state.trips, newTrip],
 				users
 			});
-			break;
 
 		case actions.FETCH_NEW_ITINERARY_ITEM_SUCCESS:
-			console.log(action.translatedItineraryItem)
-			
 			let tripsWithNewItineraryItem = state.trips.map( trip => {
 				if(trip.id !== action.tripId) {
 					return trip;
@@ -143,13 +129,11 @@ export const ourtineraryReducer = (state=initialState, action) => {
 				trips: tripsWithNewItineraryItem,
 				votes: [...state.votes, ...action.translatedItineraryItem.votes]
 			})
-			break;
 
 		case actions.FETCH_VOTE_SUCCESS:
 			return Object.assign({}, state, {
 				votes: [...state.votes, action.vote]
-			});
-			break;		
+			});		
 
 		case actions.EDIT_VOTE_SUCCESS:
 			let votes = state.votes.map((vote) => {
@@ -164,35 +148,30 @@ export const ourtineraryReducer = (state=initialState, action) => {
 			return Object.assign({}, state, {
 				votes
 			})
-			break;
 
 		// FOLLOWING CASES ARE IN REGARDS TO LOGGING IN	
 		case actions.SET_AUTH_TOKEN:
 			return Object.assign({}, state, {
             	authToken: action.authToken
         	});
-			break;
 
 		case actions.CLEAR_AUTH:
 			return Object.assign({}, state, {
             	authToken: null,
             	currentUser: null
         	});
-        	break;
 
 		case actions.AUTH_REQUEST:
 			return Object.assign({}, state, {
             	loading: true,
             	error: null
         	});
-        	break;
 
 		case actions.AUTH_SUCCESS:
 			return Object.assign({}, state, {
             	loading: false,
             	currentUser: action.currentUser
         	});
-        	break;
 
 		case actions.AUTH_ERROR:
 			return Object.assign({}, state, {

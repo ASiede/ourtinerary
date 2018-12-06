@@ -8,20 +8,13 @@ export class ItineraryItem extends React.Component {
       super(props);
     }
 
-    componentDidMount() {
-    }
-
-     handleDeleteItineraryItem(itineraryItem) {
-      // ADD AN ARE YOU SURE
+    handleDeleteItineraryItem(itineraryItem) {
       this.props.dispatch(deleteItineraryItem(itineraryItem, this.props.trip.id))
-      
-      
     }
 
     render() {
         //ADD CONFIRMATION BUTTON
         const linkString = this.props.item.website;
-
         const confirmedHTML = this.props.item.confirmed ? <li>confirmed: {this.props.item.confirmed}</li> : '';
         const flightNumberHTML = this.props.item.flightNumber ? <li>Flight Number: {this.props.item.flightNumber}</li> : '';
         const layoversHTML = this.props.item.layovers ? <li>Layovers: {this.props.item.layovers}</li> : '';
@@ -40,17 +33,16 @@ export class ItineraryItem extends React.Component {
         const voteIds = this.props.item.votes.sort();
 
         const voteHTML = voteIds.map(vote => { 
-          return (
-          <Vote key={vote.id} voteId={vote} />
-          )
+            return (
+                <Vote key={vote.id} voteId={vote} />
+            )
         })
     
         return (
             <div>
-                <button type="click" onClick={() => this.handleDeleteItineraryItem(this.props.item._id)}>Delete ItineraryItem</button>
+                <button type="click" onClick={() => {if (window.confirm('Are you sure you wish to delete this itinerary item? This action cannot be undone.')) this.handleDeleteItineraryItem(this.props.item._id)}}>Delete Itinerary Item</button>
                 <h3>{typeHTML}</h3>
                 <h4>{nameHTML}</h4>  
-
                 <ul>
                     {flightNumberHTML}
                     {layoversHTML}
@@ -67,12 +59,13 @@ export class ItineraryItem extends React.Component {
                     {voteHTML}
                 </ul>
             </div>
-        )} 
+        )
+    } 
 }
 
 const mapStateToProps = state => ({
-  currentUser: state.ourtinerary.currentUser,
-  ourtinerary: state.ourtinerary
+    currentUser: state.ourtinerary.currentUser,
+    ourtinerary: state.ourtinerary
   
 });
 

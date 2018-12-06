@@ -10,15 +10,11 @@ export class TripList extends React.Component {
 	componentDidMount() {
 		// COULD IMPROVE BY PASSING SEARCH QUERIES FOR ONLY USERS TRIPS
 		this.props.dispatch(getTrips())
-
 	}
 
 	render() {
-
 		const userId = this.props.user ? this.props.user.id : '';
-
 		const userTrips = this.props.user && this.props.user.trips ? this.props.user.trips : [];
-
 		const trips = userTrips.map((trip) => (
 			<li key={trip._id}><Link to={`/trip/${trip._id}`}>{trip.name}</Link></li>
 		));
@@ -32,7 +28,6 @@ export class TripList extends React.Component {
 		)
 	}
 }
-
 
 const mapStateToProps = (state) => ({
 	ourtinerary: state.ourtinerary
