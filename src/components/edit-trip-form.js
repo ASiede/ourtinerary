@@ -5,7 +5,7 @@ import {getUsers} from '../actions'
 import {reduxForm, Field, focus} from 'redux-form';
 import {required, nonEmpty} from '../validators';
 import {editTrip, deleteTrip, invite} from '../actions/index';
-// import './edit-trip-form.css'
+import './edit-trip-form.css'
 
 export class EditTripForm extends React.Component {
 	constructor(props) { 
@@ -106,9 +106,11 @@ export class EditTripForm extends React.Component {
 
 	render () {
 		return (
-			<div>
-				<h2>Make Changes Below</h2>
+			<div className="edit-trip">
+				
 		        	<form onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
+		        		<h3>Make Changes Below</h3>
+
 		        		<Field
 		        		name="name"
 		        		type="text"
@@ -152,7 +154,13 @@ export class EditTripForm extends React.Component {
 				        </button>
 		        	</form>
 
-		        	<button type="click" onClick={() => {if (window.confirm('Are you sure you wish to delete this trip? This action cannot be undone.')) this.handleDeleteTrip(this.props.trip)}}>Delete Trip</button>
+		        	
+		        	<div className="delete-trip-wrapper">
+				        <button className="delete-trip" type="click" onClick={() => {if (window.confirm('Are you sure you wish to delete this trip? This action cannot be undone.')) this.handleDeleteTrip(this.props.trip)}}>Delete Trip</button>
+		        	</div>
+		        	
+
+		        	
 		    </div> 
 		)
 	}

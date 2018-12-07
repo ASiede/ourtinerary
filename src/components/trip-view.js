@@ -23,47 +23,49 @@ export class TripView extends React.Component {
 
     render() {
         const collaboratorsHTML = this.props.trip ? this.props.trip.collaborators.map(collaborator => <li key={collaborator.toString()} >{collaborator}</li>) :'';
-      	const tripNameHTML = this.props.trip ? <h2>{this.props.trip.name}</h2> : '';
-        const tripLocationHTML = this.props.trip ? <h3>{this.props.trip.location}</h3>: '';
-        const tripDatesHTML = this.props.trip ? <h3>{this.props.trip.dates}</h3> : '';
+      	const tripNameHTML = this.props.trip ? <h2>{this.props.trip.name}<img onClick={(e) => this.toggleEditTripForm(e)} src="http://cdn.onlinewebfonts.com/svg/img_147067.png" alt="edit-pencil"></img></h2> : '';
+        const tripLocationHTML = this.props.trip ? <div><h3>Where:</h3> <p>{this.props.trip.location}</p></div>: '';
+        const tripDatesHTML = this.props.trip ? <div><h3>When:</h3><p>{this.props.trip.dates}</p></div> : '';
 
         const editTripFormHTML = this.state.editTripForm ? <EditTripForm trip={this.props.trip}/> : '';
 
-        let toggleEditTripHTML = '';
+        // let toggleEditTripHTML = '';
 
-        if (this.props.trip && (this.props.trip.tripLeader === this.props.ourtinerary.currentUser.username)) {
-            toggleEditTripHTML = <button type="click" onClick={(e) => this.toggleEditTripForm(e)}>Toggle Edit Options</button>
-        }
+        // if (this.props.trip && (this.props.trip.tripLeader === this.props.ourtinerary.currentUser.username)) {
+        //     toggleEditTripHTML = <button type="click" onClick={(e) => this.toggleEditTripForm(e)}>Toggle Edit Options</button>
+        // }
 
         return (
             <div>
-                <header>
-            		<h1>OURtinerary</h1>
-                </header>
-                    <main>
-                        <section>
-                            {tripNameHTML}
-                            {tripLocationHTML}
-                            {tripDatesHTML}
-                            <ul>Collaborators: 
-                                {collaboratorsHTML} 
-                            </ul>
-                            
-                            {toggleEditTripHTML}
-                            {editTripFormHTML}
-                        </section>
-                
-                        <section>
-                            <h2 className='itinerary-header'>Suggested Itinerary Items</h2>
-                            <ItineraryList trip={this.props.trip} />
-                        </section>
+                <main>
+                    <section className='trip-details'>
+                        <div className='trip-name'>
+                        {tripNameHTML}
+                        
+                        
+                        </div>
+                        <div className="where-when">
+                        {tripLocationHTML}
+                        {tripDatesHTML}
+                        </div>
+                        <h3>Who's Going:</h3>
+                        <ul> 
+                            {collaboratorsHTML} 
+                        </ul>
+                        {editTripFormHTML}
+                    </section>
+            
+                    <section>
+                        <h2 className='itinerary-header'>Suggested Itinerary Items</h2>
+                        <ItineraryList trip={this.props.trip} />
+                    </section>
 
-                        <section>
-                            <NewItineraryForm trip={this.props.trip}/>
-                        </section>
+                    <section>
+                        <NewItineraryForm trip={this.props.trip}/>
+                    </section>
 
-                        <footer>Footer</footer>
-                    </main>
+                    <footer>Footer</footer>
+                </main>
           	</div>	
       	);
     }

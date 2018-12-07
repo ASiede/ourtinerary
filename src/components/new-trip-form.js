@@ -91,7 +91,7 @@ export class NewTripForm extends React.Component {
 		        		name={names}
 		        		type="text"
 		        		component={Input}
-		        		label="Collaborator"
+		        		label="Collaborator Email*"
 		        		validate={[email]}
 		        		/>
 				)
@@ -100,8 +100,10 @@ export class NewTripForm extends React.Component {
 		const collaboratorsHTML = anotherArray.map(html => html)
 		
 		return (
-			<div>
+			<div className="new-trip">
+				<div className="h2-wrapper">
 				<h2>Create A New Trip</h2>
+				</div>
 		        	<form onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
 		        		<Field
 		        		name="name"
@@ -127,22 +129,21 @@ export class NewTripForm extends React.Component {
 		        		validate={[required, nonEmpty]}
 		        		/>
 
-		        		<p>Add your collaborators here*</p>
-		        		<button type="click" onClick={(e) => this.handleAddCollaborator(e)}>Add Collaborator</button>
-
 		        		{collaboratorsHTML}
-
-		        		<p>*Enter the emails of those you want to collaborate with for your trip. Registered users of OURtinerary will be added to your trip and non users will receive an email invite</p>
-
+		        		<button className="add-collaborator" type="click" onClick={(e) => this.handleAddCollaborator(e)}> + Additional Collaborator</button><br />
+		        		
 		         		<button 
 				        	type="submit"
 				        	disabled={
 				        		this.props.pristine ||
 				        		this.props.submitting
 				        	}>
-				        	Submit
+				        	Create Trip!
 				        </button>
+				        <p>*Enter the emails of those you want to collaborate with for this trip. Registered users of OURtinerary will be added to your trip and non users will receive an email invite. Once they have registered, you can then add them to the trip.</p>
+
 		        	</form>
+		        	
 		    </div>    	
 		)};
 }

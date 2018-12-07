@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {getVote, editVote} from '../actions';
+import './vote.css'
 
 export class Vote extends React.Component { 
     constructor(props) {
@@ -24,7 +25,9 @@ export class Vote extends React.Component {
     	const vote = this.props.ourtinerary.votes && this.props.ourtinerary.votes.length>0 ? this.props.ourtinerary.votes.find(vote => vote.id === this.props.voteId): [];
 
       let editVoteHTML = (vote && vote.user && this.props.currentUser && (this.props.currentUser.username === vote.user.username) && vote.status !== '') ?
-          <button type='click' onClick={() => this.handleVote(vote.id,'')}>Change My Vote</button>:
+          
+          <img className="change-vote" onClick={() => this.handleVote(vote.id,'')} src="http://cdn.onlinewebfonts.com/svg/img_147067.png" alt="edit-pencil"></img>
+          :
           '';
 
     	let voteHTML = '';
@@ -39,7 +42,7 @@ export class Vote extends React.Component {
 				  voteHTML =<li key={vote.id}>{vote.user.usernam} Choose your vote:<span onClick={() => this.handleVote(vote.id,'Yes')}>👍</span><span onClick={() => this.handleVote(vote.id, 'No')}>👎</span></li>
 
 			} else if (vote && vote.user) {
-				  voteHTML = <li key={vote.id}>{vote.user.username} hasn't voted yet </li>
+				  voteHTML = <li key={vote.id}>{vote.user.username} No Vote </li>
 			} 
           return (
               <div>

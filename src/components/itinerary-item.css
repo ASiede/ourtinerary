@@ -1,0 +1,61 @@
+.itinerary-item {
+	border: rgb(0, 99, 151) 3px solid;
+	margin: 20px;
+	border-radius: 5px;
+	padding-bottom: 15px;
+	font-size: 20px;
+	box-shadow: 5px 10px 18px #888888;
+}
+
+.type-wrapper {
+	display: flex;
+	justify-content: space-between;
+	align-content: center;
+}
+
+.itinerary-item h3 {
+font-size: 20px;
+background-color: rgb(0, 99, 151);
+display: inline-block;
+margin: 0px;
+padding: 7px;
+color: white;
+border-radius: 0px 0px 5px 0px;
+margin-left: 0px;
+
+}
+
+.trash-icon {
+	height: 30px;
+		margin-right: 10px;
+		margin-top: 10px;
+}
+
+.trash-icon:hover {
+	cursor: pointer;
+	opacity: .5;
+}
+
+.itinerary-item h4 {
+	font-size: 30px;
+	padding: 0px;
+	display: block;
+	width: 100px;
+	margin: 0 auto;
+	
+}
+
+.itinerary-item-info ul {
+	margin: 0px;
+	text-align: left;
+	padding: 5px;
+}
+
+.itinerary-item-info li {
+	padding: 5px;
+}
+
+
+
+
+

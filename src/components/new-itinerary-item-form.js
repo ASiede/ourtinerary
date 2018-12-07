@@ -48,7 +48,9 @@ export class NewItineraryForm extends React.Component {
 	render () {
 		return (
 			<div>
+				<div className="h2-wrapper">
 				<h2>Create New Trip Itinerary Below</h2>
+				</div>
 		        	<label>Type of Activity</label><br />
 						<select value={this.state.itineraryType} onChange={e => this.handleFormChange(e.target.value)}>
 							<option value="Flight">Flight</option>

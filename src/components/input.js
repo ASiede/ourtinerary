@@ -27,7 +27,7 @@ export default class Input extends React.Component {
                     {this.props.label}
                     {error}
                     {warning}
-                </label>
+                </label><br />
                 <Element
                     {...this.props.input}
                     id={this.props.input.name}

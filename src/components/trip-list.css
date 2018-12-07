@@ -1,0 +1,49 @@
+.trip-list {
+	border: none;
+}
+
+.trips {
+	
+	list-style-type: none;
+	/*padding-top: 10px;*/
+	margin-top: 0px;
+	padding-bottom: 10px;
+	padding-left: 0px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.trips a {
+	text-decoration: none;
+	color: white;
+	font-weight: bold;
+	
+}
+
+.trips li {
+	
+	background-color: #006397;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	font-size: 20px;
+	border: black solid 1px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-radius: 5px;
+	box-shadow: 5px 10px 18px #888888;
+}
+
+
+
+.trips li:hover {
+	background-color: rgb(0, 99, 151, .75);
+	color: white;
+	cursor: pointer;
+	box-shadow: none;
+}
+
+
+
+/*.trips li:nth-child(2) {
+	background-color: lightblue;
+}*/

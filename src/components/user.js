@@ -23,9 +23,12 @@ export class User extends React.Component {
 		return (
 			<div className="user">
 				<main>
-		      		<section className="trips">
+		      		<section className="browse-trips">
+		      			<div className="h2-wrapper">
 		        		<h2>Browse Your Trips</h2>
+		        		</div>   
 					        {tripComponent}
+					     
 		      		</section>
 
 			        <section>
