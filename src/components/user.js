@@ -4,13 +4,14 @@ import {getUser} from '../actions'
 import NewTripForm from './new-trip-form';
 import TripList from './trip-list';
 import { withRouter } from 'react-router'
+import './user.css'
+
 
 
 export class User extends React.Component {
 	
 	componentDidMount() {
 		this.props.dispatch(getUser(this.props.currentUser.id))
-
 	}
 	
 	render() {
@@ -18,16 +19,12 @@ export class User extends React.Component {
 		let userTrips = []
 		userTrips = user ? user.trips : []
 		const tripComponent = userTrips && userTrips.length>0 ? <TripList user={user}/> : <p>You have no trips yet. Create a trip below</p>;
-
+		
 		return (
-
-			<div>
-				<header>
-					<h1>OURtinerary</h1>
-				</header>
+			<div className="user">
 				<main>
-		      		<section>
-		        		<h2>Your Trips</h2>
+		      		<section className="trips">
+		        		<h2>Browse Your Trips</h2>
 					        {tripComponent}
 		      		</section>
 

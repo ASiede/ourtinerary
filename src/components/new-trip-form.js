@@ -5,6 +5,7 @@ import {getUsers} from '../actions'
 import {reduxForm, Field, focus} from 'redux-form';
 import {required, nonEmpty, email} from '../validators';
 import {createNewTrip, invite} from '../actions/index';
+import { withRouter } from 'react-router'
 import './new-trip-form.css'
 
 export class NewTripForm extends React.Component {
@@ -100,7 +101,7 @@ export class NewTripForm extends React.Component {
 		
 		return (
 			<div>
-				<h2>Create New Trip Below</h2>
+				<h2>Create A New Trip</h2>
 		        	<form onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
 		        		<Field
 		        		name="name"
@@ -151,7 +152,7 @@ const mapStateToProps = (state) => ({
 	currentUser: state.ourtinerary.currentUser,
 });
 
-NewTripForm = connect(mapStateToProps)(NewTripForm);
+NewTripForm = withRouter(connect(mapStateToProps)(NewTripForm));
 
 export default reduxForm({
 	form: 'newTripForm',

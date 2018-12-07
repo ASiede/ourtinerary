@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import Input from './input';
 import {login, registerUser, getTrips} from '../actions/index';
 import {required, nonEmpty, email} from '../validators';
+import './registration-form.css'
 
 
 export class RegistrationForm extends React.Component {
@@ -22,8 +23,8 @@ export class RegistrationForm extends React.Component {
 
 	render () {
 		return (
-			<div>
-				<h3>Registration</h3>
+			<div className="registration-area">
+				<h3>Register</h3>
 			    	<form onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
 				     	<Field 
 				        name="firstName" 

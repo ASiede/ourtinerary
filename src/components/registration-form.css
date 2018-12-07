@@ -1,0 +1,34 @@
+.registration-area {
+	padding-top: 15px;
+	display:flex;
+	flex-direction: column;
+	border-top: 2px solid black;
+	padding-bottom: 20px;
+	border: solid black 3px;
+	margin: 10px;
+
+}
+
+.registration-area h3 {
+	font-size: 25px;
+ 	margin-top: 0px;
+ 	margin-bottom: 10px;
+}
+
+.registration-area label {
+	padding: 10px;
+	margin: 10px;
+	font-size: 20px;
+
+}
+
+
+
+.registration-area input {
+	font-size: 15px;
+	border-radius: 6px;
+	padding: 10px;
+	margin: 10px;
+}
+
+

@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {getTrips} from '../actions'
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import { withRouter } from 'react-router';
 
 import './trip-list.css';
 
@@ -20,7 +21,7 @@ export class TripList extends React.Component {
 		));
 
 		return (
-			<div>
+			<div className="trip-list">
 				<ul className="trips">
 					{trips}
 				</ul>
@@ -33,4 +34,4 @@ const mapStateToProps = (state) => ({
 	ourtinerary: state.ourtinerary
 });
 
-export default connect(mapStateToProps)(TripList);
+export default withRouter(connect(mapStateToProps)(TripList));

@@ -7,6 +7,7 @@ import User from './user';
 import Nav from './nav';
 import TripView from './trip-view'
 import createBrowserHistory from 'history/createBrowserHistory'
+import './app.css';
 
 
 const user = {loggedIn: true}

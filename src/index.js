@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './components/app';
 import {Provider} from 'react-redux';
 import store from './store';
 import * as serviceWorker from './serviceWorker';
 import * as actions from './actions'
-
+import './index.css';
 
 // console.log(store.getState().ourtinerary);
 // store.dispatch(actions.login("Delores", "passwordpassword"))
