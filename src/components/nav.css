@@ -18,6 +18,7 @@ nav {
 	/*background-color: #FFF7D6;*/
     max-width: 100%;
     /*position: fixed;*/
+    z-index: 100;
 }
 
 nav h1 {
@@ -106,7 +107,7 @@ button:hover {
 	overflow: auto;
 	background-image: linear-gradient(to bottom right, #006397, #BCD8ED);
 	position: fixed; 
-	z-index: 1; 
+	z-index: 100; 
 	right: 0;
 	overflow: auto;
 	text-align: center;
