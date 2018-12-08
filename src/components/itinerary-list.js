@@ -11,7 +11,7 @@ export class ItineraryList extends React.Component {
 		const itineraryItems = trip ? trip.itineraryItems: '';
 		const list = trip ? trip.itineraryItems.map(item => 
 			 <ItineraryItem key={item.id} item={item} trip={trip} />
-			): '';
+			): <p>This trip doesn't have any itinerary items yet.</p>;
 
 		return (
 			<div>{list}</div>

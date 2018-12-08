@@ -1,5 +1,5 @@
 .trip-details {
-  border: 1px solid black;
+  /*border: 1px solid black;*/
   background-image: url("https://journalistontherun.com/wp-content/uploads/2015/10/o-SOLO-TRAVEL-facebook.jpg");
   background-size: cover;
   background-repeat: no-repeat;
@@ -8,9 +8,9 @@
   flex-direction: column;
 }
 .trip-details h2 {
-  border-left: 2px solid black;
+/*  border-left: 2px solid black;
   border-right: 2px solid black;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid black;*/
   margin: 0px;
   padding: 15px;
 }
@@ -22,9 +22,12 @@
 
 .trip-details img {
   max-height: 30px;
- margin-left: 10px;
- position: absolute;
- right: 20px;
+  margin-left: -30px;
+/* margin-left: 10px;*/
+ /*position: absolute;*/
+ /*right: 20px;*/
+ float: right;
+
 }
 
 .trip-details img:hover{

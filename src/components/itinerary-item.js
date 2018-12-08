@@ -61,11 +61,14 @@ export class ItineraryItem extends React.Component {
                     {foodTypeHTML}
                     {websiteHTML}
                     {otherHTML}
+                    <li>Votes:
+                        <ul className="votes-list">
+                            {voteHTML}
+                        </ul>
+                    </li>
                 </ul>
                 </div>
-                <ul className="votes-list">Votes
-                    {voteHTML}
-                </ul>
+
             </div>
         )
     } 
