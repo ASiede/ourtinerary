@@ -214,7 +214,7 @@ export const createNewTrip = (newTrip) => dispatch => {
         })
         .then(trip => {
             dispatch(fetchNewTripSuccess(trip))
-            history.push(`trip/${trip.id}`)
+            history.push(`/trip/${trip.id}`)
         })
 };
 
@@ -573,7 +573,7 @@ export const login = (username, password) => dispatch => {
                         _error: message
                     })
                 );
-            })    
+            })
     );
 };
 
@@ -600,7 +600,3 @@ export const refreshAuthToken = () => (dispatch, getState) => {
             clearAuthToken(authToken);
         });
 };
-
-
-
-

@@ -8,11 +8,11 @@ import {createNewTrip, invite} from '../actions/index';
 import './new-trip-form.css'
 
 export class NewTripForm extends React.Component {
-	constructor(props) { 
+	constructor(props) {
 		super(props);
 		this.state = {
 			numberOfCollaborators: 1
-		} 
+		}
 	}
 
 	handleAddCollaborator(e) {
@@ -64,12 +64,12 @@ export class NewTripForm extends React.Component {
 			nonUsers.map(nonUser => this.props.dispatch(invite(nonUser, inviterName, values.name)))
 		}
 
-		return this.props.dispatch(createNewTrip(trip))
+		this.props.dispatch(createNewTrip(trip));
 
-	}		
-	
+	}
+
 	render () {
-		const html = 
+		const html =
 			<Field
     		name='collaborator'
     		type="text"
@@ -97,7 +97,7 @@ export class NewTripForm extends React.Component {
 		}
 
 		const collaboratorsHTML = anotherArray.map(html => html)
-		
+
 		return (
 			<div>
 				<h2>Create New Trip Below</h2>
@@ -117,7 +117,7 @@ export class NewTripForm extends React.Component {
 		        		label="Dates"
 		        		validate={[required, nonEmpty]}
 		        		/>
-		          		
+
 		          		<Field
 		        		name="location"
 		        		type="text"
@@ -133,7 +133,7 @@ export class NewTripForm extends React.Component {
 
 		        		<p>*Enter the emails of those you want to collaborate with for your trip. Registered users of OURtinerary will be added to your trip and non users will receive an email invite</p>
 
-		         		<button 
+		         		<button
 				        	type="submit"
 				        	disabled={
 				        		this.props.pristine ||
@@ -142,7 +142,7 @@ export class NewTripForm extends React.Component {
 				        	Submit
 				        </button>
 		        	</form>
-		    </div>    	
+		    </div>
 		)};
 }
 
@@ -155,8 +155,7 @@ NewTripForm = connect(mapStateToProps)(NewTripForm);
 
 export default reduxForm({
 	form: 'newTripForm',
-	onSubmitFail: (errors, dispatch) =>{
+	onSubmitFail: (errors = {}, dispatch) =>{
         dispatch(focus('newTripForm', Object.keys(errors)[0]))
     }
 })(NewTripForm)
-
