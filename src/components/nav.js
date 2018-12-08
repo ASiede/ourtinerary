@@ -67,9 +67,8 @@ export class Nav extends React.Component {
 						<p 
 						onClick={(e) => this.hideLoggedInModal(e)} 
 						onClick={() => this.logout()}
-						
-						>
-							<Link to={`/`}>Log Out</Link></p>
+						><Link to={`/`}>Log Out</Link></p>
+						<p><Link /></p>
 					</div>
 				</div>  
 
