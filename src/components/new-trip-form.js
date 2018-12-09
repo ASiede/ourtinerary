@@ -9,11 +9,11 @@ import { withRouter } from 'react-router'
 import './new-trip-form.css'
 
 export class NewTripForm extends React.Component {
-	constructor(props) { 
+	constructor(props) {
 		super(props);
 		this.state = {
 			numberOfCollaborators: 1
-		} 
+		}
 	}
 
 	handleAddCollaborator(e) {
@@ -65,12 +65,12 @@ export class NewTripForm extends React.Component {
 			nonUsers.map(nonUser => this.props.dispatch(invite(nonUser, inviterName, values.name)))
 		}
 
-		return this.props.dispatch(createNewTrip(trip))
+		this.props.dispatch(createNewTrip(trip));
 
-	}		
-	
+	}
+
 	render () {
-		const html = 
+		const html =
 			<Field
     		name='collaborator'
     		type="text"
@@ -98,7 +98,7 @@ export class NewTripForm extends React.Component {
 		}
 
 		const collaboratorsHTML = anotherArray.map(html => html)
-		
+
 		return (
 			<div className="new-trip">
 				<div className="h2-wrapper">
@@ -120,7 +120,7 @@ export class NewTripForm extends React.Component {
 		        		label="Dates"
 		        		validate={[required, nonEmpty]}
 		        		/>
-		          		
+
 		          		<Field
 		        		name="location"
 		        		type="text"
@@ -130,9 +130,15 @@ export class NewTripForm extends React.Component {
 		        		/>
 
 		        		{collaboratorsHTML}
+
+
+		        		<p>*Enter the emails of those you want to collaborate with for your trip. Registered users of OURtinerary will be added to your trip and non users will receive an email invite</p>
+
+
 		        		<button className="add-collaborator" type="click" onClick={(e) => this.handleAddCollaborator(e)}> + Additional Collaborator</button><br />
 		        		
 		         		<button 
+
 				        	type="submit"
 				        	disabled={
 				        		this.props.pristine ||
@@ -143,8 +149,12 @@ export class NewTripForm extends React.Component {
 				        <p>*Enter the emails of those you want to collaborate with for this trip. Registered users of OURtinerary will be added to your trip and non users will receive an email invite. Once they have registered, you can then add them to the trip.</p>
 
 		        	</form>
+
+		    </div>
+
 		        	
 		    </div>    	
+
 		)};
 }
 
@@ -157,8 +167,7 @@ NewTripForm = withRouter(connect(mapStateToProps)(NewTripForm));
 
 export default reduxForm({
 	form: 'newTripForm',
-	onSubmitFail: (errors, dispatch) =>{
+	onSubmitFail: (errors = {}, dispatch) =>{
         dispatch(focus('newTripForm', Object.keys(errors)[0]))
     }
 })(NewTripForm)
-
