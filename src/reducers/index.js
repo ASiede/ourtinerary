@@ -23,7 +23,6 @@ export const ourtineraryReducer = (state=initialState, action) => {
 			});		
 		
 		case actions.FETCH_TRIPS_SUCCESS:
-			
 			return Object.assign({}, state, {
 				trips: action.trips.trips
 			});
