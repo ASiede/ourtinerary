@@ -28,3 +28,55 @@
 
 }	
 
+/*
+MEDIA QUERIES
+*/
+
+/*Landscape phones*/
+
+@media only screen 
+  and (min-width: 320px) 
+  and (max-width: 732px)
+  and (orientation: landscape) {
+    
+
+}
+
+/*screen size small*/
+
+@media only screen 
+  and (min-width: 320px) 
+  and (max-width: 645px)
+  {
+ 
+
+}  
+
+/* screen size medium*/
+  @media only screen 
+  and (min-width: 645px) 
+  and (max-width: 1000px)
+  {
+  
+  .browse-trips h2{
+  		max-width: 350px;
+  		font-size: 35px;
+  		margin: 10px;
+  	}
+
+
+} 
+
+/* screen size large */
+  @media only screen 
+  and (min-width: 1000px)
+  {
+ .browse-trips h2{
+  		max-width: 350px;
+  		font-size: 35px;
+  		margin: 10px;
+  	}
+
+} 
+/*  and (max-device-width: 1600px) */
+

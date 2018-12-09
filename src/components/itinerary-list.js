@@ -14,7 +14,7 @@ export class ItineraryList extends React.Component {
 			): <p>This trip doesn't have any itinerary items yet.</p>;
 
 		return (
-			<div>{list}</div>
+			<div className="itinerary-list-wrapper">{list}</div>
 		);
 	}
 }

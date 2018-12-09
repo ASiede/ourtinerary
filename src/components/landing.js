@@ -30,10 +30,6 @@ export function Landing(props) {
 			    	<p>Everyone gets to give and thumbs up or down on the different suggestions.</p>
 			    	<p>Finally: enjoy your trip!</p>		
 			    </section>
-
-			    <section className="registration-and-login">
-			        
-			    </section>
 			</main>
 		</div>
 	);

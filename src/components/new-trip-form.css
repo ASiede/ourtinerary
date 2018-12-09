@@ -11,7 +11,7 @@
 }
 
 .h2-wrapper h2 {
-	max-width: 230px;
+	
 	margin: 0px;
 	 color: #6B7888;
 	 background-color: rgb(255,255,255, .6);
@@ -53,4 +53,71 @@
 	background-color: transparent;
 	color: blue;
 }
+
+/*
+MEDIA QUERIES
+*/
+
+/*Landscape phones*/
+
+@media only screen 
+  and (min-width: 320px) 
+  and (max-width: 732px)
+  and (orientation: landscape) {
+    
+
+}
+
+/*screen size small*/
+
+@media only screen 
+  and (min-width: 320px) 
+  and (max-width: 645px)
+  {
+ 
+
+    .new-trip form {
+	max-width: 350px;
+	margin-left: auto;
+	margin-right: auto;
+	}
+
+}  
+
+/* screen size medium*/
+  @media only screen 
+  and (min-width: 645px) 
+  and (max-width: 1000px)
+  {
+
+  	.h2-wrapper h2{
+  		max-width: 350px;
+  		font-size: 35px;
+  		margin: 10px;
+  	}
+  
+  	.new-trip form {
+	max-width: 350px;
+	margin-left: auto;
+	margin-right: auto;
+	}
+
+} 
+
+/* screen size large */
+  @media only screen 
+  and (min-width: 1000px)
+  {
+.new-trip form {
+	max-width: 350px;
+	margin-left: auto;
+	margin-right: auto;
+	}
+	.h2-wrapper h2{
+  		max-width: 350px;
+  		font-size: 35px;
+  		margin: 10px;
+  	}
+} 
+/*  and (max-device-width: 1600px) */
 

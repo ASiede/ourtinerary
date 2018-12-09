@@ -57,7 +57,9 @@ export class TripView extends React.Component {
             
                     <section>
                         <h2 className='itinerary-header'>Suggested Itinerary Items</h2>
+                        <div className="itinerary-list-wrapper">
                         <ItineraryList trip={this.props.trip} />
+                        </div>
                     </section>
 
                     <section>

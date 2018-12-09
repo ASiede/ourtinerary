@@ -10,7 +10,7 @@
 }
 
 nav {
-	height: 100px;
+	height: 90px;
 	border: 1px solid  #10222C ;
 	display: flex;
 	justify-content: space-between;
@@ -37,7 +37,7 @@ nav h1 {
 
 .globe {
 	height: 80%;
-	margin-left: 7px;
+	margin-left: 5px;
 }
 
 .modal-show {
@@ -59,25 +59,10 @@ nav h1 {
 
 .modal{
 	display: none;
-	/*width: 300px; 
-	border: solid 1px black;
-	
-	background-image: linear-gradient(to bottom right, #006397, #BCD8ED);
-	position: absolute; 
-	z-index: 1; 
-	right: 0;
-	overflow: auto;
-	text-align: center;
-	top: 0;
-   
-    
-    overflow-y:scroll;
-    overflow-x:hidden;*/
 }
 
 /* Modal Content/Box */
 .login-modal-content {
- /* padding: 20px;*/
   border: 1px solid #888;
   width: 100%; 
   text-align: center;
@@ -87,22 +72,15 @@ nav h1 {
   margin:0px;
 }
 
-
-
-
 button {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", 'Poppins', sans-serif;
 	font-size: 17px;
 	font-weight: bold;
-/*	color: black;
-	background-color: white;*/
-	/*border: silver solid 1px;*/
 	background-color: #00AA9B;
 	border-radius: 5px;
 	padding: 13px;
 	color: white;
 	border: none;
-
 
 }
 
@@ -112,7 +90,6 @@ button:hover {
 }
 
 /*the modal when you are logged in*/
-
 
 .logged-in-modal-show {
 	width: 300px; 
@@ -165,14 +142,76 @@ button:hover {
   cursor: pointer;
 }
 
-
-/*//#0E8AC8*/
-
 .registration-and-login {
    background-image: linear-gradient(to bottom right, #006397, #BCD8ED);
-   /*border: 20px solid #10222C;*/
 }
 
+/*
+MEDIA QUERIES
+*/
+
+/*Landscape phones*/
+
+@media only screen 
+  and (min-width: 320px) 
+  and (max-width: 732px)
+  and (orientation: landscape) {
+
+}
+
+/*screen size small*/
+
+@media only screen 
+  and (min-width: 320px) 
+  and (max-width: 645px)
+  {
+
+
+}  
+
+/* screen size medium*/
+  @media only screen 
+  and (min-width: 645px) 
+  and (max-width: 1000px){
+	.login-lines{
+	
+	margin-right: 40px;
+	}
+
+	.globe {
+	height: 80%;
+	margin-left: 35px;
+
+}
+	nav h1 {
+	font-size: 45px;
+
+	}
+
+
+} 
+
+/* screen size large */
+  @media only screen 
+  and (min-width: 1000px)
+  {
+   
+.login-lines{
+	
+	margin-right: 40px;
+	}
+
+	.globe {
+	height: 80%;
+	margin-left: 35px;
+
+}
+	nav h1 {
+	font-size: 45px;
+
+	}
+} 
+/*  and (max-device-width: 1600px) */
 
 
 
