@@ -35,8 +35,6 @@ export function Landing(props) {
 			        
 			    </section>
 			</main>
-
-			<footer>Footer</footer>	
 		</div>
 	);
 }

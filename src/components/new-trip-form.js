@@ -147,11 +147,7 @@ export class NewTripForm extends React.Component {
 				        	Create Trip!
 				        </button>
 				        <p>*Enter the emails of those you want to collaborate with for this trip. Registered users of OURtinerary will be added to your trip and non users will receive an email invite. Once they have registered, you can then add them to the trip.</p>
-
 		        	</form>
-
-		    </div>
-
 		        	
 		    </div>    	
 

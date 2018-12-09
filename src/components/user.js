@@ -37,8 +37,6 @@ export class User extends React.Component {
 			        <section>
 			        	<NewTripForm currentUser={this.props.currentUser.username}/>
 			        </section>
-
-		      		<footer>Footer</footer>
 		    	</main>
 	    	</div>
 		);

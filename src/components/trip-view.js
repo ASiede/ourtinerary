@@ -63,8 +63,6 @@ export class TripView extends React.Component {
                     <section>
                         <NewItineraryForm trip={this.props.trip}/>
                     </section>
-
-                    <footer>Footer</footer>
                 </main>
           	</div>	
 
