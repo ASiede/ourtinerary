@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {deleteItineraryItem} from '../actions/index';
 import Vote from './vote'
+import './itinerary-item.css'
 
 export class ItineraryItem extends React.Component { 
 
@@ -36,10 +37,19 @@ export class ItineraryItem extends React.Component {
         })
     
         return (
-            <div>
-                <button type="click" onClick={() => {if (window.confirm('Are you sure you wish to delete this itinerary item? This action cannot be undone.')) this.handleDeleteItineraryItem(this.props.item._id)}}>Delete Itinerary Item</button>
+            <div className="itinerary-item">
+                <div className="type-wrapper">
                 <h3>{typeHTML}</h3>
+                <img 
+                    onClick={() => {if (window.confirm('Are you sure you wish to delete this itinerary item? This action cannot be undone.')) this.handleDeleteItineraryItem(this.props.item._id)}}
+                    className="trash-icon" 
+                    src="https://img.icons8.com/metro/1600/delete.png" 
+                    alt="trash">
+                </img>
+                </div>
+
                 <h4>{nameHTML}</h4>  
+                <div className="itinerary-item-info">
                 <ul>
                     {flightNumberHTML}
                     {layoversHTML}
@@ -51,10 +61,14 @@ export class ItineraryItem extends React.Component {
                     {foodTypeHTML}
                     {websiteHTML}
                     {otherHTML}
+                    <li>Votes:
+                        <ul className="votes-list">
+                            {voteHTML}
+                        </ul>
+                    </li>
                 </ul>
-                <ul>Votes
-                    {voteHTML}
-                </ul>
+                </div>
+
             </div>
         )
     } 

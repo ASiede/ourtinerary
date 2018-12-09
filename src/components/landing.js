@@ -2,8 +2,8 @@ import React from 'react';
 import RegistrationForm from './registration-form';
 import {connect} from 'react-redux';
 import LoginForm from './login-form';
-import './landing.css';
 import { withRouter } from 'react-router'
+import './landing.css';
 
 
 export function Landing(props) {
@@ -13,27 +13,29 @@ export function Landing(props) {
 
 	return (
 		<div>
-			<header>
-				<h1>Welcome to OURtinerary</h1>
-			</header>
 			<main>
-			    <section>Description
-			    	<p>Want a central place for you and others to collaborate on an upcoming trip? Ourtinerary allows you to create a trip for one or more people, where trip goers can suggest itinerary items, vote on them, provide feedback, and confirm final trip plans. All in one place! </p>
+				
+			    <section className="short-description">
+			    	
+			    	<h2>The best place to plan your next trip with friends!</h2>
 			    </section>
-			    <section>
-			        <h2>Screen Shots/explanation</h2>
-			        <p>[image placehoder]</p>
-			        <p>View of creating a new trip</p>
-			        <p>[image placehoder]</p>
-			        <p>View of a trip</p>
-			        <p>[image placehoder]</p>
-			        <p>View adding itinerary to a trip</p>
+
+			    <section className="long-description">
+			    	<h2> Want to know how it works?</h2>
+			    	<p>Start by signing up and creating a trip! It's that easy</p>
+			    		<img src="screen-shot-1.png" alt="screenshot"></img>
+			    	<p>Add to the trip who will be going. If they are not registered yet, they will get and email invite to join</p>
+			    	<p>You and your fellow collaborators can suggest things to do on the trip</p>
+			    		<p>[image placehoder]</p>
+			    	<p>Everyone gets to give and thumbs up or down on the different suggestions.</p>
+			    	<p>Finally: enjoy your trip!</p>		
 			    </section>
-			    <section>
-			        <RegistrationForm />
-			    	<LoginForm />     
+
+			    <section className="registration-and-login">
+			        
 			    </section>
 			</main>
+
 			<footer>Footer</footer>	
 		</div>
 	);

@@ -1,0 +1,26 @@
+.login-area { 
+	border: solid black 3px;
+	margin: 10px;
+	display:flex;
+	flex-direction: column;
+	margin-bottom: 15px;
+	padding-bottom: 20px;
+
+ }
+
+ .login-area h3 {
+ 	font-size: 25px;
+ 	margin-top: 0px;
+ 	margin-bottom: 10px;
+ }
+
+ .login-area label {
+ 	font-size: 20px;
+ }
+
+ .login-area input {
+ 	border-radius: 6px;
+ 	font-size: 15px;
+ 	padding: 10px;
+	margin: 10px;
+ }

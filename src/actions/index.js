@@ -270,7 +270,7 @@ export const deleteTrip = (tripId, userId) => dispatch => {
             if (!res.ok) {
                 return Promise.reject(res.statusText);
             }
-            history.goBack();
+            
             return res.json();
         })
         .catch(err => {
@@ -285,7 +285,9 @@ export const deleteTrip = (tripId, userId) => dispatch => {
             }
         })
         .then(deletedTrip => {
+
             dispatch(deleteTripSuccess(tripId));
+            history.goBack();
         })
 };
 

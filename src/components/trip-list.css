@@ -1,21 +1,49 @@
-* {
-  box-sizing: border-box;
+.trip-list {
+	border: none;
 }
 
-body {
-  text-align: center;
+.trips {
+	
+	list-style-type: none;
+	/*padding-top: 10px;*/
+	margin-top: 0px;
+	padding-bottom: 10px;
+	padding-left: 0px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
-.trips ul {
-  border: 1px solid black;
-  list-style-type: none;
-  padding: 0;
+.trips a {
+	text-decoration: none;
+	color: white;
+	font-weight: bold;
+	
 }
+
 .trips li {
-  padding: 15px;
-  background-color: white;
+	
+	background-color: #006397;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	font-size: 20px;
+	/*border: teal solid 1px;*/
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-radius: 5px;
+	box-shadow: 5px 10px 18px #888888;
 }
 
-.trips li:nth-of-type(2n) {
-  background-color: lightgrey;
-} 
+
+
+.trips li:hover {
+	background-color: rgb(0, 99, 151, .75);
+	color: white;
+	cursor: pointer;
+	box-shadow: none;
+}
+
+
+
+/*.trips li:nth-child(2) {
+	background-color: lightblue;
+}*/

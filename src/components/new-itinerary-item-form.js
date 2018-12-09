@@ -5,7 +5,7 @@ import {changeItineraryType} from '../actions'
 import {reduxForm, Field, focus} from 'redux-form';
 import {required, nonEmpty} from '../validators';
 import {createNewItineraryItem} from '../actions/index';
-// import './new-itinerary-item-form.css'
+import './new-itinerary-item-form.css'
 
 export class NewItineraryForm extends React.Component {
 	constructor(props) { 
@@ -48,7 +48,12 @@ export class NewItineraryForm extends React.Component {
 	render () {
 		return (
 			<div>
+				<div className="h2-wrapper">
 				<h2>Create New Trip Itinerary Below</h2>
+				</div>
+
+				<form className="itinerary-item-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
+
 		        	<label>Type of Activity</label><br />
 						<select value={this.state.itineraryType} onChange={e => this.handleFormChange(e.target.value)}>
 							<option value="Flight">Flight</option>
@@ -60,7 +65,7 @@ export class NewItineraryForm extends React.Component {
 							<option value="Other">Other</option>
 						</select><br />
 
-		        	<form onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
+		        	
 
 		        		{ this.state.itineraryType === "Flight" &&
 			        		<Field

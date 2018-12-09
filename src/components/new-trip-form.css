@@ -1,20 +1,56 @@
-* {
-  box-sizing: border-box;
+.h2-wrapper {
+	 background-image: url("https://stemcell.keck.usc.edu/wp-content/uploads/2017/11/150324_flights-hero-image_1330x742.jpg");
+	 background-position: 50% 73%;
+	 margin: 0px;
+	padding: 30px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border: grey solid 1px;
+	
 }
 
-body {
-  text-align: center;
+.h2-wrapper h2 {
+	max-width: 230px;
+	margin: 0px;
+	 color: #6B7888;
+	 background-color: rgb(255,255,255, .6);
+	 padding: 8px;
+	 border-radius: 5px;
+}	
+
+.new-trip form {
+	border: 2px solid rgb(0, 99, 151, .75);
+	/*text-align: left;*/
+	margin: 15px;
+	padding: 15px;
+	background-color: rgb(0, 99, 151, .05);
+	border-radius: 5px;
+	box-shadow: 5px 10px 18px #888888;
 }
 
-input, label {
-  margin: 10px;
+.new-trip {
+	
 }
 
-input {
-  padding: 5px;
+.new-trip input{
+	padding: 7px;
+	margin: 7px;
+	border-radius: 5px;
+	width:200px;
 }
 
-footer {
-  background-color: grey;
-  padding: 20px;
+.add-collaborator {
+	background-color: transparent;
+	color: black;
+	text-decoration: underline;
+	font-weight: normal;
+	padding: 2px;
+	margin-bottom: 15px;
 }
+
+.add-collaborator:hover {
+	background-color: transparent;
+	color: blue;
+}
+

@@ -5,6 +5,7 @@ import {getUsers} from '../actions'
 import {reduxForm, Field, focus} from 'redux-form';
 import {required, nonEmpty, email} from '../validators';
 import {createNewTrip, invite} from '../actions/index';
+import { withRouter } from 'react-router'
 import './new-trip-form.css'
 
 export class NewTripForm extends React.Component {
@@ -90,7 +91,7 @@ export class NewTripForm extends React.Component {
 		        		name={names}
 		        		type="text"
 		        		component={Input}
-		        		label="Collaborator"
+		        		label="Collaborator Email*"
 		        		validate={[email]}
 		        		/>
 				)
@@ -99,8 +100,10 @@ export class NewTripForm extends React.Component {
 		const collaboratorsHTML = anotherArray.map(html => html)
 
 		return (
-			<div>
-				<h2>Create New Trip Below</h2>
+			<div className="new-trip">
+				<div className="h2-wrapper">
+				<h2>Create A New Trip</h2>
+				</div>
 		        	<form onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
 		        		<Field
 		        		name="name"
@@ -126,23 +129,32 @@ export class NewTripForm extends React.Component {
 		        		validate={[required, nonEmpty]}
 		        		/>
 
-		        		<p>Add your collaborators here*</p>
-		        		<button type="click" onClick={(e) => this.handleAddCollaborator(e)}>Add Collaborator</button>
-
 		        		{collaboratorsHTML}
+
 
 		        		<p>*Enter the emails of those you want to collaborate with for your trip. Registered users of OURtinerary will be added to your trip and non users will receive an email invite</p>
 
-		         		<button
+
+		        		<button className="add-collaborator" type="click" onClick={(e) => this.handleAddCollaborator(e)}> + Additional Collaborator</button><br />
+		        		
+		         		<button 
+
 				        	type="submit"
 				        	disabled={
 				        		this.props.pristine ||
 				        		this.props.submitting
 				        	}>
-				        	Submit
+				        	Create Trip!
 				        </button>
+				        <p>*Enter the emails of those you want to collaborate with for this trip. Registered users of OURtinerary will be added to your trip and non users will receive an email invite. Once they have registered, you can then add them to the trip.</p>
+
 		        	</form>
+
 		    </div>
+
+		        	
+		    </div>    	
+
 		)};
 }
 
@@ -151,7 +163,7 @@ const mapStateToProps = (state) => ({
 	currentUser: state.ourtinerary.currentUser,
 });
 
-NewTripForm = connect(mapStateToProps)(NewTripForm);
+NewTripForm = withRouter(connect(mapStateToProps)(NewTripForm));
 
 export default reduxForm({
 	form: 'newTripForm',

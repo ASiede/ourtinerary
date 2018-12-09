@@ -1,53 +1,73 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-  text-align: center;
-}
-
-nav {
-  background-color:grey;
-  padding: 5px;
-}
-
-nav ul {
+.trip-details {
+  /*border: 1px solid black;*/
+  background-image: url("https://journalistontherun.com/wp-content/uploads/2015/10/o-SOLO-TRAVEL-facebook.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  /*background-color: rgb(0, 99, 151);*/
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
 }
-
-header {
+.trip-details h2 {
+/*  border-left: 2px solid black;
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;*/
+  margin: 0px;
   padding: 15px;
-  background-color: white;
 }
 
-.itinerary-header {
-  background-color: grey;
-  padding: 5px;
+.trip-name h2{
+ /* display: inline-block;*/
+
 }
 
-section {
-  padding: 40px;
-  background-color: lightgrey;
+.trip-details img {
+  max-height: 30px;
+  margin-left: -30px;
+/* margin-left: 10px;*/
+ /*position: absolute;*/
+ /*right: 20px;*/
+ float: right;
+
 }
 
-section:nth-of-type(2n) {
-  background-color:white;
+.trip-details img:hover{
+  cursor: pointer;
+  opacity: .5;
 }
 
-div {
-  background-color: lightgrey;
+.trip-details h3{
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-input, label {
-  margin: 10px;
+.trip-details p {
+  margin: 5px;
 }
 
-input {
-  padding: 5px;
+.where-when {
+  display: flex;
+  justify-content: space-around;
 }
 
-footer {
-  background-color: grey;
-  padding: 20px;
+.trip-details ul {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.trip-details li {
+  min-width: 35%;
+  margin-bottom: 10px;
+}
+
+.trip-details li:hover {
+  background-color: transparent;
+  cursor: default;
+  color: black;
+}
+
+.trip-details ul, li {
+  list-style: none;
+  padding: 0px;
+  margin-top: 0px;
 }
