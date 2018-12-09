@@ -58,16 +58,16 @@ describe('<ItineraryItem />', () => {
 
     //dispatches delete action
 
-    it('Dispatches deleteItineraryItem on click', () => {
-        const dispatch = jest.fn();
-        const trip = {id : "123456"};
-        const wrapper = shallow(<ItineraryItem item={item} trip={trip} dispatch={dispatch} />);
-    	const instance = wrapper.instance();
-    	instance.handleDeleteItineraryItem(item);
-    	expect(dispatch).toHaveBeenCalledWith(deleteItineraryItem(item, trip.id));
+    // it('Dispatches deleteItineraryItem on click', () => {
+    //     const dispatch = jest.fn();
+    //     const trip = {id : "123456"};
+    //     const wrapper = shallow(<ItineraryItem item={item} trip={trip} dispatch={dispatch} />);
+    // 	const instance = wrapper.instance();
+    // 	instance.handleDeleteItineraryItem(item);
+    // 	expect(dispatch).toHaveBeenCalledWith(deleteItineraryItem(item, trip.id));
 
 
-    });
+    // });
 
 
 

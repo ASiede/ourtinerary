@@ -49,7 +49,7 @@ describe('logout', () => {
 //             trips: [trip1]
 //         });
 //     });
-// });
+// }); 
 
 //NOT WORKING
 describe('fetchTripSuccess', () => {
