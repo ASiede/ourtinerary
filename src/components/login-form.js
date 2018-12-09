@@ -3,6 +3,7 @@ import {reduxForm, Field, focus} from 'redux-form';
 import Input from './input';
 import {login, getTrips} from '../actions';
 import {required, nonEmpty} from '../validators';
+import {connect} from 'react-redux';
 import './login-form.css'
 
 export class LoginForm extends React.Component {
@@ -14,6 +15,8 @@ export class LoginForm extends React.Component {
 	}
 
 	render () {
+		const incorrectPassword = this.props.ourtinerary && this.props.ourtinerary.error && this.props.ourtinerary.error.code === 401 ? <p className="error-message">Password is incorrect</p> : '';
+
 		return (
 			<div className="login-area">
 				<h3>Login</h3>
@@ -27,15 +30,14 @@ export class LoginForm extends React.Component {
 				        validate={[required, nonEmpty]}
 				        />
 				        
-
+						{incorrectPassword}
 				        <Field 
 				        name="password" 
-				        type="text" 
+				        type="password" 
 				        component={Input}
 				        label="Password"
 				        validate={[required, nonEmpty]}
 				        />
-				        
 				        
 				        <button 
 				        	type="submit"
@@ -49,6 +51,14 @@ export class LoginForm extends React.Component {
 		    </div>	
 		)};
 }
+
+const mapStateToProps = (state) => ({
+	ourtinerary: state.ourtinerary,
+	loggedIn: state.ourtinerary.currentUser !== null,
+	currentUser: state.ourtinerary.currentUser,
+});
+
+LoginForm = connect(mapStateToProps)(LoginForm);
 
 export default reduxForm({
 	form: 'userLogin',

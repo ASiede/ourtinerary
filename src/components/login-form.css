@@ -24,3 +24,8 @@
  	padding: 8px;
 	margin: 8px;
  }
+
+ .error-message {
+ 	color: darkred;
+ 	font-size: 20px;
+ }

@@ -1,5 +1,5 @@
 import {API_BASE_URL} from '../config.js';
-import {SubmissionError} from 'redux-form';
+import {SubmissionError, focus} from 'redux-form';
 import jwtDecode from 'jwt-decode';
 import {saveAuthToken, clearAuthToken} from '../local-storage';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
@@ -173,6 +173,7 @@ export const registerUser = user => dispatch => {
             const {reason, message, location} = err;
             if (reason === 'ValidationError') {
                 // Convert ValidationErrors into SubmissionErrors for Redux Form
+                dispatch(authError(err)); //trying something
                 return Promise.reject(
                     new SubmissionError({
                         [location]: message
