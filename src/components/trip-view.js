@@ -15,6 +15,8 @@ export class TripView extends React.Component {
         }
     }
 
+    
+
     toggleEditTripForm(e) {
         this.setState({
             editTripForm: !this.state.editTripForm

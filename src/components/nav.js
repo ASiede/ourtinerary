@@ -15,6 +15,13 @@ export class Nav extends React.Component {
 		} 
 	}
 
+	scrollToTop() {
+        window.scrollTo({
+        	top: 0,
+        	behavior: 'smooth'
+        })
+    }
+
 	showModal(e) {
 		this.setState({
 			className: 'modal-show'
@@ -43,6 +50,7 @@ export class Nav extends React.Component {
 	}
 
 	logout() {
+		this.scrollToTop()
 		return this.props.dispatch(logout());
 	}
 
@@ -63,7 +71,9 @@ export class Nav extends React.Component {
 					<div className="logged-in-modal-content">
 						<span onClick={(e) => this.hideLoggedInModal(e)} className="close">&times;</span>
     					<p>Currrently logged in as {username}</p>
-						<p onClick={(e) => this.hideLoggedInModal(e)}><Link to={`/user/${this.props.currentUser}`}>MyTrips</Link></p>
+						<p onClick={(e) => this.hideLoggedInModal(e)}
+						onClick={(e) => this.scrollToTop()}>
+						<Link to={`/user/${this.props.currentUser}`}>MyTrips</Link></p>
 						<p 
 						onClick={(e) => this.hideLoggedInModal(e)} 
 						onClick={() => this.logout()}
