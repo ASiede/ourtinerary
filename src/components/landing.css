@@ -6,6 +6,22 @@ main {
 
 }
 
+main p {
+  margin: 20px;
+ /* border-top: 2px solid black;
+  border-bottom: 2px solid black;*/
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.long-description img {
+  border: solid grey 1px;
+  border-radius: 5px;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 85%;
+}
+
 
 
 .short-description {

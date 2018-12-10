@@ -15,6 +15,13 @@ export class NewItineraryForm extends React.Component {
 		}
 	}
 
+	scrollToTop() {
+        window.scrollTo({
+        	top: 0,
+        	behavior: 'smooth'
+        })
+    }
+
 	handleFormChange(itineraryType) {
 	    this.setState({
 	      itineraryType
@@ -41,6 +48,7 @@ export class NewItineraryForm extends React.Component {
 		const itineraryItem = {tripId, type, flightNumber, layovers,length,departureTimeArrivalTime, name, price, location, pool, foodType, website, other}
 
 		if (tripId) {
+			this.scrollToTop();
 			return this.props.dispatch(createNewItineraryItem(itineraryItem, tripId));	
 		}	
 	}

@@ -16,6 +16,13 @@ export class NewTripForm extends React.Component {
 		}
 	}
 
+	scrollToTop() {
+        window.scrollTo({
+        	top: 0,
+        	behavior: 'smooth'
+        })
+    }
+
 	handleAddCollaborator(e) {
 		e.preventDefault();
 		this.setState({
@@ -64,6 +71,7 @@ export class NewTripForm extends React.Component {
 		if(nonUsers.length>0 && inviterName) {
 			nonUsers.map(nonUser => this.props.dispatch(invite(nonUser, inviterName, values.name)))
 		}
+		this.scrollToTop();
 
 		this.props.dispatch(createNewTrip(trip));
 
