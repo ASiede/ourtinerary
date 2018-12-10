@@ -6,7 +6,6 @@ import Landing from './landing';
 import User from './user';
 import Nav from './nav';
 import TripView from './trip-view'
-
 import createHistory from 'history/createBrowserHistory'
 
 const user = {loggedIn: true}

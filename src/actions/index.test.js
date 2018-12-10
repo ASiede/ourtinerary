@@ -1,3 +1,4 @@
+import {API_BASE_URL} from '../config.js';
 import {fetchTripsSuccess, 
 	FETCH_TRIPS_SUCCESS, 
 	getTrips,
@@ -32,8 +33,8 @@ describe('getTrips', () => {
 
         const dispatch = jest.fn();
         return getTrips()(dispatch).then(() => {
-            expect(fetch).toHaveBeenCalledWith('/trips/');
-            expect(dispatch).toHaveBeenCalledWith(fetchBoardSuccess(trips));
+            expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}/trips/`);
+            expect(dispatch).toHaveBeenCalledWith(fetchTripsSuccess(trips));
         });
     });
 });
@@ -64,7 +65,7 @@ describe('getUser', () => {
 
         const dispatch = jest.fn();
         return getUser(userId)(dispatch).then(() => {
-            expect(fetch).toHaveBeenCalledWith('/user');
+            expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}/users/${userId}`);
             expect(dispatch).toHaveBeenCalledWith(fetchUserSuccess(user));
         });
     });

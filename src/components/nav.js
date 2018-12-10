@@ -60,7 +60,7 @@ export class Nav extends React.Component {
 
 		const username = this.props.currentUser ? this.props.currentUser.username: '';
 		const navLinks = this.props.loggedIn ? 
-			<div>
+			<div className="logged-in-modal">
 				<img 
 				onClick={(e) => this.showLoggedInModal(e)}
 				 className="login-lines" 

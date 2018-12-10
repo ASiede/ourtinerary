@@ -58,10 +58,10 @@ const mapStateToProps = (state) => ({
 	currentUser: state.ourtinerary.currentUser,
 });
 
-LoginForm = connect(mapStateToProps)(LoginForm);
+const myComponent = connect(mapStateToProps)(LoginForm);
 
 export default reduxForm({
 	form: 'userLogin',
 	onSubmitFail: (errors, dispatch) =>
         dispatch(focus('userLogin', Object.keys(errors)[0]))
-})(LoginForm)
+})(myComponent)

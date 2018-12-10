@@ -14,7 +14,7 @@ export const fetchTripsSuccess = trips => ({
 })
 
 export const getTrips = () => dispatch => {
-	fetch(`${API_BASE_URL}/trips/`)
+	return fetch(`${API_BASE_URL}/trips/`)
 		.then(res => {
 			if (!res.ok) {
 				return Promise.reject(res.statusText);
@@ -43,7 +43,7 @@ export const fetchUserSuccess = user => ({
     user
 })
 export const getUser = (userId) => dispatch => {
-    fetch(`${API_BASE_URL}/users/` + userId)
+    return fetch(`${API_BASE_URL}/users/` + userId)
         .then(res => {
             if (!res.ok) {
                 return Promise.reject(res.statusText);
@@ -299,7 +299,7 @@ export const deleteItineraryItemSuccess = (itineraryItemId, tripId) => ({
     tripId
 })
 export const deleteItineraryItem = (itineraryItemId, tripId) => dispatch => {
-    fetch(`${API_BASE_URL}/itineraryItems/`+ itineraryItemId, {
+    return fetch(`${API_BASE_URL}/itineraryItems/`+ itineraryItemId, {
         method: 'DELETE',
         headers: {
             'content-type': 'application/json'

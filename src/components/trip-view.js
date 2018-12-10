@@ -1,11 +1,11 @@
 import React from 'react';
 import ItineraryList from './itinerary-list';
 import NewItineraryForm from './new-itinerary-item-form';
-import EditTripForm from './edit-trip-form'
+import EditTripForm from './edit-trip-form';
 import {connect} from 'react-redux';
-import {getTrip} from '../actions'
-import { withRouter } from 'react-router-dom'
-import './trip-view.css'
+// import {getTrip} from '../actions'
+import { withRouter } from 'react-router-dom';
+import './trip-view.css';
 
 export class TripView extends React.Component {
     constructor(props) {
@@ -14,9 +14,6 @@ export class TripView extends React.Component {
             editTripForm: false
         }
     }
-
-    
-
     toggleEditTripForm(e) {
         this.setState({
             editTripForm: !this.state.editTripForm

@@ -1,10 +1,9 @@
 import React from 'react';
 import Input from './input';
 import {connect} from 'react-redux';
-import {getUsers} from '../actions'
 import {reduxForm, Field, focus} from 'redux-form';
 import {required, nonEmpty, email} from '../validators';
-import {createNewTrip, invite} from '../actions/index';
+import {getUsers, createNewTrip, invite} from '../actions/index';
 import { withRouter } from 'react-router'
 import './new-trip-form.css'
 

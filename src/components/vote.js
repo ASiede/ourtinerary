@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {getVote, editVote} from '../actions';
-import './vote.css'
+import './vote.css';
 
 export class Vote extends React.Component { 
     constructor(props) {

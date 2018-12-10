@@ -7,7 +7,6 @@ import newtrip from '../screenshots/newtrip.png';
 import tripview from '../screenshots/tripview.png';
 import './landing.css';
 
-
 export function Landing(props) {
 	if(props.loggedIn) {
 		props.history.push(`/user/${props.currentUser}`);
@@ -16,12 +15,9 @@ export function Landing(props) {
 	return (
 		<div>
 			<main>
-				
 			    <section className="short-description">
-			    	
 			    	<h2>The best place to plan your next trip with friends!</h2>
 			    </section>
-
 			    <section className="long-description">
 			    	<h2> Want to know how it works?</h2>
 			    	<p>Start by signing up and creating a trip! It's that easy</p>

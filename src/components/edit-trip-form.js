@@ -1,22 +1,19 @@
 import React from 'react';
 import Input from './input';
 import {connect} from 'react-redux';
-import {getUsers} from '../actions'
 import {reduxForm, Field, focus} from 'redux-form';
 import {required, nonEmpty} from '../validators';
-import {editTrip, deleteTrip, invite} from '../actions/index';
+import {getUsers, editTrip, deleteTrip, invite} from '../actions/index';
 import './edit-trip-form.css'
 
 export class EditTripForm extends React.Component {
 	constructor(props) { 
 		super(props)
-		// this.state = {
-		// 	visable: true
-		// } 
 	}
 
 	componentDidMount() {
 		//can improve if i get by email individually
+
 		this.props.dispatch(getUsers())
 	}
 
@@ -25,19 +22,11 @@ export class EditTripForm extends React.Component {
         return this.props.dispatch(deleteTrip(this.props.trip.id, userId))
     }
 
-	// toggleVisable() {
-	// 	console.log("toggled")
-	// 	this.setState({
-	//         visable: !this.state.visable
-	//       })
-	// }
-
 	onSubmit(values) {
 		//Separating users and non users
 		let submittedEmails = []
 		let nonUsers = [];
 		let users = [];
-
 
 		//push collaborator email to submittedEmails
 		let keys = Object.keys(values)
@@ -79,7 +68,7 @@ export class EditTripForm extends React.Component {
 		let currentCollaboratorsIds = collaboratorUserObjs.map(user => user.id)
 
 
-		///skubmitting
+		///submitting
 
 		const tripLeader = this.props.ourtinerary.currentUser.id;
 		const tripFields = ["name", "dates", "location"];
@@ -157,10 +146,7 @@ export class EditTripForm extends React.Component {
 		        	
 		        	<div className="delete-trip-wrapper">
 				        <button className="delete-trip" type="click" onClick={() => {if (window.confirm('Are you sure you wish to delete this trip? This action cannot be undone.')) this.handleDeleteTrip(this.props.trip)}}>Delete Trip</button>
-		        	</div>
-		        	
-
-		        	
+		        	</div>	
 		    </div> 
 		)
 	}
@@ -172,10 +158,11 @@ const mapStateToProps = (state) => ({
 	currentUser: state.ourtinerary.currentUser,
 });
 
-EditTripForm = connect(mapStateToProps)(EditTripForm);
+const myComponent = connect(mapStateToProps)(EditTripForm);
 
 export default reduxForm({
 	form: 'editTripForm',
 	onSubmitFail: (errors, dispatch) =>
         dispatch(focus('editTripForm', Object.keys(errors)[0]))
-})(EditTripForm)
+})(myComponent)
+

@@ -4,6 +4,18 @@ import {shallow, mount} from 'enzyme';
 import {ItineraryItem, handleDeleteItineraryItem} from './itinerary-item';
 import {deleteItineraryItem} from '../actions';
 
+const mockDeleteItineraryItemAction = {
+    type: 'DELETE_ITINERARY_ITEM'
+};
+jest.mock('../actions', () => Object.assign({},
+    require.requireActual('../actions'),
+    {
+        fetchBoard: jest.fn().mockImplementation(() => {
+            return mockDeleteItineraryItemAction;
+        })
+    }
+));
+
 describe('<ItineraryItem />', () => {
 	const item = {
 		id: "1234567",
@@ -24,8 +36,6 @@ describe('<ItineraryItem />', () => {
     it('Renders without crashing', () => {
         shallow(<ItineraryItem item={item} />);
     });
-
-    //Renders all the itinerary information
 
     it('Renders the type', () => {
         const wrapper = shallow(<ItineraryItem item={item} />);
@@ -56,7 +66,7 @@ describe('<ItineraryItem />', () => {
         expect(wrapper.contains(<ul>{item.votes}</ul>));
     });
 
-    //dispatches delete action
+    //DOES NOT WORK
 
     // it('Dispatches deleteItineraryItem on click', () => {
     //     const dispatch = jest.fn();
@@ -64,14 +74,7 @@ describe('<ItineraryItem />', () => {
     //     const wrapper = shallow(<ItineraryItem item={item} trip={trip} dispatch={dispatch} />);
     // 	const instance = wrapper.instance();
     // 	instance.handleDeleteItineraryItem(item);
-    // 	expect(dispatch).toHaveBeenCalledWith(deleteItineraryItem(item, trip.id));
-
-
+    // 	expect(dispatch).toHaveBeenCalledWith(mockDeleteItineraryItemAction);
     // });
-
-
-
-
-
 
 });
