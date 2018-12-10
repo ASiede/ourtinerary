@@ -4,16 +4,18 @@ import NewItineraryForm from './new-itinerary-item-form';
 import EditTripForm from './edit-trip-form'
 import {connect} from 'react-redux';
 import {getTrip} from '../actions'
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router-dom'
 import './trip-view.css'
 
 export class TripView extends React.Component {
-    constructor(props) { 
+    constructor(props) {
         super(props);
         this.state = {
             editTripForm: false
         }
     }
+
+    
 
     toggleEditTripForm(e) {
         this.setState({
@@ -37,12 +39,12 @@ export class TripView extends React.Component {
 
         return (
             <div>
+
                 <main>
                     <section className='trip-details'>
                         <div className='trip-name'>
                         {tripNameHTML}
-                        
-                        
+          
                         </div>
                         <div className="where-when">
                         {tripLocationHTML}
@@ -57,16 +59,17 @@ export class TripView extends React.Component {
             
                     <section>
                         <h2 className='itinerary-header'>Suggested Itinerary Items</h2>
+                        <div className="itinerary-list-wrapper">
                         <ItineraryList trip={this.props.trip} />
+                        </div>
                     </section>
 
                     <section>
                         <NewItineraryForm trip={this.props.trip}/>
                     </section>
-
-                    <footer>Footer</footer>
                 </main>
           	</div>	
+
       	);
     }
 }
@@ -86,13 +89,3 @@ const mapStateToProps = (state, props) => {
 };
 
 export default withRouter(connect(mapStateToProps)(TripView));
-
-
-
-
-                      
-
-
-
-
-

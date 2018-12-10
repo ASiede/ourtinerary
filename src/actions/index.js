@@ -1,5 +1,5 @@
 import {API_BASE_URL} from '../config.js';
-import {SubmissionError} from 'redux-form';
+import {SubmissionError, focus} from 'redux-form';
 import jwtDecode from 'jwt-decode';
 import {saveAuthToken, clearAuthToken} from '../local-storage';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
@@ -173,6 +173,7 @@ export const registerUser = user => dispatch => {
             const {reason, message, location} = err;
             if (reason === 'ValidationError') {
                 // Convert ValidationErrors into SubmissionErrors for Redux Form
+                dispatch(authError(err)); //trying something
                 return Promise.reject(
                     new SubmissionError({
                         [location]: message
@@ -214,7 +215,7 @@ export const createNewTrip = (newTrip) => dispatch => {
         })
         .then(trip => {
             dispatch(fetchNewTripSuccess(trip))
-            history.push(`trip/${trip.id}`)
+            history.push(`/trip/${trip.id}`)
         })
 };
 
@@ -575,7 +576,7 @@ export const login = (username, password) => dispatch => {
                         _error: message
                     })
                 );
-            })    
+            })
     );
 };
 
@@ -602,7 +603,3 @@ export const refreshAuthToken = () => (dispatch, getState) => {
             clearAuthToken(authToken);
         });
 };
-
-
-
-

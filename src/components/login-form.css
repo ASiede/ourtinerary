@@ -21,6 +21,11 @@
  .login-area input {
  	border-radius: 6px;
  	font-size: 15px;
- 	padding: 10px;
-	margin: 10px;
+ 	padding: 8px;
+	margin: 8px;
+ }
+
+ .error-message {
+ 	color: darkred;
+ 	font-size: 20px;
  }
