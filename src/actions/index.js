@@ -72,7 +72,7 @@ export const fetchUsersSuccess = users => ({
     users
 })
 export const getUsers = () => dispatch => {
-    fetch(`${API_BASE_URL}/users/`)
+    return fetch(`${API_BASE_URL}/users/`)
         .then(res => {
             if (!res.ok) {
                 return Promise.reject(res.statusText);
@@ -101,7 +101,7 @@ export const fetchTripSuccess = trip => ({
     trip
 })
 export const getTrip = (tripId) => dispatch => {
-    fetch(`${API_BASE_URL}/trips/` + tripId)
+    return fetch(`${API_BASE_URL}/trips/` + tripId)
         .then(res => {
             if (!res.ok) {
                 return Promise.reject(res.statusText);
@@ -124,35 +124,35 @@ export const getTrip = (tripId) => dispatch => {
         });
 };
 
-export const FETCH_ITINERARY_ITEM_SUCCESS = 'FETCH_ITINERARY_ITEM_SUCCESS';
-export const fetchItineraryItemSuccess = (itineraryItem, tripId) => ({
-    type: FETCH_ITINERARY_ITEM_SUCCESS,
-    itineraryItem,
-    tripId
-})
-export const getItineraryItem = (itemId, tripId) => dispatch => {
-    fetch(`${API_BASE_URL}/itineraryItems/` + itemId)
-        .then(res => {
-            if (!res.ok) {
-                return Promise.reject(res.statusText);
-            }
-            return res.json();
-        })
-        .catch(err => {
-            const {reason, message, location} = err;
-            if (reason === 'ValidationError') {
-                // Convert ValidationErrors into SubmissionErrors for Redux Form
-                return Promise.reject(
-                    new SubmissionError({
-                        [location]: message
-                    })
-                );
-            }
-        })
-        .then((itineraryItem) => {
-            dispatch(fetchItineraryItemSuccess(itineraryItem, tripId));
-        });
-};
+// export const FETCH_ITINERARY_ITEM_SUCCESS = 'FETCH_ITINERARY_ITEM_SUCCESS';
+// export const fetchItineraryItemSuccess = (itineraryItem, tripId) => ({
+//     type: FETCH_ITINERARY_ITEM_SUCCESS,
+//     itineraryItem,
+//     tripId
+// })
+// export const getItineraryItem = (itemId, tripId) => dispatch => {
+//     fetch(`${API_BASE_URL}/itineraryItems/` + itemId)
+//         .then(res => {
+//             if (!res.ok) {
+//                 return Promise.reject(res.statusText);
+//             }
+//             return res.json();
+//         })
+//         .catch(err => {
+//             const {reason, message, location} = err;
+//             if (reason === 'ValidationError') {
+//                 // Convert ValidationErrors into SubmissionErrors for Redux Form
+//                 return Promise.reject(
+//                     new SubmissionError({
+//                         [location]: message
+//                     })
+//                 );
+//             }
+//         })
+//         .then((itineraryItem) => {
+//             dispatch(fetchItineraryItemSuccess(itineraryItem, tripId));
+//         });
+// };
 
 export const LOGOUT = "LOGOUT"
 export const logout = () => ({
@@ -189,7 +189,7 @@ export const fetchNewTripSuccess = trip => ({
     trip
 })
 export const createNewTrip = (newTrip) => dispatch => {
-    fetch(`${API_BASE_URL}/trips`, {
+    return fetch(`${API_BASE_URL}/trips`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -225,7 +225,7 @@ export const editTripSuccess = trip => ({
     trip
 })
 export const editTrip = (updatedFields) => dispatch => {
-    fetch(`${API_BASE_URL}/trips/`+updatedFields.id, {
+    return fetch(`${API_BASE_URL}/trips/`+updatedFields.id, {
         method: 'PUT',
         headers: {
             'content-type': 'application/json'
@@ -260,7 +260,7 @@ export const deleteTripSuccess = trip => ({
     trip
 })
 export const deleteTrip = (tripId, userId) => dispatch => {
-    fetch(`${API_BASE_URL}/trips/`+ tripId, {
+    return fetch(`${API_BASE_URL}/trips/`+ tripId, {
         method: 'DELETE',
         headers: {
             'content-type': 'application/json'
@@ -286,7 +286,6 @@ export const deleteTrip = (tripId, userId) => dispatch => {
             }
         })
         .then(deletedTrip => {
-
             dispatch(deleteTripSuccess(tripId));
             history.goBack();
         })
@@ -354,7 +353,7 @@ export const fetchNewItineraryItemSuccess = (itineraryItem, tripId) => ({
     tripId
 })
 export const createNewItineraryItem = (itineraryItem, tripId) => dispatch => {
-    fetch(`${API_BASE_URL}/itineraryItems`, {
+    return fetch(`${API_BASE_URL}/itineraryItems`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json'
@@ -389,7 +388,7 @@ export const editVoteSuccess = vote => ({
     vote
 })
 export const editVote = (vote) => dispatch => {
-    fetch(`${API_BASE_URL}/votes/`+ vote.id, {
+    return fetch(`${API_BASE_URL}/votes/`+ vote.id, {
         method: 'PUT',
         headers: {
             'content-type': 'application/json'
@@ -424,7 +423,7 @@ export const fetchVoteSuccess = vote => ({
     vote
 })
 export const getVote = (voteId) => dispatch => {
-    fetch(`${API_BASE_URL}/votes/` + voteId)
+    return fetch(`${API_BASE_URL}/votes/` + voteId)
         .then(res => {
             if (!res.ok) {
                 return Promise.reject(res.statusText);
@@ -448,9 +447,8 @@ export const getVote = (voteId) => dispatch => {
 };
 
 export const INVITE_SUCCESS = 'INVITE_SUCCESS';
-export const inviteSuccess = trip => ({
+export const inviteSuccess = () => ({
     type: INVITE_SUCCESS,
-    trip
 })
 export const invite = (email, inviterName, tripName) => dispatch => {
     const emailBody = {
@@ -458,7 +456,7 @@ export const invite = (email, inviterName, tripName) => dispatch => {
         inviter: inviterName,
         trip: tripName
     }
-    fetch(`${API_BASE_URL}/send-email`, {
+    return fetch(`${API_BASE_URL}/send-email`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json'
@@ -483,7 +481,7 @@ export const invite = (email, inviterName, tripName) => dispatch => {
             }
         })
         .then(() => {
-            // dispatch(inviteSuccess(trip))
+            dispatch(inviteSuccess())
         });
 };
 
@@ -559,7 +557,6 @@ export const login = (username, password) => dispatch => {
             // Reject any requests which don't return a 200 status, creating
             // errors which follow a consistent format
             .then(res => normalizeResponseErrors(res))
-            // .then(res => (res))
             .then(res => res.json())
             .then(({authToken}) => storeAuthInfo(authToken, dispatch))
             .catch(err => {
