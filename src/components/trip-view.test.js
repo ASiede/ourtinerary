@@ -67,4 +67,7 @@ describe('<TripView />', () => {
     	expect(wrapper.state('editTripForm')).toEqual(true);
     })
 
-});    
+});
+
+
+    

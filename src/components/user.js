@@ -7,12 +7,10 @@ import { withRouter } from 'react-router'
 import './user.css'
 
 export class User extends React.Component {
-
 	constructor(props) {
         super(props)
     }
 
-	
 	componentDidMount() {
 		this.props.dispatch(getUser(this.props.currentUser.id))
 	}

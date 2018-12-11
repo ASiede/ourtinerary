@@ -11,7 +11,9 @@ describe('<ItineraryList />', () => {
 
     const trip2 = {
     	itineraryItems: [
-    		{name: 'mariot'}
+    		{
+                id: '123',
+                name: 'mariot'}
     	]
     }
 
@@ -21,7 +23,7 @@ describe('<ItineraryList />', () => {
     
 
     it('Renders without crashing', () => {
-        shallow(<ItineraryList />);
+        shallow(<ItineraryList ourtinerary={ourtinerary} trip={trip2}/>);
     });
 
     //NOT WORKING

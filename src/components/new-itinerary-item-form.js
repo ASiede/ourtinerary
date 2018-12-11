@@ -63,7 +63,7 @@ export class NewItineraryForm extends React.Component {
 				<form className="itinerary-item-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
 
 		        	<label>Type of Activity</label><br />
-						<select value={this.state.itineraryType} onChange={e => this.handleFormChange(e.target.value)}>
+						<select className="type-select" value={this.state.itineraryType} onChange={e => this.handleFormChange(e.target.value)}>
 							<option value="Flight">Flight</option>
 							<option value="Hotel" default>Hotel</option>
 							<option value="Restaurant/Bar">Restaurant/Bar</option>
@@ -189,10 +189,10 @@ const mapStateToProps = (state) => ({
 	currentUser: state.ourtinerary.currentUser,
 });
 
-NewItineraryForm = connect(mapStateToProps)(NewItineraryForm);
+const myComponent = connect(mapStateToProps)(NewItineraryForm);
 
 export default reduxForm({
 	form: 'NewTripForm',
 	onSubmitFail: (errors, dispatch) =>
         dispatch(focus('newTripForm', Object.keys(errors)[0]))
-})(NewItineraryForm)
+})(myComponent)
