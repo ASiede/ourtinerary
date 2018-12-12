@@ -32,6 +32,11 @@
 	margin-top: 10px;
 }
 
+.delete-trip {
+	background-color: rgb(0, 170, 155);
+	color: black;
+}
+
 .delete-trip-wrapper {
 	border: 2px solid red;
 	margin: 15px;

@@ -30,6 +30,12 @@ export function Landing(props) {
 			    	<p>Everyone gets to vote on what they think about each itinerary item.</p>
 			    	<p>Finally, go enjoy your trip!</p>		
 			    </section>
+			    <section className="demo" role="region">
+			    	<p className="try">Wanna try it out first? Use the demo account below:</p>
+			    	<p>Username: Delores </p>
+			    	<p>Password: passwordpassword</p>
+			    	<p>Try inviting her friends Teddy(Teddy@gmail.com) and Mave(Mave@gmail.com) on a trip.</p>	
+			    </section>
 			</main>
 		</div>
 	);
