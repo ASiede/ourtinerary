@@ -62,7 +62,7 @@ export class NewItineraryForm extends React.Component {
 
 				<form aria-live="assertive" className="itinerary-item-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
 		        	<label for="type">Type of Activity</label><br />
-						<select id="type" value={this.state.itineraryType} onChange={e => this.handleFormChange(e.target.value)}>
+						<select className="type-select" id="type" value={this.state.itineraryType} onChange={e => this.handleFormChange(e.target.value)}>
 							<option value="Flight">Flight</option>
 							<option value="Hotel" default>Hotel</option>
 							<option value="Restaurant/Bar">Restaurant/Bar</option>
