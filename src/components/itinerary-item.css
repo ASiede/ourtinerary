@@ -52,8 +52,17 @@
 	padding: 5px;
 }
 
+/*.itinerary-itme-info a {
+	background-color: red;
+}*/
+
 .itinerary-item-info li {
 	padding: 5px;
+	max-width: 100%;
+}
+
+.website-link {
+	word-wrap: break-word;
 }
 
 .votes-list {
