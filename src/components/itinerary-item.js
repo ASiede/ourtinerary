@@ -20,7 +20,7 @@ export class ItineraryItem extends React.Component {
         const locationHTML = this.props.item.location ? <li>Location: {this.props.item.location}</li> : '';
         const poolHTML = this.props.item.pool ? <li>Pool: {this.props.item.pool}</li> : '';
         const foodTypeHTML = this.props.item.foodType ? <li>Foot Type: {this.props.item.foodType}</li> : '';
-        const websiteHTML = this.props.item.website ? <li>Website: <a href={"http://"+linkString} target="_blank">{this.props.item.website}</a></li> : '';
+        const websiteHTML = this.props.item.website ? <li>Website: <a className="website-link" href={"http://"+linkString} target="_blank">{this.props.item.website}</a></li> : '';
         const otherHTML = this.props.item.other ? <li>Other: {this.props.item.other}</li> : '';
         const itineraryItemVotes = this.props.item.votes ? this.props.item.votes : [];
         const typeHTML = this.props.item ? <h3>{this.props.item.type}</h3> : '';
