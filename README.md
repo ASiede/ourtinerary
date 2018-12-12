@@ -6,7 +6,7 @@ OURtineary is a web app where you and your friends can plan your next trip simpl
 ## Live Demo
 [Link to Demo](https://stark-hamlet-54072.herokuapp.com/)
 
-Wanna try it out? Use the demo account below:
+Want to try it out? Use the demo account below:
 
 Username: Delores
 
