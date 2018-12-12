@@ -1,5 +1,6 @@
     .trip-details {
         background-image: url("https://journalistontherun.com/wp-content/uploads/2015/10/o-SOLO-TRAVEL-facebook.jpg");
+        background-color: rgb(0, 99, 151, .05);
         background-size: cover;
         background-repeat: no-repeat;
         display: flex;
