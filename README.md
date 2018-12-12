@@ -1,7 +1,7 @@
 # OURtinerary
 
 ## Overview
-OURtineary is a web app where you and your friends can plan your next trip simply and in one place. Users create a trip and invite all those going on the trip to join the trip on OURtinerary. Users can then view details of the trip and suggest different itinerary items. Users have the opportunity to vote on different itinerary items that have been suggested.
+OURtineary is a web app where you and your friends can plan your next trip simply and in one place. Users create a trip and invite all those going to join the trip on OURtinerary. Users can then view details of the trip and suggest different itinerary items. Users have the opportunity to vote on different itinerary items that have been suggested.
 
 ## Live Demo
 [Link to Demo](https://stark-hamlet-54072.herokuapp.com/)
