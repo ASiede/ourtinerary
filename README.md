@@ -1,19 +1,23 @@
 # OURtinerary
 
 ## Overview
-OURtineary is a web app where you and your friends can plan your next trip simply and in one place. Users create a trip and invited all those going on the trip to join the trip on OURtinerary. Users then have one central place to view details of the trip and suggest different itinerary items. Users have the opputunity to vote on different itinerary items that have been suggested. My organizing ideas and opinions OURtinerary will help groups enjoy their next trip 
+OURtineary is a web app where you and your friends can plan your next trip simply and in one place. Users create a trip and invited all those going on the trip to join the trip on OURtinerary. Users can then view details of the trip and suggest different itinerary items. Users have the opputunity to vote on different itinerary items that have been suggested.
 
 ## Live Demo
 [Link to Demo](https://stark-hamlet-54072.herokuapp.com/)
+Wanna try it out first? Use the demo account below:
+Username: Delores
+Password: passwordpassword
+Try inviting her friends Teddy(Teddy@gmail.com) and Mave(Mave@gmail.com) on a trip.
 
 ## Screenshots
 Landing View
 
-![Landing View]()
+![Landing View](/src/screenshots/landing.png)
 
 Register/Login
 
-![Register/Login]()
+![Register/Login](/src/screenshots/registrationlogin.png)
 
 Create a Trip
 
@@ -21,24 +25,30 @@ Create a Trip
 
 View Trip
 
-![Create Itinerary Item]()
+![Create Itinerary Item](/src/screenshots/tripview.png)
 
 Mobile Landing View
 
-![Mobile Landing View]()
+![Mobile Landing View](/src/screenshots/mobile.png)
 
 
 ## API Documentation
-API Layer of Ourtinerary allows for:
+API Layer of OURtinerary allows for:
 
-- POST /trip...Add a new trip
-- GET /trip...Find trips by most recent or by severeal search parameter options
-- GET /trip/{tripId}...Find trip by ID
-- PUT /trip...Updtate an existing trip that you have contributed
-- DELETE /trip...Delete an existing trip that you have contributed
+- POST /trips...Add a new trip
+- GET /trips...Find trips
+- GET /trips/{tripId}...Find trip by ID
+- PUT /trips...Edit an existing trip 
 
-- POST  /user...Register as a new user
-- GET /user/{userID}...Find user by ID
+- DELETE /itineraryItems...Delete an existing trip
+- POST /itineraryItems...Add a new itinerary item
+- DELETE /itineraryItems...Delete an existing itinerary item
+
+- GET /votes...Get votes
+- PUT /votes...Edit an existing vote
+
+- POST  /users...Register as a new user
+- GET /users...Find users
 - POST  /auth/login...Login as an existing user
 
 ## Tecnhnology used
