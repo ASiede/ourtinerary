@@ -2,34 +2,37 @@ import React from 'react';
 import {shallow, mount} from 'enzyme';
 import {Nav} from './nav';
 
-
 describe('<Nav/>', () => {
-
-
-
 	it('Renders without crashing', () => {
 	    shallow(<Nav />);
 	});
 
-	// it('Renders nav element', () => {
-	//     const wrapper = shallow(<Nav />);
-	//     expect(wrapper.contains(<nav />))
-	// });
+	it('Changes state className on click of show modal while not logged in', () => {
+        const wrapper = shallow(<Nav  handleSubmit={fn => fn}/>);
+        const result = wrapper.find('.login-lines');
+        result.simulate('click');
+        expect(wrapper.state('className')).toEqual('modal-show');
+    });
 
-	// it('Renders div1 if not logged in', () => {
-	//     const wrapper = shallow(<Nav loggedIn={true}/>);
-	//     expect(wrapper.contains(<div className='logged-in-modal' />)).to.equal(true);
-	// });
+    it('Changes state className on click of hide modal while not logged in', () => {
+        const wrapper = shallow(<Nav  handleSubmit={fn => fn}/>);
+        const result = wrapper.find('.close');
+        result.simulate('click');
+        expect(wrapper.state('className')).toEqual('modal');
+    });
 
-	//render div if logged in
-	//render div if not logged in
+    it('Changes state className on click of show modal while logged in', () => {
+        const wrapper = shallow(<Nav  handleSubmit={fn => fn}/>);
+        const result = wrapper.find('.login-lines');
+        result.simulate('click');
+        expect(wrapper.state('loggedInClassName')).toEqual('logged-in-modal');
+    });
 
-	//scroll to top
-	//show modal
-	//hide modal
-	//show logged in modal
-	//hide logged in modal
-	//log out
-
+    it('Changes state className on click of hide modal while logged in', () => {
+        const wrapper = shallow(<Nav  handleSubmit={fn => fn}/>);
+        const result = wrapper.find('.close');
+        result.simulate('click');
+        expect(wrapper.state('loggedInClassName')).toEqual('logged-in-modal');
+    });
 
 });	

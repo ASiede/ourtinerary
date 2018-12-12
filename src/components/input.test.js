@@ -12,13 +12,4 @@ describe('<Input />', () => {
         shallow(<Input input={input} meta={meta}/>);
     });
 
-    it('Renders a label', () => {
-        const wrapper = shallow(<Input input={input} meta={meta}/>);
-        expect(wrapper.contains(<label>input.name</label>));  
-    });
-
-    it('Renders an Element element', () => {
-        const wrapper = shallow(<Input input={input} meta={meta}/>);
-        expect(wrapper.contains(<Element />)); 
-    });
 });

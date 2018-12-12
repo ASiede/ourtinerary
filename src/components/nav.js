@@ -30,13 +30,11 @@ export class Nav extends React.Component {
 
 	hideModal(e) {
 		this.setState({
-			// modalVisable: !this.state.modalVisable
 			className: 'modal'
 		})
 	}
 
 	showLoggedInModal(e) {
-		console.log('clicked')
 		this.setState({
 			loggedInClassName: 'logged-in-modal-show'
 		})
@@ -44,7 +42,6 @@ export class Nav extends React.Component {
 
 	hideLoggedInModal(e) {
 		this.setState({
-			// modalVisable: !this.state.modalVisable
 			loggedInClassName: 'logged-in-modal'
 		})
 	}
@@ -60,7 +57,7 @@ export class Nav extends React.Component {
 
 		const username = this.props.currentUser ? this.props.currentUser.username: '';
 		const navLinks = this.props.loggedIn ? 
-			<div className="logged-in-modal">
+			<div>
 				<img 
 				onClick={(e) => this.showLoggedInModal(e)}
 				 className="login-lines" 

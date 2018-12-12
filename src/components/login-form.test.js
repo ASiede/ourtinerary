@@ -9,5 +9,4 @@ describe('<LoginForm />', () => {
         shallow(<LoginForm handleSubmit={fn => fn}/>);
     });
 
-
 });    
