@@ -20,47 +20,17 @@ describe('<TripView />', () => {
 		]
 	}
 
-	const mockItineraryItems = [{
-				type: 'hotel',
-				name: 'mariot'
-			}
-		]
-
-	const ourtinerary = [
-	{trips: [trip]}
-	]
-
     it('Renders without crashing', () => {
         shallow(<TripView />);
     });
 
-    //should render trip details
-    it('Renders the trip details', () => {
+    it('Renders the HTML elements', () => {
     	const wrapper = shallow(<TripView trip={trip} />);
-    	expect(wrapper.contains(<h2>{trip.name}</h2>));
-    	expect(wrapper.contains(<p>{trip.location}</p>));
-    	expect(wrapper.contains(<p>{trip.dates}</p>));
-    	expect(wrapper.contains(<li>{trip.collaborators[0]}</li>));
+    	expect(wrapper.find('.trip-details').exists()).toEqual(true);
+        expect(wrapper.find('.trip-name').exists()).toEqual(true);
+        expect(wrapper.find('.itinerary-list-wrapper').exists()).toEqual(true);
     })
 
-    //NOT WORKING
-
-    //should render itinerary items
-    // it('Renders the itinerary items', () => {
-    //     const wrapper = shallow(<ItineraryList ourtinerary={ourtinerary} trip={trip} itineraryItems={mockItineraryItems} />);
-    //     const itineraryItems = wrapper.find(ItineraryItem);
-    //     expect(itineraryItems.length).toEqual(mockItineraryItems.length);
-    //     const firstItem = itineraryItems.first();
-    //     expect(firstItem.prop('name')).toEqual(mockItineraryItems[0].name);
-    // });
-
-    //should render new itin item form
-        it('Renders the new itinerary form', () => {
-        const wrapper = shallow(<TripView ourtinerary={ourtinerary} trip={trip} itineraryItems={mockItineraryItems} />);
-  		expect(wrapper.contains(<NewItineraryItemForm />))
-    });
-
-    //should toggle edit trip form when  toggleEditTripForm is clicked
     it('Should switch to toggle show editing form when the edit image is clicked', () => {
     	const wrapper = shallow(<TripView trip={trip} />);
     	wrapper.find('img').simulate('click');

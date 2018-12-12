@@ -12,4 +12,9 @@ describe('<Input />', () => {
         shallow(<Input input={input} meta={meta}/>);
     });
 
+    it('Renders correct HTML elements ', () => {
+        const wrapper = shallow(<Input input={input} meta={meta}/>);
+        expect(wrapper.find('.form-input').exists()).toEqual(true);
+    });
+   
 });

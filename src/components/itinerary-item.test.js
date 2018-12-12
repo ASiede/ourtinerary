@@ -1,20 +1,7 @@
 import React from 'react';
 import {shallow, mount} from 'enzyme';
-
 import {ItineraryItem, handleDeleteItineraryItem} from './itinerary-item';
 import {deleteItineraryItem} from '../actions';
-
-const mockDeleteItineraryItemAction = {
-    type: 'DELETE_ITINERARY_ITEM'
-};
-jest.mock('../actions', () => Object.assign({},
-    require.requireActual('../actions'),
-    {
-        fetchBoard: jest.fn().mockImplementation(() => {
-            return mockDeleteItineraryItemAction;
-        })
-    }
-));
 
 describe('<ItineraryItem />', () => {
 	const item = {
@@ -47,17 +34,12 @@ describe('<ItineraryItem />', () => {
         expect(wrapper.contains(<h4>{item.name}</h4>)).toEqual(true);
     });
 
-    //DOES NOT WORK
-
-    // it('Dispatches deleteItineraryItem on click', () => {
-    //     const dispatch = jest.fn();
-    //     const trip = {id : "123456"};
-    //     const itineraryItem = {id: "123"}
-    //     const wrapper = shallow(<ItineraryItem itineraryItem={itineraryItem} item={item} trip={trip} dispatch={dispatch} />);
-    //     const icon = wrapper.find('.trash-icon')
-    //     icon.simulate('click', itineraryItem)
-    //     window.confirm = jest.fn(() => true)
-    // 	expect(dispatch).toHaveBeenCalledWith(mockDeleteItineraryItemAction);
-    // });
+    it('Renders correct HTML elements ', () => {
+        const wrapper = shallow(<ItineraryItem item={item} />);
+        expect(wrapper.find('.itinerary-item').exists()).toEqual(true);
+        expect(wrapper.find('.trash-icon').exists()).toEqual(true);
+        expect(wrapper.find('.itinerary-item-info').exists()).toEqual(true);
+        expect(wrapper.find('.votes-list').exists()).toEqual(true);
+    });
 
 });

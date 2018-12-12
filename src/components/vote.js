@@ -47,7 +47,6 @@ export class Vote extends React.Component {
           return (
               <div>
                   {voteHTML}
-                  
               </div>
           )} 
 }

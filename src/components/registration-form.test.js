@@ -1,21 +1,7 @@
 import React from 'react';
 import {shallow, mount} from 'enzyme';
 import {} from '../actions';
-
 import {RegistrationForm} from './registration-form';
-
-// const mockFetchNewItineraryItemAction = {
-//     type: 'FETCH_NEW_ITINERARY_ITEM_SUCCESS'
-// };
-// jest.mock('../actions', () => Object.assign({},
-//     require.requireActual('../actions'),
-//     {
-//         createNewItineraryItem: jest.fn().mockImplementation(() => {
-//             return mockFetchNewItineraryItemAction;
-//         })
-//     }
-// ));
-
 
 describe('<RegistrationForm />', () => {
     const ourtinerary = {error: null}
@@ -24,12 +10,20 @@ describe('<RegistrationForm />', () => {
         shallow(<RegistrationForm ourtinerary={ourtinerary} handleSubmit={fn => fn}/>);
     });
 
-    it('Renders a form', () => {
-        // const wrapper = shallow(<RegistrationForm ourtinerary={ourtinerary} handleSubmit={fn => fn}/>);
-        // expect(wrapper.find('form').hasClass('registration-form')).to.equal(true);
-            // expect(wrapper.find('.my-button').hasClass('disabled')).to.equal(true);
+    it('Renders correct HTML elements ', () => {
+        const wrapper = shallow(<RegistrationForm ourtinerary={ourtinerary} handleSubmit={fn => fn}/>);
+        expect(wrapper.find('.registration-area').exists()).toEqual(true);
+        expect(wrapper.find('form').exists()).toEqual(true);
+        expect(wrapper.find('button').exists()).toEqual(true);
     });
 
-    //dispatches register user on submit
-
+    it('Dispatches registerUser on submit', () => {
+        const values = {}
+        const userId = '123'
+        const dispatch = jest.fn(registerUser => registerUser());
+        const wrapper = shallow(<RegistrationForm dispatch={dispatch} reset={fn=>fn} ourtinerary={ourtinerary} handleSubmit={fn => fn}/>);
+        const form = wrapper.find('form')
+        form.simulate('submit', values)
+        expect(dispatch).toHaveBeenCalled();
+    }); 
 });    

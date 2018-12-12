@@ -1,21 +1,8 @@
 
 import React from 'react';
 import {shallow, mount} from 'enzyme';
-
 import {TripList} from './trip-list';
 import {getTrips} from '../actions'
-
-const mockFetchTripAction = {
-    type: 'FETCH_TRIPS'
-};
-jest.mock('../actions', () => Object.assign({},
-    require.requireActual('../actions'),
-    {
-        fetchTrips: jest.fn().mockImplementation(() => {
-            return mockFetchTripAction;
-        })
-    }
-));
 
 describe('<TripList />', () => {
 	const dispatch = jest.fn();
@@ -23,11 +10,15 @@ describe('<TripList />', () => {
         shallow(<TripList dispatch={dispatch} />);
     });
 
- //    it('Dispatches getTrips on mount', () => {
-	//     const dispatch = jest.fn();
-	//     shallow(<TripList dispatch={dispatch} />);
-	//     expect(dispatch).toHaveBeenCalledWith(mockFetchTripAction);
-	// });
+    it('Renders correct HTML elements ', () => {
+        const wrapper = shallow(<TripList dispatch={dispatch} />);
+        expect(wrapper.find('.trip-list').exists()).toEqual(true);
+        expect(wrapper.find('.trips').exists()).toEqual(true);
+    });
 
-	//renders elemts
+    it('Dispatches getTrips on mount', () => {
+        const dispatch = jest.fn(getTrips => getTrips());
+        const wrapper = shallow(<TripList dispatch={dispatch} />);
+        expect(dispatch).toHaveBeenCalled();
+    }); 
 });    

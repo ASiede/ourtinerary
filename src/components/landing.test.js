@@ -14,4 +14,10 @@ describe('<Landing />', () => {
         expect(history.length) > 0;
     });
 
+    it('Renders correct HTML elements ', () => {
+        const wrapper = shallow(<Landing history={history} loggedIn={true}/>);
+        expect(wrapper.find('.short-description').exists()).toEqual(true);
+        expect(wrapper.find('.long-description').exists()).toEqual(true);
+    });
+
 });    
