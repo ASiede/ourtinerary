@@ -17,7 +17,6 @@ export class RegistrationForm extends React.Component {
 		const {username, password, email, firstName, lastName} = values;
         const user = {username, password, email, firstName, lastName};
         let error;
-        console.log(error)
 		return this.props
             .dispatch(registerUser(user))	
             .then(() => this.props.dispatch(login(username, password)));   			
