@@ -15,14 +15,12 @@ export function Landing(props) {
 
 	return (
 		<div>
-			<main>
-				
-			    <section className="short-description">
-			    	
+			<main role="main">
+			    <section role="region" className="short-description">
 			    	<h2>The best place to plan your next trip with friends!</h2>
 			    </section>
 
-			    <section className="long-description">
+			    <section role="region" className="long-description">
 			    	<h2> Want to know how it works?</h2>
 			    	<p>Start by signing up and creating a trip! It's that easy</p>
 			    		<img src={newtrip} alt="new trip view"></img>

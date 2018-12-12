@@ -27,11 +27,10 @@ export class NewTripForm extends React.Component {
 		e.preventDefault();
 		this.setState({
 	        numberOfCollaborators: this.state.numberOfCollaborators + 1
-	      })
+	    })
 	}
 
 	componentDidMount() {
-		//can improve if i get by email individually
 		this.props.dispatch(getUsers())
 	}
 
@@ -49,6 +48,7 @@ export class NewTripForm extends React.Component {
 		})
 		const collaboratorsArrTrimmed = allEmails.map(name => name.trim().toLowerCase());
 		const userEmail = this.props.ourtinerary.users.map(user => user.email)
+		//Separate users and non users
 		collaboratorsArrTrimmed.forEach(email => {
 			if (userEmail.includes(email)) {
 				collaboratorEmails.push(email);
@@ -66,15 +66,14 @@ export class NewTripForm extends React.Component {
 		const trip = {name, dates, location, collaborators, tripLeader}
 		this.props.reset();
 
+		//handle send invite to non users
 		const inviterName = this.props.ourtinerary.currentUser.username
-
 		if(nonUsers.length>0 && inviterName) {
 			nonUsers.map(nonUser => this.props.dispatch(invite(nonUser, inviterName, values.name)))
 		}
+
 		this.scrollToTop();
-
 		this.props.dispatch(createNewTrip(trip));
-
 	}
 
 	render () {
@@ -87,32 +86,30 @@ export class NewTripForm extends React.Component {
     		validate={[email]}
     		/>
 
-    		//NEED TO IMPROVE
-
-		const anotherArray = []
+		const additionalCollaboratorArr = []
 		let i
 		for(i=1; i < this.state.numberOfCollaborators + 1; i++) {
 			let names = `collaborator${i}`
-			anotherArray.push(
-					<Field
-						key={i}
-		        		name={names}
-		        		type="text"
-		        		component={Input}
-		        		label="Collaborator Email*"
-		        		validate={[email]}
-		        		/>
+			additionalCollaboratorArr.push(
+				<Field
+					key={i}
+	        		name={names}
+	        		type="text"
+	        		component={Input}
+	        		label="Collaborator Email*"
+	        		validate={[email]}
+	        		/>
 				)
 		}
 
-		const collaboratorsHTML = anotherArray.map(html => html)
+		const collaboratorsHTML = additionalCollaboratorArr.map(html => html)
 
 		return (
 			<div className="new-trip">
 				<div className="h2-wrapper">
 				<h2>Create A New Trip</h2>
 				</div>
-		        	<form onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
+		        	<form aria-live="assertive" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
 		        		<Field
 		        		name="name"
 		        		type="text"
@@ -156,7 +153,6 @@ export class NewTripForm extends React.Component {
 				        </button>
 				        <p>*Enter the emails of those you want to collaborate with for this trip. Registered users of OURtinerary will be added to your trip and non users will receive an email invite. Once they have registered, you can then add them to the trip.</p>
 		        	</form>
-		        	
 		    </div>    	
 
 		)};

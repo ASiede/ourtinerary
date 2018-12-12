@@ -7,11 +7,6 @@ import * as serviceWorker from './serviceWorker';
 import * as actions from './actions'
 import './index.css';
 
-// console.log(store.getState().ourtinerary);
-// store.dispatch(actions.login("Delores", "passwordpassword"))
-// // // store.dispatch(actions.getTrips());
-// console.log(store.getState().ourtinerary);
-
 ReactDOM.render(
 	<Provider store={store}>
 		<App />

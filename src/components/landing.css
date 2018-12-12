@@ -1,28 +1,22 @@
-
 main {
     text-align: center;
     margin-top: 90px;
     margin-bottom: 40px;
-
 }
 
 main p {
-  margin: 20px;
- /* border-top: 2px solid black;
-  border-bottom: 2px solid black;*/
-  padding-top: 15px;
-  padding-bottom: 15px;
+    margin: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .long-description img {
-  border: solid grey 1px;
-  border-radius: 5px;
-  margin-right: auto;
-  margin-left: auto;
-  max-width: 85%;
+    border: solid grey 1px;
+    border-radius: 5px;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 85%;
 }
-
-
 
 .short-description {
     background-image: url("https://stemcell.keck.usc.edu/wp-content/uploads/2017/11/150324_flights-hero-image_1330x742.jpg");
@@ -35,120 +29,70 @@ main p {
     justify-content: space-around;
     text-decoration-style: bold;
     text-align: left;
-
 }
 
 .short-description h1 {
-  font-size: 45px;
-  margin-top: 0px;
-  padding-top: 15px;
+    font-size: 45px;
+    margin-top: 0px;
+    padding-top: 15px;
 }
 
 .short-description h2 {
-
-  vertical-align: bottom;
-  font-size: 40px;
-  width: 60%;
-  padding-left: 15px;
-  line-height: 150%;
-  max-height: 100%
+    vertical-align: bottom;
+    font-size: 40px;
+    width: 60%;
+    padding-left: 15px;
+    line-height: 150%;
+    max-height: 100%
 }
 
 .screen-shots {
-    /*border: black solid 2px;*/
     margin-left: 20px;
-  margin-right: 20px;
-  background-color: white;
+    margin-right: 20px;
+    background-color: white;
 }
 
 .long-description h2 {
-  color: #6B7888;
-  font-size: 30px;
+    color: #6B7888;
+    font-size: 30px;
 }
-
 
 /*
 MEDIA QUERIES
 */
 
-/*Landscape phones*/
-
-@media only screen 
-  and (min-width: 320px) 
-  and (max-width: 732px)
-  and (orientation: landscape) {
-   
-
-}
-
-/*screen size small*/
-
-@media only screen 
-  and (min-width: 320px) 
-  and (max-width: 645px)
-  {
-
-
-}  
-
 /* screen size medium*/
   @media only screen 
   and (min-width: 645px) 
-  and (max-width: 1000px)
-  {
+  and (max-width: 1000px) {
 
-    .short-description h2 {
+  .short-description h2 {
+      font-size: 50px;
+      width: 60%;
+      padding-left: 45px;  
+  }
 
- 
-  font-size: 50px;
-  width: 60%;
-  padding-left: 45px;
-  
-}
-
-.long-description h2 {
-  color: #6B7888;
-  font-size: 40px;
-}
-
-
+  .long-description h2 {
+      color: #6B7888;
+      font-size: 40px;
+  }
 } 
 
 /* screen size large */
-  @media only screen 
-  and (min-width: 1000px)
-  {
-   
+    @media only screen 
+    and (min-width: 1000px) {
 
     .short-description h2 {
+        font-size: 65px;
+        width: 60%;
+        padding-left: 55px;
+    }
 
- 
-  font-size: 65px;
-  width: 60%;
-  padding-left: 55px;
-  
-}
-.long-description h2 {
-  color: #6B7888;
-  font-size: 40px;
-}
-
+    .long-description h2 {
+        color: #6B7888;
+        font-size: 40px;
+    }
 } 
-/*  and (max-device-width: 1600px) */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

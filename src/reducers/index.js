@@ -34,7 +34,6 @@ export const ourtineraryReducer = (state=initialState, action) => {
 			});
 
 		case actions.EDIT_TRIP_SUCCESS:
-			console.log(action.trip)
 			let tripsWithEditedTrip = state.trips.filter(trip => {
 				if(trip.id !== action.trip.id) {
 					return trip;

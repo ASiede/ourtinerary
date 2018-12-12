@@ -1,82 +1,48 @@
-/*.trips {
-	height: 200px;
-	background-image: url("https://herpackinglist.com/wp-content/uploads/2017/01/solo-travel-confidence.jpeg");
-	background-size: cover;
-	background-repeat: no-repeat;
-	margin-top: 0px;
-	vertical-align: center;
-}*/
-
 .h2-wrapper {
-	 background-image: url("https://stemcell.keck.usc.edu/wp-content/uploads/2017/11/150324_flights-hero-image_1330x742.jpg");
-	 background-position: 50% 73%;
-	 margin: 0px;
-	padding: 30px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	
+    background-image: url("https://stemcell.keck.usc.edu/wp-content/uploads/2017/11/150324_flights-hero-image_1330x742.jpg");
+    background-position: 50% 73%;
+    margin: 0px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .browse-trips h2 {
-	max-width: 230px;
-	margin: 0px;
-	 color: #6B7888;
-	 background-color: rgb(255,255,255, .6);
-	 padding: 8px;
-	 border-radius: 5px;
-
+    max-width: 230px;
+    margin: 0px;
+    color: #6B7888;
+    background-color: rgb(255,255,255, .6);
+    padding: 8px;
+    border-radius: 5px;
 }	
 
 /*
 MEDIA QUERIES
 */
 
-/*Landscape phones*/
-
-@media only screen 
-  and (min-width: 320px) 
-  and (max-width: 732px)
-  and (orientation: landscape) {
-    
-
-}
-
-/*screen size small*/
-
-@media only screen 
-  and (min-width: 320px) 
-  and (max-width: 645px)
-  {
- 
-
-}  
 
 /* screen size medium*/
-  @media only screen 
-  and (min-width: 645px) 
-  and (max-width: 1000px)
-  {
-  
-  .browse-trips h2{
-  		max-width: 350px;
-  		font-size: 35px;
-  		margin: 10px;
-  	}
-
-
+@media only screen 
+and (min-width: 645px) 
+and (max-width: 1000px)
+{
+    .browse-trips h2{
+      	max-width: 350px;
+      	font-size: 35px;
+      	margin: 10px;
+    }
 } 
 
 /* screen size large */
-  @media only screen 
-  and (min-width: 1000px)
-  {
- .browse-trips h2{
-  		max-width: 350px;
-  		font-size: 35px;
-  		margin: 10px;
-  	}
+@media only screen 
+and (min-width: 1000px)
+{
+    .browse-trips h2{
+    		max-width: 350px;
+    		font-size: 35px;
+    		margin: 10px;
+    }
 
 } 
-/*  and (max-device-width: 1600px) */
 

@@ -11,7 +11,7 @@ export class LoginForm extends React.Component {
 	onSubmit(values) {
 		this.props.reset();
 		this.props.dispatch(getTrips())
-		return this.props.dispatch(login(values.username, values.password));	
+		return this.props.dispatch(login(values.loginusername, values.loginpassword));	
 	}
 
 	render () {
@@ -23,7 +23,7 @@ export class LoginForm extends React.Component {
 			    	<form onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
 				     
 				        <Field 
-				        name="username" 
+				        name="loginusername" 
 				        type="text" 
 				        component={Input}
 				        label="Username"
@@ -32,7 +32,7 @@ export class LoginForm extends React.Component {
 				        
 						{incorrectPassword}
 				        <Field 
-				        name="password" 
+				        name="loginpassword" 
 				        type="password" 
 				        component={Input}
 				        label="Password"

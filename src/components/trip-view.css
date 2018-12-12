@@ -1,160 +1,129 @@
-.trip-details {
-  /*border: 1px solid black;*/
-  background-image: url("https://journalistontherun.com/wp-content/uploads/2015/10/o-SOLO-TRAVEL-facebook.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  /*background-color: rgb(0, 99, 151);*/
-  display: flex;
-  flex-direction: column;
-}
-.trip-details h2 {
-/*  border-left: 2px solid black;
-  border-right: 2px solid black;
-  border-bottom: 2px solid black;*/
-  margin: 0px;
-  padding: 15px;
-}
-
-.trip-name h2{
- /* display: inline-block;*/
-
-}
-
-.trip-details img {
-  max-height: 30px;
-  margin-left: -30px;
-/* margin-left: 10px;*/
- /*position: absolute;*/
- /*right: 20px;*/
- float: right;
-
-}
-
-.trip-details img:hover{
-  cursor: pointer;
-  opacity: .5;
-}
-
-.trip-details h3{
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.trip-details p {
-  margin: 5px;
-}
-
-.where-when {
-  display: flex;
-  justify-content: space-around;
-}
-
-.trip-details ul {
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-}
-
-.trip-details li {
-  min-width: 35%;
-  margin-bottom: 10px;
-}
-
-.trip-details li:hover {
-  background-color: transparent;
-  cursor: default;
-  color: black;
-}
-
-.trip-details ul, li {
-  list-style: none;
-  padding: 0px;
-  margin-top: 0px;
-}
-
-/*
-MEDIA QUERIES
-*/
-
-/*Landscape phones*/
-
-@media only screen 
-  and (min-width: 320px) 
-  and (max-width: 732px)
-  and (orientation: landscape) {
-    
-
-}
-
-/*screen size small*/
-
-@media only screen 
-  and (min-width: 320px) 
-  and (max-width: 645px)
-  {
-
-
     .trip-details {
-      background-position: 60% 15%;
+        background-image: url("https://journalistontherun.com/wp-content/uploads/2015/10/o-SOLO-TRAVEL-facebook.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: flex;
+        flex-direction: column;
+    }
+    .trip-details h2 {
+        margin: 0px;
+        padding: 15px;
+    }
+
+    .trip-details img {
+        max-height: 30px;
+        margin-left: -30px;
+        float: right;
+    }
+
+    .trip-details img:hover{
+        cursor: pointer;
+        opacity: .5;
+    }
+
+    .trip-details h3{
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .trip-details p {
+        margin: 5px;
+    }
+
+    .where-when {
+        display: flex;
+        justify-content: space-around;
     }
 
     .trip-details ul {
-      padding-left: 30px;
-      padding-right: 30px;
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+    }
+
+    .trip-details li {
+        min-width: 35%;
+        margin-bottom: 10px;
+    }
+
+    .trip-details li:hover {
+        background-color: transparent;
+        cursor: default;
+        color: black;
+    }
+
+    .trip-details ul, li {
+        list-style: none;
+        padding: 0px;
+        margin-top: 0px;
+    }
+
+    /*
+    MEDIA QUERIES
+    */
+
+    /*screen size small*/
+
+@media only screen 
+    and (min-width: 320px) 
+    and (max-width: 645px)
+    {
+    .trip-details {
+        background-position: 60% 15%;
+    }
+
+    .trip-details ul {
+        padding-left: 30px;
+        padding-right: 30px;
     }
 
     .trip-details h2, .trip-details h2,.trip-details p,.trip-details li {
-      font-size: 1.3em;
+        font-size: 1.3em;
     }
-
 }  
 
 /* screen size medium*/
-  @media only screen 
-  and (min-width: 645px) 
-  and (max-width: 1000px)
-  {
-  
-.trip-details {
-  background-position: 50% 35%;
-  padding-top: 30px;
-  padding-bottom: 30px;
-}
+@media only screen 
+and (min-width: 645px) 
+and (max-width: 1000px)
+    {
+      
+    .trip-details {
+        background-position: 50% 35%;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
 
     .trip-details ul {
-      padding-left: 30px;
-      padding-right: 30px;
+        padding-left: 30px;
+        padding-right: 30px;
     }
-
     .trip-details h2, .trip-details h2,.trip-details p,.trip-details li {
-      font-size: 1.5em;
+        font-size: 1.5em;
     }
-
 
 } 
 
 /* screen size large */
-  @media only screen 
-  and (min-width: 1000px)
-  {
+@media only screen 
+and (min-width: 1000px)
+{
  
-.trip-details {
-  background-position: 50% 35%;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  padding-left: 100px;
-  padding-right: 100px;
-
-}
+    .trip-details {
+        background-position: 50% 35%;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        padding-left: 100px;
+        padding-right: 100px;
+    }
 
     .trip-details ul {
-      padding-left: 30px;
-      padding-right: 30px;
-      margin-right: 60px
+        padding-left: 30px;
+        padding-right: 30px;
+        margin-right: 60px;
     }
 
     .trip-details h2, .trip-details h2,.trip-details p,.trip-details li {
-      font-size: 1.5em;
+        font-size: 1.5em;
     }
 } 
-/*  and (max-device-width: 1600px) */
