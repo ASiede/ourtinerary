@@ -5,27 +5,26 @@
 	flex-direction: column;
 	margin-bottom: 15px;
 	padding-bottom: 20px;
-
  }
 
- .login-area h3 {
- 	font-size: 25px;
- 	margin-top: 0px;
- 	margin-bottom: 10px;
- }
+.login-area h3 {
+	font-size: 25px;
+	margin-top: 0px;
+	margin-bottom: 10px;
+}
 
- .login-area label {
- 	font-size: 20px;
- }
+.login-area label {
+	font-size: 20px;
+}
 
- .login-area input {
- 	border-radius: 6px;
- 	font-size: 15px;
- 	padding: 8px;
+.login-area input {
+	border-radius: 6px;
+	font-size: 15px;
+	padding: 8px;
 	margin: 8px;
- }
+}
 
- .error-message {
- 	color: darkred;
- 	font-size: 20px;
- }
+.error-message {
+	color: darkred;
+	font-size: 20px;
+}

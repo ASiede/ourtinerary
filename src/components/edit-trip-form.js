@@ -12,8 +12,6 @@ export class EditTripForm extends React.Component {
 	}
 
 	componentDidMount() {
-		//can improve if i get by email individually
-
 		this.props.dispatch(getUsers())
 	}
 
@@ -40,11 +38,7 @@ export class EditTripForm extends React.Component {
 		let currentCollaboratorsUsernames = this.props.trip.collaborators ? this.props.trip.collaborators: '';
 		let currentUsers = this.props.ourtinerary.users.filter(user => currentCollaboratorsUsernames.includes(user.username))
 		let currentCollaboratorsEmails = currentUsers.map(user => user.email)
-
-		//trims input email
 		const allEmailsTrimmed = submittedEmails.map(name => name.trim().toLowerCase());
-
-		//Get all user emails
 		let userEmails = this.props.ourtinerary.users.map(user => user.email)
 
 		//pushes email to either nonuser or user
@@ -62,14 +56,10 @@ export class EditTripForm extends React.Component {
 				currentCollaboratorsEmails.push(user)
 			}
 		})
-
-		//needs to be ids
 		let collaboratorUserObjs = this.props.ourtinerary.users.filter(user => currentCollaboratorsEmails.includes(user.email));
 		let currentCollaboratorsIds = collaboratorUserObjs.map(user => user.id)
-
-
-		///submitting
-
+		
+    // Submitting
 		const tripLeader = this.props.ourtinerary.currentUser.id;
 		const tripFields = ["name", "dates", "location"];
 
@@ -85,18 +75,15 @@ export class EditTripForm extends React.Component {
 		})
 
 		this.props.reset();
-
 		nonUsers.forEach( nonUser => {
 			return this.props.dispatch(invite(nonUser, this.props.ourtinerary.currentUser.username, this.props.trip.name))
-		})
-			
+		})	
 		return this.props.dispatch(editTrip(updatedFields))
 	}
 
 	render () {
 		return (
 			<div className="edit-trip">
-				
 		        	<form onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
 		        		<h3>Make Changes Below</h3>
 
@@ -142,11 +129,10 @@ export class EditTripForm extends React.Component {
 				        	Submit
 				        </button>
 		        	</form>
-
 		        	
 		        	<div className="delete-trip-wrapper">
 				        <button className="delete-trip" type="click" onClick={() => {if (window.confirm('Are you sure you wish to delete this trip? This action cannot be undone.')) this.handleDeleteTrip(this.props.trip)}}>Delete Trip</button>
-		        	</div>	
+		        	</div>
 		    </div> 
 		)
 	}

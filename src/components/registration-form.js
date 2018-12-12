@@ -19,8 +19,7 @@ export class RegistrationForm extends React.Component {
         let error;
 		return this.props
             .dispatch(registerUser(user))	
-            .then(() => this.props.dispatch(login(username, password)));
-           			
+            .then(() => this.props.dispatch(login(username, password)));   			
 	}
 
 	render () {
@@ -29,7 +28,6 @@ export class RegistrationForm extends React.Component {
 		return (
 			<div className="registration-area">
 				<h3>Register</h3>
-					
 			    	<form className="registration-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
 				     	<Field 
 				        name="firstName" 

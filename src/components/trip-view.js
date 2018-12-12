@@ -14,6 +14,7 @@ export class TripView extends React.Component {
             editTripForm: false
         }
     }
+  
     toggleEditTripForm(e) {
         this.setState({
             editTripForm: !this.state.editTripForm
@@ -25,20 +26,12 @@ export class TripView extends React.Component {
       	const tripNameHTML = this.props.trip ? <h2>{this.props.trip.name}<img onClick={(e) => this.toggleEditTripForm(e)} src="http://cdn.onlinewebfonts.com/svg/img_147067.png" alt="edit-pencil"></img></h2> : '';
         const tripLocationHTML = this.props.trip ? <div><h3>Where:</h3> <p>{this.props.trip.location}</p></div>: '';
         const tripDatesHTML = this.props.trip ? <div><h3>When:</h3><p>{this.props.trip.dates}</p></div> : '';
-
         const editTripFormHTML = this.state.editTripForm ? <EditTripForm trip={this.props.trip}/> : '';
 
-        // let toggleEditTripHTML = '';
-
-        // if (this.props.trip && (this.props.trip.tripLeader === this.props.ourtinerary.currentUser.username)) {
-        //     toggleEditTripHTML = <button type="click" onClick={(e) => this.toggleEditTripForm(e)}>Toggle Edit Options</button>
-        // }
-
         return (
-            <div>
-
-                <main>
-                    <section className='trip-details'>
+            <div aria-live="assertive">
+                <main role="main">
+                    <section role="region" className='trip-details'>
                         <div className='trip-name'>
                         {tripNameHTML}
           
@@ -54,19 +47,18 @@ export class TripView extends React.Component {
                         {editTripFormHTML}
                     </section>
             
-                    <section>
+                    <section role="region">
                         <h2 className='itinerary-header'>Suggested Itinerary Items</h2>
                         <div className="itinerary-list-wrapper">
                         <ItineraryList trip={this.props.trip} />
                         </div>
                     </section>
 
-                    <section>
+                    <section role="region">
                         <NewItineraryForm trip={this.props.trip}/>
                     </section>
                 </main>
           	</div>	
-
       	);
     }
 }

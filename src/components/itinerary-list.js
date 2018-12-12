@@ -10,11 +10,11 @@ export class ItineraryList extends React.Component {
 		const trip = this.props.ourtinerary.trips ? this.props.ourtinerary.trips.find(trip => trip.id === this.props.trip.id) : {};
 		const itineraryItems = trip ? trip.itineraryItems: '';
 		const list = trip.itineraryItems.length > 0 ? trip.itineraryItems.map(item => 
-			 <ItineraryItem key={item.id} item={item} trip={trip} />
+				<ItineraryItem key={item.id} item={item} trip={trip} />
 			): <p>This trip doesn't have any itinerary items yet.</p>;
 
 		return (
-			<div className="itinerary-list-wrapper">{list}</div>
+			<div aria-live="assertive" className="itinerary-list-wrapper">{list}</div>
 		);
 	}
 }

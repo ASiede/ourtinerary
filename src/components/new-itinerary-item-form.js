@@ -60,10 +60,9 @@ export class NewItineraryForm extends React.Component {
 				<h2>Create New Trip Itinerary Below</h2>
 				</div>
 
-				<form className="itinerary-item-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
-
-		        	<label>Type of Activity</label><br />
-						<select className="type-select" value={this.state.itineraryType} onChange={e => this.handleFormChange(e.target.value)}>
+				<form aria-live="assertive" className="itinerary-item-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
+		        	<label for="type">Type of Activity</label><br />
+						<select id="type" value={this.state.itineraryType} onChange={e => this.handleFormChange(e.target.value)}>
 							<option value="Flight">Flight</option>
 							<option value="Hotel" default>Hotel</option>
 							<option value="Restaurant/Bar">Restaurant/Bar</option>

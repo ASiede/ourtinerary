@@ -1,3 +1,12 @@
 .change-vote {
 	height: 15px;
 }
+
+.vote {
+	padding: 0px;
+	margin: 0px;
+}
+
+.change-vote:hover, .vote span:hover {
+	cursor: pointer;
+}

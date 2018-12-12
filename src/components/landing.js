@@ -14,11 +14,12 @@ export function Landing(props) {
 
 	return (
 		<div>
-			<main>
-			    <section className="short-description">
+			<main role="main">
+			    <section role="region" className="short-description">
 			    	<h2>The best place to plan your next trip with friends!</h2>
 			    </section>
-			    <section className="long-description">
+
+			    <section role="region" className="long-description">
 			    	<h2> Want to know how it works?</h2>
 			    	<p>Start by signing up and creating a trip! It's that easy</p>
 			    		<img src={newtrip} alt="new trip view"></img>
@@ -27,6 +28,12 @@ export function Landing(props) {
 			    		<img src={tripview} alt="trip view"></img>
 			    	<p>Everyone gets to vote on what they think about each itinerary item.</p>
 			    	<p>Finally, go enjoy your trip!</p>		
+			    </section>
+			    <section className="demo" role="region">
+			    	<p className="try">Wanna try it out first? Use the demo account below:</p>
+			    	<p>Username: Delores </p>
+			    	<p>Password: passwordpassword</p>
+			    	<p>Try inviting her friends Teddy(Teddy@gmail.com) and Mave(Mave@gmail.com) on a trip.</p>	
 			    </section>
 			</main>
 		</div>

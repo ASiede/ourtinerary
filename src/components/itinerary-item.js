@@ -11,9 +11,7 @@ export class ItineraryItem extends React.Component {
     }
 
     render() {
-        //ADD CONFIRMATION BUTTON
         const linkString = this.props.item.website;
-        // const confirmedHTML = this.props.item.confirmed ? <li>confirmed: {this.props.item.confirmed}</li> : '';
         const flightNumberHTML = this.props.item.flightNumber ? <li>Flight Number: {this.props.item.flightNumber}</li> : '';
         const layoversHTML = this.props.item.layovers ? <li>Layovers: {this.props.item.layovers}</li> : '';
         const lengthHTML = this.props.item.length ? <li>Length: {this.props.item.length}</li> : '';
@@ -32,14 +30,14 @@ export class ItineraryItem extends React.Component {
 
         const voteHTML = voteIds.map(vote => { 
             return (
-                <Vote key={vote.id} voteId={vote} />
+                <li className="vote-wrapper"><Vote key={vote.id} voteId={vote} /></li>
             )
         })
     
         return (
             <div className="itinerary-item">
                 <div className="type-wrapper">
-                <h3>{typeHTML}</h3>
+                <div>{typeHTML}</div>
                 <img 
                     onClick={() => {if (window.confirm('Are you sure you wish to delete this itinerary item? This action cannot be undone.')) this.handleDeleteItineraryItem(this.props.item._id)}}
                     className="trash-icon" 
@@ -68,7 +66,6 @@ export class ItineraryItem extends React.Component {
                     </li>
                 </ul>
                 </div>
-
             </div>
         )
     } 
@@ -81,7 +78,4 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps)(ItineraryItem);
-
-
-
 

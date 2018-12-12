@@ -6,10 +6,8 @@ import { withRouter } from 'react-router';
 
 import './trip-list.css';
 
-
 export class TripList extends React.Component {
 	componentDidMount() {
-		// COULD IMPROVE BY PASSING SEARCH QUERIES FOR ONLY USERS TRIPS
 		this.props.dispatch(getTrips())
 	}
 	render() {
@@ -20,7 +18,7 @@ export class TripList extends React.Component {
 		));
 
 		return (
-			<div className="trip-list">
+			<div aria-live="assertive" className="trip-list">
 				<ul className="trips">
 					{trips}
 				</ul>
