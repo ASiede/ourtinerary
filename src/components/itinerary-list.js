@@ -1,7 +1,7 @@
 import React from 'react';
 import ItineraryItem from './itinerary-item';
 import {connect} from 'react-redux';
-import {getItineraryItem, getTrip} from '../actions'
+// import {getItineraryItem, getTrip} from '../actions'
 import './itinerary-list.css'
 
 export class ItineraryList extends React.Component {

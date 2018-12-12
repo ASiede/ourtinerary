@@ -7,7 +7,6 @@ import newtrip from '../screenshots/newtrip.png';
 import tripview from '../screenshots/tripview.png';
 import './landing.css';
 
-
 export function Landing(props) {
 	if(props.loggedIn) {
 		props.history.push(`/user/${props.currentUser}`);

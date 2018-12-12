@@ -1,10 +1,9 @@
 import React from 'react';
 import Input from './input';
 import {connect} from 'react-redux';
-import {getUsers} from '../actions'
 import {reduxForm, Field, focus} from 'redux-form';
 import {required, nonEmpty} from '../validators';
-import {editTrip, deleteTrip, invite} from '../actions/index';
+import {getUsers, editTrip, deleteTrip, invite} from '../actions/index';
 import './edit-trip-form.css'
 
 export class EditTripForm extends React.Component {
@@ -59,8 +58,8 @@ export class EditTripForm extends React.Component {
 		})
 		let collaboratorUserObjs = this.props.ourtinerary.users.filter(user => currentCollaboratorsEmails.includes(user.email));
 		let currentCollaboratorsIds = collaboratorUserObjs.map(user => user.id)
-
-		// Submitting
+		
+    // Submitting
 		const tripLeader = this.props.ourtinerary.currentUser.id;
 		const tripFields = ["name", "dates", "location"];
 
@@ -145,10 +144,11 @@ const mapStateToProps = (state) => ({
 	currentUser: state.ourtinerary.currentUser,
 });
 
-EditTripForm = connect(mapStateToProps)(EditTripForm);
+const myComponent = connect(mapStateToProps)(EditTripForm);
 
 export default reduxForm({
 	form: 'editTripForm',
 	onSubmitFail: (errors, dispatch) =>
         dispatch(focus('editTripForm', Object.keys(errors)[0]))
-})(EditTripForm)
+})(myComponent)
+

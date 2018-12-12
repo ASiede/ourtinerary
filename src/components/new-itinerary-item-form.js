@@ -61,7 +61,6 @@ export class NewItineraryForm extends React.Component {
 				</div>
 
 				<form aria-live="assertive" className="itinerary-item-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
-
 		        	<label for="type">Type of Activity</label><br />
 						<select id="type" value={this.state.itineraryType} onChange={e => this.handleFormChange(e.target.value)}>
 							<option value="Flight">Flight</option>
@@ -189,10 +188,10 @@ const mapStateToProps = (state) => ({
 	currentUser: state.ourtinerary.currentUser,
 });
 
-NewItineraryForm = connect(mapStateToProps)(NewItineraryForm);
+const myComponent = connect(mapStateToProps)(NewItineraryForm);
 
 export default reduxForm({
 	form: 'NewTripForm',
 	onSubmitFail: (errors, dispatch) =>
         dispatch(focus('newTripForm', Object.keys(errors)[0]))
-})(NewItineraryForm)
+})(myComponent)

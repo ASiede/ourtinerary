@@ -10,7 +10,6 @@ export class TripList extends React.Component {
 	componentDidMount() {
 		this.props.dispatch(getTrips())
 	}
-
 	render() {
 		const userId = this.props.user ? this.props.user.id : '';
 		const userTrips = this.props.user && this.props.user.trips ? this.props.user.trips : [];

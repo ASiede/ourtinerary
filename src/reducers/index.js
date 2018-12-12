@@ -23,7 +23,6 @@ export const ourtineraryReducer = (state=initialState, action) => {
 			});		
 		
 		case actions.FETCH_TRIPS_SUCCESS:
-			
 			return Object.assign({}, state, {
 				trips: action.trips.trips
 			});
@@ -83,23 +82,23 @@ export const ourtineraryReducer = (state=initialState, action) => {
 			});
 			
 
-		case actions.FETCH_ITINERARY_ITEM_SUCCESS:
-			let tripsToUpdateWithItems = state.trips.map((trip => {
-				if(!trip.id === action.tripId) {
-					return trip;
-				}
-				return Object.assign({}, trip, {
-					itineraryItems: [...trip.itineraryItems, action.itineraryItem]
-				})
-			}))
+		// case actions.FETCH_ITINERARY_ITEM_SUCCESS:
+		// 	let tripsToUpdateWithItems = state.trips.map((trip => {
+		// 		if(!trip.id === action.tripId) {
+		// 			return trip;
+		// 		}
+		// 		return Object.assign({}, trip, {
+		// 			itineraryItems: [...trip.itineraryItems, action.itineraryItem]
+		// 		})
+		// 	}))
 
-			return Object.assign({}, state, {
-				itineraryItems: [...state.itineraryItems, action.itineraryItem],
-			});	
+		// 	return Object.assign({}, state, {
+		// 		itineraryItems: [...state.itineraryItems, action.itineraryItem],
+		// 	});	
 
 		case actions.FETCH_NEW_TRIP_SUCCESS:
 			let newTrip = action.trip
-			newTrip._id = action.trip.id
+			// newTrip._id = action.trip.id
 			let users = state.users.map( user => {
 				if(user.username !== action.trip.tripLeader) {
 					return user;
@@ -147,7 +146,6 @@ export const ourtineraryReducer = (state=initialState, action) => {
 				votes
 			})
 
-		// FOLLOWING CASES ARE IN REGARDS TO LOGGING IN	
 		case actions.SET_AUTH_TOKEN:
 			return Object.assign({}, state, {
             	authToken: action.authToken
