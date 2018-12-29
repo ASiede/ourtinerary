@@ -136,12 +136,6 @@ and (min-width: 1000px)
         padding-right: 100px;
     }
 
-    .trip-details ul {
-        padding-left: 30px;
-        padding-right: 30px;
-        margin-right: 60px;
-    }
-
     .trip-details h2, .trip-details h2,.trip-details p,.trip-details li {
         font-size: 1.5em;
     }

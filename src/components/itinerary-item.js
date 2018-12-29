@@ -1,7 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {deleteItineraryItem} from '../actions/index';
-import Vote from './vote'
+import Vote from './vote';
+import trash from '../screenshots/trash.png'
 import './itinerary-item.css'
 
 export class ItineraryItem extends React.Component { 
@@ -41,7 +42,7 @@ export class ItineraryItem extends React.Component {
                 <img 
                     onClick={() => {if (window.confirm('Are you sure you wish to delete this itinerary item? This action cannot be undone.')) this.handleDeleteItineraryItem(this.props.item._id)}}
                     className="trash-icon" 
-                    src="https://img.icons8.com/metro/1600/delete.png" 
+                    src={trash} 
                     alt="trash">
                 </img>
                 </div>

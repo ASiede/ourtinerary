@@ -19,7 +19,7 @@ main p {
 }
 
 .short-description {
-    background-image: url("https://stemcell.keck.usc.edu/wp-content/uploads/2017/11/150324_flights-hero-image_1330x742.jpg");
+    background-image: url("../screenshots/hero-image.jpg");
     background-size: 100% 100%;
     color: white;
     height: 400px;

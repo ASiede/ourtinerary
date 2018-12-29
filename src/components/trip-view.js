@@ -4,6 +4,7 @@ import NewItineraryForm from './new-itinerary-item-form';
 import EditTripForm from './edit-trip-form';
 import {connect} from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import pencil from '../screenshots/pencil.png'
 import './trip-view.css';
 
 export class TripView extends React.Component {
@@ -22,7 +23,7 @@ export class TripView extends React.Component {
 
     render() {
         const collaboratorsHTML = this.props.trip ? this.props.trip.collaborators.map(collaborator => <li key={collaborator.toString()} >{collaborator}</li>) :'';
-      	const tripNameHTML = this.props.trip ? <h2>{this.props.trip.name}<img onClick={(e) => this.toggleEditTripForm(e)} src="http://cdn.onlinewebfonts.com/svg/img_147067.png" alt="edit-pencil"></img></h2> : '';
+      	const tripNameHTML = this.props.trip ? <h2>{this.props.trip.name}<img onClick={(e) => this.toggleEditTripForm(e)} src={pencil} alt="edit-pencil"></img></h2> : '';
         const tripLocationHTML = this.props.trip ? <div className="where"><h3>Where:</h3><p>{this.props.trip.location}</p></div>: '';
         const tripDatesHTML = this.props.trip ? <div className="when"><h3>When:</h3><p>{this.props.trip.dates}</p></div> : '';
         const editTripFormHTML = this.state.editTripForm ? <EditTripForm trip={this.props.trip}/> : '';
