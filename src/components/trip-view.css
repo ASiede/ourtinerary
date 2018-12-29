@@ -1,5 +1,5 @@
     .trip-details {
-        background-image: url("https://journalistontherun.com/wp-content/uploads/2015/10/o-SOLO-TRAVEL-facebook.jpg");
+        background-image: url("../screenshots/trip-details.jpg");
         background-color: rgb(0, 99, 151, .05);
         background-size: cover;
         background-repeat: no-repeat;
@@ -34,12 +34,30 @@
     .where-when {
         display: flex;
         justify-content: space-around;
+        flex-direction: column;
+    }
+
+    .where-when p {
+        padding:0px;
+    }
+
+    .where, .when {
+        display: flex;
+        justify-content: center;
+    }
+
+    .where p, .when p {
+        margin:0px;
+        padding:0px;
+        margin-left: 15px;
+        align-self: center;
     }
 
     .trip-details ul {
         display: flex;
+        flex-direction: column;
         justify-content: space-evenly;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
     }
 
     .trip-details li {
